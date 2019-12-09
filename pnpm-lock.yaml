@@ -7,6 +7,8 @@ dependencies:
   react-redux: 7.1.3_9a2f9d4864311d39d6f2623bd2f887e8
   react-scripts: 3.3.0
   redux: 4.0.4
+  redux-orm: 0.15.1
+  redux-persist: 6.0.0_redux@4.0.4
   redux-thunk: 2.3.0
 devDependencies:
   reactotron-react-js: 3.3.7
@@ -1512,7 +1514,7 @@ packages:
     dependencies:
       '@types/events': 3.0.0
       '@types/minimatch': 3.0.3
-      '@types/node': 12.12.14
+      '@types/node': 12.12.15
     dev: false
     resolution:
       integrity: sha512-1Bh06cbWJUHMC97acuD6UMG29nMt0Aqz1vF3guLfG+kHHJhy3AyohZFFxYk2f7Q1SQIrNwvncxAE0N/9s70F2w==
@@ -1541,10 +1543,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-tHq6qdbT9U1IRSGf14CL0pUlULksvY9OZ+5eEgl1N7t+OA3tGvNpxJCzuKQlsNgCVwbAs670L1vcVQi8j9HjnA==
-  /@types/node/12.12.14:
+  /@types/node/12.12.15:
     dev: false
     resolution:
-      integrity: sha512-u/SJDyXwuihpwjXy7hOOghagLEV1KdAST6syfnOk6QZAMzZuWZqXy5aYYZbh8Jdpd4escVFP0MvftHNDb9pruA==
+      integrity: sha512-Pv+vWicyFd07Hw/SmNnTUguqrHgDfMtjabvD9sQyxeqbpCEg8CmViLBaVPHtNsoBgZECrRf5/pgV6FJIBrGSjw==
   /@types/parse-json/4.0.0:
     dev: false
     resolution:
@@ -1559,17 +1561,17 @@ packages:
       integrity: sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
   /@types/react-dom/16.9.4:
     dependencies:
-      '@types/react': 16.9.15
+      '@types/react': 16.9.16
     dev: false
     resolution:
       integrity: sha512-fya9xteU/n90tda0s+FtN5Ym4tbgxpq/hb/Af24dvs6uYnYn+fspaxw5USlw0R8apDNwxsqumdRoCoKitckQqw==
-  /@types/react/16.9.15:
+  /@types/react/16.9.16:
     dependencies:
       '@types/prop-types': 15.7.3
       csstype: 2.6.7
     dev: false
     resolution:
-      integrity: sha512-WsmM1b6xQn1tG3X2Hx4F3bZwc2E82pJXt5OPs2YJgg71IzvUoKOSSSYOvLXYCg1ttipM+UuA4Lj3sfvqjVxyZw==
+      integrity: sha512-dQ3wlehuBbYlfvRXfF5G+5TbZF3xqgkikK7DWAsQXe2KnzV+kjD4W2ea+ThCrKASZn9h98bjjPzoTYzfRqyBkw==
   /@types/stack-utils/1.0.1:
     dev: false
     resolution:
@@ -5237,6 +5239,13 @@ packages:
     dev: false
     resolution:
       integrity: sha512-O3sR1/opvCDGLEVcvrGTMtLac8GJ5IwZC4puPrLuRj3l7ICKvkmA0vGuU9OW8mV9WIBRnaxp5GJh9IEAaNOoYg==
+  /immutable-ops/0.7.0:
+    dependencies:
+      '@babel/runtime': 7.7.6
+      ramda: 0.26.1
+    dev: false
+    resolution:
+      integrity: sha512-5tOOKVgMr3fzSX92vMJTf8CchlVxSmMm1m7nnv4pXZ6w5feLmBFIAFA1arQ+TM785kd0nzV1kUvDWlytpEnQZw==
   /import-cwd/2.1.0:
     dependencies:
       import-from: 2.1.0
@@ -8684,6 +8693,10 @@ packages:
     dev: false
     resolution:
       integrity: sha512-Sq4CW4QhwOHE8ucn6J34MqtZCeWFP2aQSmrlroYgqAV1PjStIhJXxYuTgUIfkEk7zTLjmIjLmU5q+fbD1NnOJA==
+  /ramda/0.26.1:
+    dev: false
+    resolution:
+      integrity: sha512-hLWjpy7EnsDBb0p+Z3B7rPi3GDeRG5ZtiI33kJhTt+ORCd38AbAIjB/9zRIUoeTbE/AVX5ZkU7m6bznsvrf8eQ==
   /randombytes/2.1.0:
     dependencies:
       safe-buffer: 5.2.0
@@ -8714,6 +8727,14 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha512-4Oz8DUIwdvoa5qMJelxipzi/iJIi40O5cGV1wNYp5hvZP8ZN0T+jiNkL0QepXs+EsQ9XJ8ipEDoiH70ySUJP3Q==
+  /re-reselect/3.4.0_reselect@3.0.1:
+    dependencies:
+      reselect: 3.0.1
+    dev: false
+    peerDependencies:
+      reselect: '>1.0.0'
+    resolution:
+      integrity: sha512-JsecfN+JlckncVXTWFWjn0Vk6uInl8GSf4eEd9tTk5qXHlgqkPdILpnYpgZcISXNYAzvfvsCZviaDk8AxyS5sg==
   /react-app-polyfill/1.0.5:
     dependencies:
       core-js: 3.4.8
@@ -8994,6 +9015,24 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-6tDA8g98We0zd0GvVeMT9arEOnTw9qM03L9cJXaCjrip1OO764RDBLBfrB4cwzNGDj5OA5ioymC9GkizgWJDUg==
+  /redux-orm/0.15.1:
+    dependencies:
+      '@babel/runtime': 7.7.6
+      immutable-ops: 0.7.0
+      lodash: 4.17.15
+      re-reselect: 3.4.0_reselect@3.0.1
+      reselect: 3.0.1
+    dev: false
+    resolution:
+      integrity: sha512-d/DVAXhqdlp3JxvURDrnJ4aQI9fiZTau9TtEAJakwDaaJBIF65JMX3zCZZ64QDt8RLBkcxjMIhebKY5hG5WiQQ==
+  /redux-persist/6.0.0_redux@4.0.4:
+    dependencies:
+      redux: 4.0.4
+    dev: false
+    peerDependencies:
+      redux: '>4.0.0'
+    resolution:
+      integrity: sha512-71LLMbUq2r02ng2We9S215LtPu3fY0KgaGE0k8WRgl6RkqxtGfl7HUozz1Dftwsb0D/5mZ8dwAaPbtnzfvbEwQ==
   /redux-thunk/2.3.0:
     dev: false
     resolution:
@@ -9188,6 +9227,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
+  /reselect/3.0.1:
+    dev: false
+    resolution:
+      integrity: sha1-79qpjqdFEyTQkrKyFjpqHXqaIUc=
   /resolve-cwd/2.0.0:
     dependencies:
       resolve-from: 3.0.0
@@ -9478,10 +9521,10 @@ packages:
       node: '>= 0.8.0'
     resolution:
       integrity: sha512-BsVKsiGcQMFwT8UxypobUKyv7irCNRHk1T0G680vk88yf6LBByGcZJOTJCrTP2xVN6yI+XjPJcNuE3V4fT9sAg==
-  /serialize-javascript/2.1.1:
+  /serialize-javascript/2.1.2:
     dev: false
     resolution:
-      integrity: sha512-MPLPRpD4FNqWq9tTIjYG5LesFouDhdyH0EPY3gVK4DRD5+g4aDqdNSzLIwceulo3Yj+PL1bPh6laE5+H6LTcrQ==
+      integrity: sha512-rs9OggEUF0V4jUSecXazOYsLfu7OGK2qIn3c7IPBiffz32XniEp/TX9Xmc9LQfK2nQ2QKHvZ2oygKUGU0lG4jQ==
   /serve-index/1.9.1:
     dependencies:
       accepts: 1.3.7
@@ -10171,7 +10214,7 @@ packages:
       find-cache-dir: 2.1.0
       is-wsl: 1.1.0
       schema-utils: 1.0.0
-      serialize-javascript: 2.1.1
+      serialize-javascript: 2.1.2
       source-map: 0.6.1
       terser: 4.4.2
       webpack: 4.41.2_webpack@4.41.2
@@ -10190,7 +10233,7 @@ packages:
       find-cache-dir: 3.1.0
       jest-worker: 24.9.0
       schema-utils: 2.6.1
-      serialize-javascript: 2.1.1
+      serialize-javascript: 2.1.2
       source-map: 0.6.1
       terser: 4.4.2
       webpack: 4.41.2_webpack@4.41.2
@@ -11161,4 +11204,6 @@ specifiers:
   reactotron-react-js: ^3.3.7
   reactotron-redux: ^3.1.2
   redux: ^4.0.4
+  redux-orm: ^0.15.1
+  redux-persist: ^6.0.0
   redux-thunk: ^2.3.0

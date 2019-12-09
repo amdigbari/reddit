@@ -1,5 +1,12 @@
 import { combineReducers } from 'redux';
+import { createReducer } from 'redux-orm';
 
-const appReducer = combineReducers({});
+import orm from '../orm';
+
+const ormReducer = createReducer(orm);
+
+const appReducer = combineReducers({
+    ormDatabase: ormReducer,
+});
 
 export default appReducer;
