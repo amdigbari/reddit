@@ -1,2 +1,15 @@
 @import './libraries/iran_sans_font/iransans-fontface.css';
 @import './libraries/normalizer/normalizer.css';
+@import './libraries//animate_css/animate_css.css';
+
+[desc='showOnDevice'] {
+    @media screen and (min-width: 992px) {
+        display: none !important;
+    }
+}
+
+[desc='showOnDesktop'] {
+    @media screen and (max-width: 991px) {
+        display: none !important;
+    }
+}

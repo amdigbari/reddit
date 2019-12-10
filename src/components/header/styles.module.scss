@@ -8,3 +8,45 @@
 
     @include shadow;
 }
+
+.avatar-container {
+    cursor: pointer;
+    position: relative;
+
+    .popup-container {
+        position: absolute;
+        width: 150px;
+        right: 0;
+        top: 57px;
+        background-color: $theme-light;
+        border-radius: 3px;
+        padding: 10px 3px 4px 3px;
+        direction: rtl;
+        @include shadow;
+
+        &::before {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 0.5rem;
+            height: 0.5rem;
+            background: white;
+            top: -4px;
+            right: 22.5px;
+            transform: rotate(45deg);
+            box-shadow: -3px -3px 4px $brown-gray;
+        }
+
+        .popup {
+            & > * {
+                padding: 0 7px;
+                margin-bottom: 6px;
+
+                &:not(:last-child) {
+                    padding-bottom: 6px;
+                    border-bottom: 1px solid $silver-gray;
+                }
+            }
+        }
+    }
+}
