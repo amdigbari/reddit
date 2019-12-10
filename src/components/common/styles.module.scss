@@ -1,0 +1,65 @@
+@import './variables.scss';
+
+#reddit-logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: max-content;
+
+    .avatar {
+        height: 55px;
+
+        @media screen and (max-width: 991px) {
+            height: 50px;
+        }
+    }
+
+    .logo-text {
+        color: $gray;
+        font-weight: bold;
+        font-size: 25px;
+        margin-left: 5px;
+    }
+}
+
+.searchbar-container {
+    position: relative;
+    margin: 0 30px;
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+
+    .searchbar {
+        flex: 1;
+        border: none;
+        outline: none;
+        border-bottom: 1px solid $brown-gray;
+        color: $short-text-color;
+        direction: rtl;
+        padding: 6px 5px;
+
+        &::placeholder {
+            color: $brown-gray;
+            opacity: 0.75;
+        }
+
+        &:focus {
+            outline: none;
+
+            & ~ .bottombar {
+                width: 100%;
+            }
+        }
+    }
+
+    .bottombar {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 0;
+        height: 0;
+        border: none;
+        border-bottom: 1px solid $theme-primary;
+        transition: all ease 0.2s;
+    }
+}

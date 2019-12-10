@@ -1,0 +1,10 @@
+$theme-light: #fff;
+$gray: #555;
+$silver-gray: #777;
+$brown-gray: #b6a885;
+$short-text-color: #7c6a46;
+$theme-primary: #0897a6;
+
+@mixin shadow {
+    box-shadow: 0 0 6px 1px $brown-gray;
+}
