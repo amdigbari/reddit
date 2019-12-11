@@ -5,8 +5,13 @@
     align-items: center;
     justify-content: space-between;
     padding: 8px 20px;
+    z-index: 1;
 
     @include shadow;
+
+    @media screen and(max-width: 991px) {
+        padding: 8px 10px 8px 5px;
+    }
 }
 
 .avatar-container {
@@ -38,6 +43,9 @@
         }
 
         .popup {
+            display: flex;
+            flex-direction: column;
+
             & > * {
                 padding: 0 7px;
                 margin-bottom: 6px;

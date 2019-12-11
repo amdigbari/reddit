@@ -1,6 +1,7 @@
 @import './libraries/iran_sans_font/iransans-fontface.css';
 @import './libraries/normalizer/normalizer.css';
 @import './libraries//animate_css/animate_css.css';
+@import './components/common/variables.scss';
 
 [desc='showOnDevice'] {
     @media screen and (min-width: 992px) {
@@ -11,5 +12,19 @@
 [desc='showOnDesktop'] {
     @media screen and (max-width: 991px) {
         display: none !important;
+    }
+}
+
+a {
+    color: $gray;
+
+    &:hover {
+        color: $theme-secondary;
+    }
+}
+
+.small-mobile {
+    @media screen and (max-width: 991px) {
+        font-size: 80%;
     }
 }

@@ -1,10 +1,10 @@
 import React from 'react';
 
 import styles from './styles.module.scss';
-import { useDepsChanged } from './customHooks';
-import { SEARCH_DELAY } from '../../utils/staticUtils';
+import { useDepsChanged } from '../customHooks';
+import { SEARCH_DELAY } from '../../../utils/staticUtils';
 
-const SearchBar = React.memo(({ search }) => {
+const SearchBar = React.memo(({ search, ...restProps }) => {
     let interval = React.useRef();
 
     let [isTyping, setIsTyping] = React.useState(false);
@@ -36,9 +36,9 @@ const SearchBar = React.memo(({ search }) => {
     useDepsChanged(isTypingChangedHandler, [isTyping]);
 
     return (
-        <div className={styles['searchbar-container']}>
+        <div className={styles['searchbar-container']} {...restProps}>
             <input
-                className={styles.searchbar}
+                className={[styles.searchbar, 'small-mobile'].join(' ')}
                 type="text"
                 placeholder="جست‌وجو کنید..."
                 onKeyDown={keyDownHandler}

@@ -1,10 +1,14 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
-import Header from './header';
+import CustomScreen from './common/customScreen/CustomScreen';
 
-const App = () => {
+const App = React.memo(props => {
+    const renderHomepage = React.useCallback(() => {
+        return <CustomScreen></CustomScreen>;
+    }, []);
+
     return (
         <>
             <Helmet>
@@ -12,10 +16,12 @@ const App = () => {
             </Helmet>
 
             <Router>
-                <Header />
+                <Switch>
+                    <Route exact path="/" render={renderHomepage} />
+                </Switch>
             </Router>
         </>
     );
-};
+});
 
 export default App;
