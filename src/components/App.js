@@ -2,13 +2,10 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
-import CustomScreen from './common/customScreen/CustomScreen';
+import Homepage from './homepage';
+import NotFount from './notFount';
 
 const App = React.memo(props => {
-    const renderHomepage = React.useCallback(() => {
-        return <CustomScreen></CustomScreen>;
-    }, []);
-
     return (
         <>
             <Helmet>
@@ -17,7 +14,8 @@ const App = React.memo(props => {
 
             <Router>
                 <Switch>
-                    <Route exact path="/" render={renderHomepage} />
+                    <Route exact path="/" component={Homepage} />
+                    <Route component={NotFount} />
                 </Switch>
             </Router>
         </>

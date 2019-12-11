@@ -11,7 +11,7 @@ import { ANIMATION_DURATION } from '../../utils/staticUtils';
 import SearchbarIcon from '../common/searchbar/SearchbarIcon';
 import HamburgerIcon from '../hamburgerMenu/HamburgerIcon';
 
-const Header = React.memo(({ openBurgerMenu }) => {
+const Header = React.memo(({ toggleMenuVisibility: openBurgerMenu }) => {
     let [profilePopupVisibility, setProfilePopupVisibility] = React.useState(false);
 
     const activatePopup = () => setProfilePopupVisibility(true);

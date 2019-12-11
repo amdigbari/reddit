@@ -11,6 +11,7 @@ dependencies:
   react-redux: 7.1.3_9a2f9d4864311d39d6f2623bd2f887e8
   react-router-dom: 5.1.2_react@16.12.0
   react-scripts: 3.3.0_node-sass@4.13.0
+  react-sidebar: 3.0.2_react-dom@16.12.0+react@16.12.0
   redux: 4.0.4
   redux-orm: 0.15.1
   redux-thunk: 2.3.0
@@ -9408,6 +9409,18 @@ packages:
       react: ^0.13.0 || ^0.14.0 || ^15.0.0 || ^16.0.0
     resolution:
       integrity: sha512-v1ht1aHg5k/thv56DRcjw+WtojuuDHFUgGfc+bFHOWsF4ZK6C2V57DO0Or0GPsg6+LSTE0M6Ry/gfzhzSwbc5w==
+  /react-sidebar/3.0.2_react-dom@16.12.0+react@16.12.0:
+    dependencies:
+      '@babel/runtime': 7.7.6
+      prop-types: 15.7.2
+      react: 16.12.0
+      react-dom: 16.12.0_react@16.12.0
+    dev: false
+    peerDependencies:
+      react: '>=16.4.2'
+      react-dom: '>=16.4.2'
+    resolution:
+      integrity: sha512-LG/JO1cJvdRqSmUT+DOhJrml/b45/UqM9nm8emcgbJb5EKNegKCObZcrRqyzVix42VfFf0odytviAAFEYYTu1Q==
   /react/15.6.2:
     dependencies:
       create-react-class: 15.6.3
@@ -10840,7 +10853,7 @@ packages:
     dev: false
     resolution:
       integrity: sha512-FCEhQ/4rE1zYv9rYXJw/msRqsnmlje5jHP6huWeBZ704jUTy02c5AZyWujpMR1ax6mVw9NyJMfuK2CMDWVIfgA==
-  /terser-webpack-plugin/1.4.2_webpack@4.41.2:
+  /terser-webpack-plugin/1.4.3_webpack@4.41.2:
     dependencies:
       cacache: 12.0.3
       find-cache-dir: 2.1.0
@@ -10858,7 +10871,7 @@ packages:
     peerDependencies:
       webpack: ^4.0.0
     resolution:
-      integrity: sha512-fdEb91kR2l+BVgES77N/NTXWZlpX6vX+pYPjnX5grcDYBF2CMnzJiXX4NNlna4l04lvCW39lZ+O/jSvUhHH/ew==
+      integrity: sha512-QMxecFz/gHQwteWwSo5nTc6UaICqN1bMedC5sMtUc7y3Ha3Q8y6ZO0iCR8pq4RJC8Hjf0FEPEHZqcMB/+DFCrA==
   /terser-webpack-plugin/2.2.1_webpack@4.41.2:
     dependencies:
       cacache: 13.0.1
@@ -11504,7 +11517,7 @@ packages:
       node-libs-browser: 2.2.1
       schema-utils: 1.0.0
       tapable: 1.1.3
-      terser-webpack-plugin: 1.4.2_webpack@4.41.2
+      terser-webpack-plugin: 1.4.3_webpack@4.41.2
       watchpack: 1.6.0
       webpack-sources: 1.4.3
     dev: false
@@ -11908,6 +11921,7 @@ specifiers:
   react-redux: ^7.1.3
   react-router-dom: ^5.1.2
   react-scripts: 3.3.0
+  react-sidebar: ^3.0.2
   reactotron-react-js: ^3.3.7
   reactotron-redux: ^3.1.2
   redux: ^4.0.4
