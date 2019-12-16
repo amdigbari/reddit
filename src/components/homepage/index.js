@@ -1,12 +1,15 @@
 import React from 'react';
 
 import CustomScreen from '../common/customScreen/CustomScreen';
-import CustomNavbar from '../common/navbar/CustomNavbar';
-import { navigationTabs } from '../../utils/hardcodedData';
+import CustomNavbar from '../common/customNavbar/CustomNavbar';
+import { navigationTabs, samplePost } from '../../utils/hardcodedData';
+import PostCard from '../post/postCard/PostCard';
 
 const Homepage = React.memo(props => {
     const renderComponent = React.useCallback(activeNavigatorId => {
-        return <div>{navigationTabs.find(navigator => navigator.id === activeNavigatorId).title}</div>;
+        const activeNavigator = navigationTabs.find(navigator => navigator.id === activeNavigatorId).title;
+
+        return <PostCard post={samplePost} />;
     }, []);
 
     return (

@@ -16,8 +16,6 @@
 }
 
 a {
-    color: $gray;
-
     &:hover {
         color: $theme-secondary;
     }
@@ -27,4 +25,24 @@ a {
     @media screen and (max-width: 991px) {
         font-size: 80%;
     }
+}
+
+.text-truncate {
+    text-overflow: ellipsis;
+}
+
+a,
+span,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+textarea {
+    color: $gray;
+    text-align: right;
+    line-height: 1.4;
 }
