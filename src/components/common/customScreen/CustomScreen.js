@@ -25,7 +25,10 @@ const CustomScreen = React.memo(({ children }) => {
             <article className={styles['page-wrapper']}>
                 <Header toggleMenuVisibility={toggleMenuVisibility} />
 
-                <main className={styles['main-content']}>{children}</main>
+                <main className={styles['main-content']}>
+                    <section className={styles['menubar']} desc="showOnDesktop"></section>
+                    <article className={styles['page-content']}>{children}</article>
+                </main>
             </article>
         </Sidebar>
     );

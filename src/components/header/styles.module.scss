@@ -2,10 +2,12 @@
 
 .container {
     display: flex;
+    width: calc(100% - 16px);
     align-items: center;
     justify-content: space-between;
     padding: 8px 20px;
     z-index: 1;
+    background-color: $theme-light;
 
     @include shadow;
 

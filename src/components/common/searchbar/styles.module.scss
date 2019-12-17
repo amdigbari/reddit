@@ -15,6 +15,7 @@
         color: $short-text-color;
         direction: rtl;
         padding: 6px 5px;
+        background-color: transparent;
 
         &::placeholder {
             color: $brown-gray;
