@@ -4,6 +4,21 @@
     padding: 10px;
     background-color: $theme-light;
 
+    .header {
+        padding: 10px 15px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .avatar {
+        border-radius: 50%;
+    }
+
+    .name {
+        margin-left: 10px;
+    }
+
     .image-container {
         width: 100%;
         height: 250px;
@@ -13,11 +28,11 @@
         overflow: hidden;
         border-radius: 4px;
         background-color: $image-background;
+    }
 
-        .card-image {
-            max-width: 100%;
-            max-height: 100%;
-        }
+    .card-image {
+        max-width: 100%;
+        max-height: 100%;
     }
 
     .caption-container {
@@ -27,4 +42,26 @@
         margin-top: 10px;
         direction: rtl;
     }
+
+    .author-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .footer {
+        padding: 7px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .score-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.border-bottom {
+    border-bottom: 1px solid $silver-gray;
 }

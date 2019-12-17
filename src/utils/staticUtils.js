@@ -9,6 +9,8 @@ export const GRAY = '#4a4a4a';
 export const PRIMARY_COLOR = '#ff6265';
 export const BACKGROUND_COLOR = '#f1efea';
 export const LIGHT_COLOR = '#fff';
+export const GREEN = 'rgb(40, 174, 68)';
+export const RED = 'rgb(211, 71, 71)';
 
 //Sizes
 export const ICON_MOBILE_SIZE = 30;

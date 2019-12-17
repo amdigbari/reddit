@@ -2,11 +2,14 @@ import React from 'react';
 import LinesEllipsis from 'react-lines-ellipsis';
 
 import styles from './styles.module.scss';
+import PostChannel from './PostChannel';
+import PostAuthor from './PostAuthor';
+import PostScore from './PostScore';
 
-const PostCard = React.memo(({ post }) => {
+const PostCard = React.memo(({ post, showBorder = false }) => {
     return (
-        <div className={styles['card-container']}>
-            {/* TODO: header -> channel:component */}
+        <div className={[styles['card-container'], showBorder ? styles['border-bottom'] : ''].join(' ')}>
+            <PostChannel channel={post.channel} />
 
             <div className={styles['image-container']}>
                 <img src={post.image} alt="card_image" className={styles['card-image']} />
@@ -21,7 +24,16 @@ const PostCard = React.memo(({ post }) => {
                 trimRight={false}
             />
 
-            {/* TODO: author, score: component */}
+            <div className={styles.footer}>
+                <PostAuthor author={post.author} />
+                <PostScore
+                    score={post.score}
+                    userScore={post.userScore}
+                    setScore={() => {
+                        //TODO:
+                    }}
+                />
+            </div>
         </div>
     );
 });
