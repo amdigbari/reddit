@@ -1,18 +1,37 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Loading } from './common/CommonComponents';
 
-import Homepage from './homepage';
-import NotFount from './notFount';
-import PostScreen from './post/postScreen';
+const Homepage = lazy(() => import('./homepage'));
+const NotFound = lazy(() => import('./notFound'));
+const PostScreen = lazy(() => import('./post/postScreen'));
+
+const SuspenseFallback = () => {
+    const containerStyle = {
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    };
+
+    return (
+        <div style={containerStyle}>
+            <Loading />
+        </div>
+    );
+};
 
 const RootRouter = React.memo(() => {
     return (
         <BrowserRouter>
-            <Switch>
-                <Route exact path="/" component={Homepage} />
-                <Route exact path="/posts/:pk" component={PostScreen} />
-                <Route component={NotFount} />
-            </Switch>
+            <Suspense fallback={<SuspenseFallback />}>
+                <Switch>
+                    <Route exact path="/" component={Homepage} />
+                    <Route exact path="/posts/:pk" component={PostScreen} />
+                    <Route component={NotFound} />
+                </Switch>
+            </Suspense>
         </BrowserRouter>
     );
 });

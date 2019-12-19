@@ -1,0 +1,54 @@
+@import '../common/variables.scss';
+
+.comment-list-container {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: $theme-light;
+
+    * {
+        text-align: right;
+        direction: rtl;
+    }
+
+    .comment-list-wrapper {
+        width: 100%;
+        margin-top: 8px;
+
+        .comment-container {
+            width: 100%;
+            border-top: 1px solid $silver-gray;
+
+            &.reply {
+                border-top: none;
+            }
+
+            .comment-header {
+                width: 100%;
+                padding: 8px 0;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .comment-author {
+                    display: flex;
+                    align-items: center;
+                }
+            }
+
+            .comment-text {
+                padding: 0 10px;
+            }
+
+            .reply-comment {
+                cursor: pointer;
+                margin: 10px 25px 10px 0;
+                color: $gray;
+                transition: color 0.2s linear;
+
+                &:hover {
+                    color: $theme-secondary;
+                }
+            }
+        }
+    }
+}

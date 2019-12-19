@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Animated } from 'react-animated-css';
 
 import styles from './styles.module.scss';
-import RedditLogo from '../common/RedditLogo';
+import { RedditLogo } from '../common/CommonComponents';
 import SearchBar from '../common/searchbar/SearchBar';
 import ProfileAvatar from '../profile/ProfileAvatar';
 import testProfile from '../../assets/images/test_profile.jpg';
-import { Animated } from 'react-animated-css';
 import { ANIMATION_DURATION, SHOW_ON_DESKTOP, SHOW_ON_DEVICE } from '../../utils/staticUtils';
 import SearchbarIcon from '../common/searchbar/SearchbarIcon';
 import HamburgerIcon from '../hamburgerMenu/HamburgerIcon';

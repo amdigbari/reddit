@@ -2,7 +2,7 @@
 
 .container {
     display: flex;
-    width: calc(100% - 16px);
+    width: 100%;
     align-items: center;
     justify-content: space-between;
     padding: 8px 20px;
@@ -11,7 +11,7 @@
 
     @include shadow;
 
-    @media screen and(max-width: 991px) {
+    @media screen and (max-width: 991px) {
         padding: 8px 10px 8px 5px;
     }
 }

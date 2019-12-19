@@ -27,7 +27,7 @@ const PostCard = React.memo(({ post, showBorder = false, fullCaption = false }) 
                 <p>{post.date}</p>
             </div>
 
-            <Link to="#">
+            <Link to={`/posts/${post.pk}`}>
                 <div className={styles['image-container']}>
                     <img src={post.image} alt="card_image" className={styles['card-image']} />
                 </div>
