@@ -7,7 +7,7 @@ import SearchBar from '../common/searchbar/SearchBar';
 import ProfileAvatar from '../profile/ProfileAvatar';
 import testProfile from '../../assets/images/test_profile.jpg';
 import { Animated } from 'react-animated-css';
-import { ANIMATION_DURATION } from '../../utils/staticUtils';
+import { ANIMATION_DURATION, SHOW_ON_DESKTOP, SHOW_ON_DEVICE } from '../../utils/staticUtils';
 import SearchbarIcon from '../common/searchbar/SearchbarIcon';
 import HamburgerIcon from '../hamburgerMenu/HamburgerIcon';
 
@@ -22,12 +22,12 @@ const Header = React.memo(({ toggleMenuVisibility: openBurgerMenu }) => {
         <header className={styles.container}>
             <RedditLogo />
 
-            <SearchBar search={console.log} desc="showOnDesktop" />
+            <SearchBar search={console.log} desc={SHOW_ON_DESKTOP} />
 
             <>
                 <div
                     className={styles['avatar-container']}
-                    desc="showOnDesktop"
+                    desc={SHOW_ON_DESKTOP}
                     onMouseEnter={activatePopup}
                     onMouseLeave={deactivatePopup}>
                     <ProfileAvatar source={testProfile} />
@@ -49,8 +49,8 @@ const Header = React.memo(({ toggleMenuVisibility: openBurgerMenu }) => {
             </>
 
             <div>
-                <SearchbarIcon desc="showOnDevice" style={{ marginRight: 15 }} />
-                <HamburgerIcon desc="showOnDevice" onClick={openBurgerMenu} />
+                <SearchbarIcon desc={SHOW_ON_DEVICE} style={{ marginRight: 15 }} />
+                <HamburgerIcon desc={SHOW_ON_DEVICE} onClick={openBurgerMenu} />
             </div>
         </header>
     );

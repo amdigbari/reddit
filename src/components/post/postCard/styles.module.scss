@@ -8,6 +8,17 @@
         padding: 10px 15px;
         display: flex;
         align-items: center;
+        justify-content: space-between;
+
+        .channel-name {
+            display: flex;
+            align-items: center;
+        }
+
+        .channel-admins-container {
+            display: flex;
+            align-items: center;
+        }
     }
 
     .avatar {
@@ -36,10 +47,13 @@
 
     .caption-container {
         max-height: 100px;
-        width: 100%;
         overflow: hidden;
         margin-top: 10px;
         direction: rtl;
+
+        @media screen and (min-width: 992px) {
+            padding: 0 25px;
+        }
     }
 
     .author-container {

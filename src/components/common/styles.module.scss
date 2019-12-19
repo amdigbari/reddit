@@ -6,7 +6,7 @@
     cursor: pointer;
     width: max-content;
 
-    .avatar {
+    .reddit-avatar {
         height: 55px;
 
         @media screen and (max-width: 991px) {
@@ -19,5 +19,14 @@
         font-weight: bold;
         font-size: 25px;
         margin-left: 5px;
+    }
+}
+
+.avatar {
+    border-radius: 50%;
+    transition: transform 0.2s linear;
+
+    &.link:hover {
+        transform: scale(1.1);
     }
 }

@@ -1,23 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
-
-import Homepage from './homepage';
-import NotFount from './notFount';
+import RootRouter from './Router';
+import RootMeta from './MetaData';
 
 const App = React.memo(props => {
     return (
         <>
-            <Helmet>
-                <title>DNews</title>
-            </Helmet>
+            <RootMeta />
 
-            <Router>
-                <Switch>
-                    <Route exact path="/" component={Homepage} />
-                    <Route component={NotFount} />
-                </Switch>
-            </Router>
+            <RootRouter />
         </>
     );
 });

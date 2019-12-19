@@ -1,3 +1,6 @@
+export const SHOW_ON_DESKTOP = 'showOnDesktop';
+export const SHOW_ON_DEVICE = 'showOnDevice';
+
 export const ENTER_KEY_CODE = 13;
 
 export const SEARCH_DELAY = 500;

@@ -21,4 +21,5 @@ export const samplePost = {
     },
     score: 10,
     userScore: 1,
+    date: 'همین الان:/'
 };

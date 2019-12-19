@@ -7,7 +7,7 @@ import PostChannel from './PostChannel';
 import PostAuthor from './PostAuthor';
 import PostScore from './PostScore';
 
-const PostCard = React.memo(({ post, showBorder = false }) => {
+const PostCard = React.memo(({ post, showBorder = false, fullCaption = false }) => {
     const ReadMore = () => {
         return (
             <>
@@ -21,7 +21,11 @@ const PostCard = React.memo(({ post, showBorder = false }) => {
 
     return (
         <div className={[styles['card-container'], showBorder ? styles['border-bottom'] : ''].join(' ')}>
-            <PostChannel channel={post.channel} />
+            <div className={styles.header}>
+                <PostChannel channel={post.channel} />
+
+                <p>{post.date}</p>
+            </div>
 
             <Link to="#">
                 <div className={styles['image-container']}>
@@ -29,14 +33,18 @@ const PostCard = React.memo(({ post, showBorder = false }) => {
                 </div>
             </Link>
 
-            <LinesEllipsis
-                component={'p'}
-                text={post.caption}
-                className={styles['caption-container']}
-                maxLine={3}
-                ellipsis={<ReadMore />}
-                trimRight={false}
-            />
+            {fullCaption ? (
+                <p className={styles['caption-container']}>{post.caption}</p>
+            ) : (
+                <LinesEllipsis
+                    component={'p'}
+                    text={post.caption}
+                    className={styles['caption-container']}
+                    maxLine={3}
+                    ellipsis={<ReadMore />}
+                    trimRight={false}
+                />
+            )}
 
             <div className={styles.footer}>
                 <PostAuthor author={post.author} />

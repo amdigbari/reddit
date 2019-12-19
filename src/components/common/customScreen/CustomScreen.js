@@ -6,8 +6,9 @@ import Header from '../../header';
 import styles from './styles.module.scss';
 import { useToggle } from '../customHooks';
 import SidebarContent from '../../hamburgerMenu';
+import { SHOW_ON_DESKTOP } from '../../../utils/staticUtils';
 
-const CustomScreen = React.memo(({ children }) => {
+const CustomScreen = React.memo(({ children, className = '', ...restProps }) => {
     let [menuVisibility, toggleMenuVisibility] = useToggle(false);
 
     const SidebarComponent = React.useCallback(() => {
@@ -26,8 +27,8 @@ const CustomScreen = React.memo(({ children }) => {
                 <Header toggleMenuVisibility={toggleMenuVisibility} />
 
                 <main className={styles['main-content']}>
-                    <section className={styles['menubar']} desc="showOnDesktop"></section>
-                    <article className={styles['page-content']}>{children}</article>
+                    <section className={styles['menubar']} desc={SHOW_ON_DESKTOP}></section>
+                    <article className={[styles['page-content'], className].join(' ')}>{children}</article>
                 </main>
             </article>
         </Sidebar>
