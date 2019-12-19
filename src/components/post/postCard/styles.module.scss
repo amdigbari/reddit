@@ -59,6 +59,14 @@
         flex-direction: column;
         align-items: center;
     }
+
+    .show-more {
+        margin-right: 10px;
+
+        &:not(:hover) {
+            color: $red;
+        }
+    }
 }
 
 .border-bottom {

@@ -8,6 +8,17 @@ import PostAuthor from './PostAuthor';
 import PostScore from './PostScore';
 
 const PostCard = React.memo(({ post, showBorder = false }) => {
+    const ReadMore = () => {
+        return (
+            <>
+                <span>...</span>
+                <Link to={'#'}>
+                    <span className={styles['show-more']}>[نمایش بیشتر]</span>
+                </Link>
+            </>
+        );
+    };
+
     return (
         <div className={[styles['card-container'], showBorder ? styles['border-bottom'] : ''].join(' ')}>
             <PostChannel channel={post.channel} />
@@ -23,7 +34,7 @@ const PostCard = React.memo(({ post, showBorder = false }) => {
                 text={post.caption}
                 className={styles['caption-container']}
                 maxLine={3}
-                ellipsis="..."
+                ellipsis={<ReadMore />}
                 trimRight={false}
             />
 
