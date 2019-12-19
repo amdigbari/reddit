@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaRegComment } from 'react-icons/fa';
-import Animated from 'react-animated-css';
 
 import styles from './styles.module.scss';
 import Avatar from '../common/Avatar';

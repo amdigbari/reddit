@@ -1,13 +1,18 @@
 import React from 'react';
 import LinesEllipsis from 'react-lines-ellipsis';
 import { Link } from 'react-router-dom';
+import { FaRegComment } from 'react-icons/fa';
 
 import styles from './styles.module.scss';
 import PostChannel from './PostChannel';
 import PostAuthor from './PostAuthor';
 import PostScore from './PostScore';
+import { GRAY } from '../../../utils/staticUtils';
+import { useToggle } from '../../common/customHooks';
 
 const PostCard = React.memo(({ post, showBorder = false, fullCaption = false }) => {
+    let [replyPostModalVisibility, toggleReplyPostModalVisibility] = useToggle(false);
+
     const ReadMore = () => {
         return (
             <>
@@ -48,6 +53,12 @@ const PostCard = React.memo(({ post, showBorder = false, fullCaption = false }) 
 
             <div className={styles.footer}>
                 <PostAuthor author={post.author} />
+
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <span style={{ marginRight: 6 }}>21</span>
+                    <FaRegComment className={styles['reply-comment']} onClick={toggleReplyPostModalVisibility} />
+                </div>
+
                 <PostScore
                     score={post.score}
                     userScore={post.userScore}

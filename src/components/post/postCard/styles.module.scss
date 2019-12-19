@@ -64,6 +64,16 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        .reply-comment {
+            cursor: pointer;
+            color: $gray;
+            transition: color 0.2s linear;
+
+            &:hover {
+                color: $theme-secondary;
+            }
+        }
     }
 
     .score-container {
