@@ -37,14 +37,16 @@ const SearchBar = React.memo(({ search, ...restProps }) => {
 
     return (
         <div className={styles['searchbar-container']} {...restProps}>
-            <input
-                className={[styles.searchbar, 'small-mobile'].join(' ')}
-                type="text"
-                placeholder="جست‌وجو کنید..."
-                onKeyDown={keyDownHandler}
-                onKeyUp={keyUpHandler}
-            />
-            <span className={[styles.bottombar, 'bottombar'].join(' ')}></span>
+            <div className={styles['searchbar-wrapper']}>
+                <input
+                    className={[styles.searchbar, 'small-mobile'].join(' ')}
+                    type="text"
+                    placeholder="جست‌وجو کنید..."
+                    onKeyDown={keyDownHandler}
+                    onKeyUp={keyUpHandler}
+                />
+                <span className={[styles.bottombar, 'bottombar'].join(' ')}></span>
+            </div>
         </div>
     );
 });
