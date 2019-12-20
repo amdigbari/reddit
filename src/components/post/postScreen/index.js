@@ -10,7 +10,7 @@ const PostScreen = React.memo(({ match }) => {
 
     return (
         <>
-            <PostCard post={samplePost} fullCaption />
+            <PostCard post={samplePost} fullCaption style={{ marginTop: 30 }} />
             <CommentsList comments={samplePost.comments || []} allCommentsCount={21} />
         </>
     );
