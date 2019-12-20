@@ -20,7 +20,7 @@ const SidebarContent = React.memo(props => {
     const LinksSection = () => {
         return (
             <>
-                <Link to="#Posts">
+                <Link to="/posts/">
                     <div className={[styles['link-container'], styles['bottom-border']].join(' ')}>
                         <p>Posts</p>
                     </div>
