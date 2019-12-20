@@ -25,3 +25,13 @@ export const Loading = ({ size = 45 }) => {
         </div>
     );
 };
+
+export const ButtonLoading = ({ color, visible }) => {
+    return (
+        <div className={styles['button-loading']} style={{ display: visible ? 'block' : 'none' }}>
+            <div
+                className={styles['loading-gradient']}
+                style={{ backgroundImage: `linear-gradient(to right, transparent, ${color}, transparent)` }}></div>
+        </div>
+    );
+};
