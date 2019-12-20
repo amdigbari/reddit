@@ -7,7 +7,6 @@ import styles from './styles.module.scss';
 import PostChannel from './PostChannel';
 import PostAuthor from './PostAuthor';
 import PostScore from './PostScore';
-import { GRAY } from '../../../utils/staticUtils';
 import { useToggle } from '../../common/customHooks';
 
 const PostCard = React.memo(({ post, showBorder = false, fullCaption = false }) => {
@@ -17,7 +16,7 @@ const PostCard = React.memo(({ post, showBorder = false, fullCaption = false }) 
         return (
             <>
                 <span>...</span>
-                <Link to={'#'}>
+                <Link to={`/posts/${post.pk}`}>
                     <span className={styles['show-more']}>[نمایش بیشتر]</span>
                 </Link>
             </>

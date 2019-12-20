@@ -1,6 +1,5 @@
 import React from 'react';
 
-import CustomScreen from '../common/customScreen/CustomScreen';
 import CustomNavbar from '../common/customNavbar/CustomNavbar';
 import { navigationTabs, samplePost } from '../../utils/hardcodedData';
 import PostCard from '../post/postCard/PostCard';
@@ -17,11 +16,7 @@ const Homepage = React.memo(props => {
         );
     }, []);
 
-    return (
-        <CustomScreen>
-            <CustomNavbar navigators={navigationTabs} renderComponent={renderComponent} />
-        </CustomScreen>
-    );
+    return <CustomNavbar navigators={navigationTabs} renderComponent={renderComponent} />;
 });
 
 export default Homepage;

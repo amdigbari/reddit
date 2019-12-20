@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Loading } from './common/CommonComponents';
+import CustomScreen from './common/customScreen/CustomScreen';
 
 const Homepage = lazy(() => import('./homepage'));
 const NotFound = lazy(() => import('./notFound'));
@@ -26,14 +27,16 @@ const SuspenseFallback = () => {
 const RootRouter = React.memo(() => {
     return (
         <BrowserRouter>
-            <Suspense fallback={<SuspenseFallback />}>
-                <Switch>
-                    <Route exact path="/" component={Homepage} />
-                    <Route exact path="/posts/" component={PostsScreen} />
-                    <Route exact path="/posts/:pk" component={PostScreen} />
-                    <Route component={NotFound} />
-                </Switch>
-            </Suspense>
+            <CustomScreen>
+                <Suspense fallback={<SuspenseFallback />}>
+                    <Switch>
+                        <Route exact path="/" component={Homepage} />
+                        <Route exact path="/posts/" component={PostsScreen} />
+                        <Route exact path="/posts/:pk" component={PostScreen} />
+                        <Route component={NotFound} />
+                    </Switch>
+                </Suspense>
+            </CustomScreen>
         </BrowserRouter>
     );
 });

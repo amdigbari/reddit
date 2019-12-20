@@ -6,7 +6,7 @@ import logo from '../../assets/images/reddit_logo.png';
 
 export const RedditLogo = () => {
     return (
-        <Link to="#" id={styles['reddit-logo']}>
+        <Link to="/" id={styles['reddit-logo']}>
             <img alt="Reddit" src={logo} className={styles['reddit-avatar']} />
             <span className={styles['logo-text']}>DNews</span>
         </Link>
