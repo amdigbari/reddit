@@ -9,7 +9,12 @@ const PostsScreen = React.memo(() => {
     return (
         <>
             {posts.map((post, index, array) => (
-                <PostCard post={post} key={post.pk} {...(index < array.length - 1 ? { showBorder: true } : {})} />
+                <PostCard
+                    post={post}
+                    key={post.pk}
+                    {...(index === 0 ? { style: { marginTop: 30 } } : {})}
+                    {...(index < array.length - 1 ? { showBorder: true } : {})}
+                />
             ))}
         </>
     );
