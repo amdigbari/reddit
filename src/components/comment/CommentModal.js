@@ -5,8 +5,7 @@ import image from '../../assets/images/test_profile.jpg';
 import styles from './styles.module.scss';
 import Modal from '../common/Modal';
 import Avatar from '../common/Avatar';
-import { ButtonLoading } from '../common/CommonComponents';
-import { DARK_PRIMARY_COLOR } from '../../utils/staticUtils';
+import { CustomButtonWithLoading } from '../common/CommonComponents';
 import { useToggle } from '../common/customHooks';
 
 const CommentModal = ({ modalVisibility, toggleVisibility: toggleModalVisibility }) => {
@@ -50,17 +49,13 @@ const CommentModal = ({ modalVisibility, toggleVisibility: toggleModalVisibility
                     <Avatar src={image} />
                 </div>
 
-                <div className={styles['submit-comment-container']}>
-                    <button
-                        className={styles['submit-comment']}
-                        style={{ opacity: buttonLoadingVisibility ? 0.6 : 1 }}
-                        type="submit"
-                        onClick={toggleButtonLoadingVisibility}>
-                        ارسال
-                    </button>
-
-                    <ButtonLoading color={DARK_PRIMARY_COLOR} visible={buttonLoadingVisibility} />
-                </div>
+                <CustomButtonWithLoading
+                    className={styles['submit-comment-container']}
+                    type="submit"
+                    activeLoading={toggleButtonLoadingVisibility}
+                    loading={buttonLoadingVisibility}>
+                    ارسال
+                </CustomButtonWithLoading>
             </form>
         );
     };

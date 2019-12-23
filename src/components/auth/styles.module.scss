@@ -1,0 +1,61 @@
+@import '../common//variables.scss';
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+
+    .auth-container {
+        width: 100%;
+        max-width: 600px;
+        height: 100%;
+        background-color: $background-color;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow: hidden;
+
+        .reddit-avatar {
+            margin-top: 75px;
+            height: 100px;
+        }
+
+        .reddit-title {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+
+        .reddit-description {
+            margin-top: 25px;
+            max-width: 75%;
+            text-align: center;
+        }
+
+        .login-page-button {
+            width: 75%;
+            margin-top: 35px;
+            height: 45px;
+        }
+
+        .signup-page-button {
+            margin-top: 50px;
+            color: $theme-primary;
+            transition: color 0.2s linear;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 18px;
+
+            &:hover {
+                color: $theme-secondary;
+            }
+        }
+    }
+}
+
+.username-input {
+    width: 80%;
+    direction: ltr;
+    text-align: left;
+    padding: 7px 10px;
+}

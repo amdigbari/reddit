@@ -1,5 +1,6 @@
 import React from 'react';
 import Sidebar from 'react-sidebar';
+import { connect } from 'react-redux';
 
 import Header from '../../header';
 
@@ -7,15 +8,16 @@ import styles from './styles.module.scss';
 import { useToggle } from '../customHooks';
 import SidebarContent from '../../hamburgerMenu';
 import { SHOW_ON_DESKTOP } from '../../../utils/staticUtils';
+import Auth from '../../auth/Auth';
 
-const CustomScreen = React.memo(({ children, className = '', ...restProps }) => {
+const CustomScreen = React.memo(({ children, className = '', loginUser, ...restProps }) => {
     let [menuVisibility, toggleMenuVisibility] = useToggle(false);
 
     const SidebarComponent = React.useCallback(() => {
         return <SidebarContent toggleMenuVisibility={toggleMenuVisibility} />;
     }, [toggleMenuVisibility]);
 
-    return (
+    return loginUser.username ? (
         <Sidebar
             onSetOpen={toggleMenuVisibility}
             open={menuVisibility}
@@ -28,11 +30,19 @@ const CustomScreen = React.memo(({ children, className = '', ...restProps }) => 
 
                 <main className={styles['main-content']}>
                     <section className={styles['menubar']} desc={SHOW_ON_DESKTOP}></section>
-                    <article className={[styles['page-content'], className].join(' ')}>{children}</article>
+                    <article className={[styles['page-content'], className].join(' ')} {...restProps}>
+                        {children}
+                    </article>
                 </main>
             </article>
         </Sidebar>
+    ) : (
+        <Auth />
     );
 });
 
-export default CustomScreen;
+const mapStateTpProps = state => {
+    return { loginUser: state.loginUser };
+};
+
+export default connect(mapStateTpProps)(CustomScreen);

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import styles from './styles.module.scss';
 import logo from '../../assets/images/reddit_logo.png';
+import { useToggle } from './customHooks';
+import { PRIMARY_COLOR, DARK_PRIMARY_COLOR } from '../../utils/staticUtils';
 
 export const RedditLogo = () => {
     return (
@@ -32,6 +34,55 @@ export const ButtonLoading = ({ color, visible }) => {
             <div
                 className={styles['loading-gradient']}
                 style={{ backgroundImage: `linear-gradient(to right, transparent, ${color}, transparent)` }}></div>
+        </div>
+    );
+};
+
+export const CustomButton = ({
+    color = PRIMARY_COLOR,
+    hoverColor = DARK_PRIMARY_COLOR,
+    className = '',
+    style = {},
+    children,
+    ...restProps
+}) => {
+    let [isHover, toggleIsHover] = useToggle(false);
+
+    return (
+        <button
+            className={[styles['custom-button'], className].join(' ')}
+            style={{ backgroundColor: isHover ? hoverColor : color, ...style }}
+            {...restProps}
+            onMouseEnter={toggleIsHover}
+            onMouseLeave={toggleIsHover}>
+            {children}
+        </button>
+    );
+};
+
+export const CustomButtonWithLoading = ({
+    loading,
+    activeLoading,
+    children,
+    color = PRIMARY_COLOR,
+    hoverColor = DARK_PRIMARY_COLOR,
+    loadingColor = DARK_PRIMARY_COLOR,
+    className = '',
+    style = {},
+    ...restProps
+}) => {
+    return (
+        <div className={className} style={{ position: 'relative', ...style }}>
+            <CustomButton
+                style={{ opacity: loading ? 0.6 : 1 }}
+                color={color}
+                hoverColor={hoverColor}
+                onClick={activeLoading}
+                {...restProps}>
+                {children}
+            </CustomButton>
+
+            <ButtonLoading color={loadingColor} visible={loading} />
         </div>
     );
 };

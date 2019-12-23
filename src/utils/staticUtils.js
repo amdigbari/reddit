@@ -9,6 +9,7 @@ export const ANIMATION_DURATION = 400;
 
 // Colors
 export const GRAY = '#4a4a4a';
+export const SILVER_GRAY = '#777';
 export const PRIMARY_COLOR = '#ff6265';
 export const DARK_PRIMARY_COLOR = '#de5356';
 export const LIGHT_PRIMARY_COLOR = '#ff8688';
