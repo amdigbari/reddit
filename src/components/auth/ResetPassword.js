@@ -8,21 +8,21 @@ import CustomScreenWithBackButton from '../common/screenWithBackButton/CustomScr
 
 const textStyle = { width: '80%', textAlign: 'center', margin: '50px auto 0 auto' };
 
-const SignIn = React.memo(({ showForgotPasswordPage, goBack }) => {
+const ResetPassword = React.memo(({ goBack }) => {
     let [username, setUsername] = React.useState('');
-    let [password, setPassword] = React.useState('');
     let [isSubmitting, toggleIsSubmitting] = useToggle(false);
 
     const changeUsername = ({ target }) => {
         setUsername(target.value.trim());
     };
 
-    const changePassword = ({ target }) => {
-        setPassword(target.value.trim());
-    };
-
     const Description = () => {
-        return <p style={textStyle}>Type in your username and password you choose for DNews and click Login</p>;
+        return (
+            <p style={textStyle}>
+                No problem!. Just type in your username and we will send the reset link to your account email. If you didn't set an email
+                for your account you should reset your password by reporting this the support
+            </p>
+        );
     };
 
     const RenderInputs = React.useCallback(() => {
@@ -36,40 +36,23 @@ const SignIn = React.memo(({ showForgotPasswordPage, goBack }) => {
                     color="secondary"
                     onKeyUp={changeUsername}
                 />
-                <TextField
-                    name="password"
-                    className="input-container"
-                    type="password"
-                    label="password"
-                    color="secondary"
-                    onKeyUp={changePassword}
-                />
 
                 <CustomButtonWithLoading
                     className="button-container"
                     type="submit"
                     loading={isSubmitting}
                     activeLoading={toggleIsSubmitting}>
-                    Login
+                    Send Link
                 </CustomButtonWithLoading>
             </form>
         );
     }, [isSubmitting, toggleIsSubmitting]);
 
-    const ForgotPassword = () => {
-        return (
-            <p className="forgot-password" style={textStyle} onClick={showForgotPasswordPage}>
-                Can't SignIn?! Reset Password.
-            </p>
-        );
-    };
-
     return (
-        <CustomScreenWithBackButton goBack={goBack} title="Sign In">
+        <CustomScreenWithBackButton goBack={goBack} title="Reset Password">
             <Description />
             <RenderInputs />
-            <ForgotPassword />
         </CustomScreenWithBackButton>
     );
 });
-export default SignIn;
+export default ResetPassword;

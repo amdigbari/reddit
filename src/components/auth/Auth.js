@@ -7,11 +7,13 @@ import logo from '../../assets/images/reddit_logo.png';
 import { CustomButton } from '../common/CommonComponents';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
+import ResetPassword from './ResetPassword';
 
 const PAGE_TYPES = {
     auth: 'auth',
     login: 'login',
     signUp: 'signUp',
+    forgotPassword: 'forgotPassword',
 };
 
 const Auth = React.memo(({ loginUser, registerUser, unregisterUser }) => {
@@ -22,6 +24,8 @@ const Auth = React.memo(({ loginUser, registerUser, unregisterUser }) => {
     const showSignUpPage = () => setPage(PAGE_TYPES.signUp);
 
     const showAuthPage = () => setPage(PAGE_TYPES.auth);
+
+    const showForgotPasswordPage = () => setPage(PAGE_TYPES.forgotPassword);
 
     const Description = () => {
         return (
@@ -51,7 +55,7 @@ const Auth = React.memo(({ loginUser, registerUser, unregisterUser }) => {
 
     return (
         <div className={styles.container}>
-            <div className={styles['auth-container']}>
+            <div className={styles['auth-container']} style={{ maxWidth: page === PAGE_TYPES.auth ? 600 : 'unset' }}>
                 {page === PAGE_TYPES.auth ? (
                     <>
                         <Description />
@@ -59,9 +63,11 @@ const Auth = React.memo(({ loginUser, registerUser, unregisterUser }) => {
                         <SignUpButton />
                     </>
                 ) : page === PAGE_TYPES.login ? (
-                    <SignIn goBack={showAuthPage} />
+                    <SignIn goBack={showAuthPage} showForgotPasswordPage={showForgotPasswordPage} />
+                ) : page === PAGE_TYPES.signUp ? (
+                    <SignUp goBack={showAuthPage} />
                 ) : (
-                    <SignUp />
+                    <ResetPassword goBack={showLoginPage} />
                 )}
             </div>
         </div>

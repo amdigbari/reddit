@@ -8,7 +8,7 @@ const CustomScreenWithBackButton = ({ goBack, title, children, ...restProps }) =
     return (
         <div className={styles['main-container']} {...restProps}>
             <header className={styles.header}>
-                <MdChevronLeft color={SILVER_GRAY} size={30} onClick={goBack} style={{ transform: 'scale(1.2)' }} />
+                <MdChevronLeft className={styles['back-button']} size={30} onClick={goBack} />
 
                 <p>{title}</p>
 

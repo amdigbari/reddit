@@ -13,6 +13,7 @@ export const SILVER_GRAY = '#777';
 export const PRIMARY_COLOR = '#ff6265';
 export const DARK_PRIMARY_COLOR = '#de5356';
 export const LIGHT_PRIMARY_COLOR = '#ff8688';
+export const SECONDARY_COLOR = '#c2b526';
 export const BACKGROUND_COLOR = '#f1efea';
 export const LIGHT_COLOR = '#fff';
 export const GREEN = 'rgb(40, 174, 68)';
