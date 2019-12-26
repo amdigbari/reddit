@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FiPlus } from 'react-icons/fi';
 
 import styles from './styles.module.scss';
 import logo from '../../assets/images/reddit_logo.png';
 import { useToggle } from './customHooks';
-import { PRIMARY_COLOR, DARK_PRIMARY_COLOR } from '../../utils/staticUtils';
+import { PRIMARY_COLOR, DARK_PRIMARY_COLOR, LIGHT_COLOR } from '../../utils/staticUtils';
 
 export const RedditLogo = () => {
     return (
@@ -83,6 +84,14 @@ export const CustomButtonWithLoading = ({
             </CustomButton>
 
             <ButtonLoading color={loadingColor} visible={loading} />
+        </div>
+    );
+};
+
+export const FloatAddButton = ({ onClick, className, ...restProps }) => {
+    return (
+        <div className={[styles['float-add-button'], className].join(' ')} {...restProps} onClick={onClick}>
+            <FiPlus color={LIGHT_COLOR} size={35} />
         </div>
     );
 };

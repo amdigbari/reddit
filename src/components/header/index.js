@@ -42,7 +42,7 @@ const Header = React.memo(({ toggleMenuVisibility: openBurgerMenu }) => {
                         <div className={styles.popup}>
                             <Link to="#profile">پروفایل</Link>
                             <Link to="/posts/">پست‌ها</Link>
-                            <Link to="#channels">کانال‌ها</Link>
+                            <Link to="/channels/">کانال‌ها</Link>
                         </div>
                     </Animated>
                 </div>

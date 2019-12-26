@@ -1,0 +1,48 @@
+@import '../../common/variables.scss';
+
+.link {
+    width: 100%;
+    background-color: $theme-light;
+    overflow: hidden;
+
+    &.border-bottom {
+        border-bottom: 1px solid $overlay-color;
+    }
+
+    .card {
+        width: 100%;
+        padding: 8px 15px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+
+        &:hover {
+            * {
+                color: $gray;
+
+                &.name {
+                    color: $theme-secondary;
+                }
+            }
+        }
+
+        .description {
+            flex: 1;
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            justify-content: space-between;
+
+            p {
+                text-overflow: ellipsis;
+                text-align: left;
+                direction: ltr;
+            }
+
+            .name {
+                transition: color 0.2s linear;
+            }
+        }
+    }
+}

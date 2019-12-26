@@ -7,6 +7,45 @@ export const navigationTabs = [
     { id: 4, title: 'Activities' },
 ];
 
+export const sampleChannel = {
+    name: 'Sample Channel',
+    logo: image,
+    members: 85,
+    pk: 1,
+    admins: [
+        {
+            avatar: image,
+            name: 'amdigbari',
+            pk: 1,
+        },
+        {
+            avatar: image,
+            name: 'amdigbari',
+            pk: 2,
+        },
+        {
+            avatar: image,
+            name: 'amdigbari',
+            pk: 3,
+        },
+        {
+            avatar: image,
+            name: 'amdigbari',
+            pk: 4,
+        },
+        {
+            avatar: image,
+            name: 'amdigbari',
+            pk: 5,
+        },
+        {
+            avatar: image,
+            name: 'amdigbari',
+            pk: 6,
+        },
+    ],
+};
+
 export const samplePost = {
     pk: 1,
     image,

@@ -10,7 +10,7 @@ import SidebarContent from '../../hamburgerMenu';
 import { SHOW_ON_DESKTOP } from '../../../utils/staticUtils';
 import Auth from '../../auth/Auth';
 
-const CustomScreen = React.memo(({ children, className = '', loginUser, ...restProps }) => {
+const CustomScreen = React.memo(({ children, className = '', loginUser }) => {
     let [menuVisibility, toggleMenuVisibility] = useToggle(false);
 
     const SidebarComponent = React.useCallback(() => {
@@ -30,9 +30,7 @@ const CustomScreen = React.memo(({ children, className = '', loginUser, ...restP
 
                 <main className={styles['main-content']}>
                     <section className={styles['menubar']} desc={SHOW_ON_DESKTOP}></section>
-                    <article className={[styles['page-content'], className].join(' ')} {...restProps}>
-                        {children}
-                    </article>
+                    <article className={[styles['page-content'], className].join(' ')}>{children}</article>
                 </main>
             </article>
         </Sidebar>

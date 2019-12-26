@@ -25,7 +25,7 @@ const SidebarContent = React.memo(props => {
                         <p>Posts</p>
                     </div>
                 </Link>
-                <Link to="#Channels">
+                <Link to="/channels/">
                     <div className={[styles['link-container'], styles['bottom-border']].join(' ')}>
                         <p>Channels</p>
                     </div>

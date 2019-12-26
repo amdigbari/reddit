@@ -7,6 +7,8 @@ const Homepage = lazy(() => import('./homepage'));
 const NotFound = lazy(() => import('./notFound'));
 const PostScreen = lazy(() => import('./post/postScreen'));
 const PostsScreen = lazy(() => import('./post/postsScreen'));
+const ChannelScreen = lazy(() => import('./channel/channelScreen'));
+const ChannelsScreen = lazy(() => import('./channel/channelsScreen'));
 
 const SuspenseFallback = () => {
     const containerStyle = {
@@ -31,8 +33,13 @@ const RootRouter = React.memo(() => {
                 <Suspense fallback={<SuspenseFallback />}>
                     <Switch>
                         <Route exact path="/" component={Homepage} />
+
                         <Route exact path="/posts/" component={PostsScreen} />
                         <Route exact path="/posts/:pk" component={PostScreen} />
+
+                        <Route exact path="/channels/" component={ChannelsScreen} />
+                        <Route exact path="/channels/:pk" component={ChannelScreen} />
+
                         <Route component={NotFound} />
                     </Switch>
                 </Suspense>
