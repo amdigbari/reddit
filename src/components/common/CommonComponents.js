@@ -62,13 +62,13 @@ export const CustomButton = ({
 
 export const CustomButtonWithLoading = ({
     loading,
-    activeLoading,
     children,
     color = PRIMARY_COLOR,
     hoverColor = DARK_PRIMARY_COLOR,
     loadingColor = DARK_PRIMARY_COLOR,
     className = '',
     style = {},
+    clickHandler,
     ...restProps
 }) => {
     return (
@@ -77,7 +77,7 @@ export const CustomButtonWithLoading = ({
                 style={{ opacity: loading ? 0.6 : 1 }}
                 color={color}
                 hoverColor={hoverColor}
-                onClick={activeLoading}
+                onClick={clickHandler}
                 {...restProps}>
                 {children}
             </CustomButton>

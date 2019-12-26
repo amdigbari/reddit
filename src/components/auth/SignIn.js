@@ -8,9 +8,52 @@ import CustomScreenWithBackButton from '../common/screenWithBackButton/CustomScr
 
 const textStyle = { width: '80%', textAlign: 'center', margin: '50px auto 0 auto' };
 
+const RenderInputs = ({
+    username: { username, error: usernameError, change: changeUsername },
+    password: { password, error: passwordError, change: changePassword },
+    isSubmitting,
+    submitForm,
+    handleSubmit,
+}) => {
+    return (
+        <form method="POST" action="/" onSubmit={submitForm}>
+            <TextField
+                name="username"
+                className="input-container animation-error"
+                type="text"
+                label="username"
+                color="secondary"
+                value={username}
+                onChange={changeUsername}
+                error={usernameError}
+                helperText="username can't be empty"
+            />
+            <TextField
+                name="password"
+                className="input-container animation-error"
+                type="password"
+                label="password"
+                color="secondary"
+                value={password}
+                onChange={changePassword}
+                error={passwordError}
+                helperText="password can't be empty"
+            />
+
+            <CustomButtonWithLoading className="button-container" type="submit" loading={isSubmitting} clickHandler={handleSubmit}>
+                Login
+            </CustomButtonWithLoading>
+        </form>
+    );
+};
+
 const SignIn = React.memo(({ showForgotPasswordPage, goBack }) => {
     let [username, setUsername] = React.useState('');
     let [password, setPassword] = React.useState('');
+
+    let [usernameValidate, setUsernameValidate] = React.useState(true);
+    let [passwordValidate, setPasswordValidate] = React.useState(true);
+
     let [isSubmitting, toggleIsSubmitting] = useToggle(false);
 
     const changeUsername = ({ target }) => {
@@ -25,37 +68,6 @@ const SignIn = React.memo(({ showForgotPasswordPage, goBack }) => {
         return <p style={textStyle}>Type in your username and password you choose for DNews and click Login</p>;
     };
 
-    const RenderInputs = React.useCallback(() => {
-        return (
-            <form method="POST" action="/" onSubmit={e => e.preventDefault()}>
-                <TextField
-                    name="username"
-                    className="input-container"
-                    type="text"
-                    label="username"
-                    color="secondary"
-                    onKeyUp={changeUsername}
-                />
-                <TextField
-                    name="password"
-                    className="input-container"
-                    type="password"
-                    label="password"
-                    color="secondary"
-                    onKeyUp={changePassword}
-                />
-
-                <CustomButtonWithLoading
-                    className="button-container"
-                    type="submit"
-                    loading={isSubmitting}
-                    activeLoading={toggleIsSubmitting}>
-                    Login
-                </CustomButtonWithLoading>
-            </form>
-        );
-    }, [isSubmitting, toggleIsSubmitting]);
-
     const ForgotPassword = () => {
         return (
             <p className="forgot-password" style={textStyle} onClick={showForgotPasswordPage}>
@@ -64,10 +76,32 @@ const SignIn = React.memo(({ showForgotPasswordPage, goBack }) => {
         );
     };
 
+    const submitForm = event => {
+        event.preventDefault();
+        console.log('Submit');
+    };
+
+    const submitButtonHandler = event => {
+        setUsernameValidate(username.length);
+        setPasswordValidate(password.length);
+
+        if (username.length && password.length) {
+            toggleIsSubmitting();
+        } else {
+            event.preventDefault();
+        }
+    };
+
     return (
         <CustomScreenWithBackButton goBack={goBack} title="Sign In">
             <Description />
-            <RenderInputs />
+            <RenderInputs
+                username={{ username, error: !usernameValidate, change: changeUsername }}
+                password={{ password, error: !passwordValidate, change: changePassword }}
+                isSubmitting={isSubmitting}
+                handleSubmit={submitButtonHandler}
+                submitForm={submitForm}
+            />
             <ForgotPassword />
         </CustomScreenWithBackButton>
     );

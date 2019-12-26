@@ -8,8 +8,33 @@ import CustomScreenWithBackButton from '../common/screenWithBackButton/CustomScr
 
 const textStyle = { width: '80%', textAlign: 'center', margin: '50px auto 0 auto' };
 
+const RenderInputs = ({ username: { username, error: usernameError, change: changeUsername }, isSubmitting, submitForm, handleSubmit }) => {
+    return (
+        <form method="POST" action="/" onSubmit={submitForm}>
+            <TextField
+                name="username"
+                className="input-container animation-error"
+                type="text"
+                label="username"
+                color="secondary"
+                value={username}
+                onChange={changeUsername}
+                error={usernameError}
+                helperText="username can't be empty"
+            />
+
+            <CustomButtonWithLoading className="button-container" type="submit" loading={isSubmitting} clickHandler={handleSubmit}>
+                Send Link
+            </CustomButtonWithLoading>
+        </form>
+    );
+};
+
 const ResetPassword = React.memo(({ goBack }) => {
     let [username, setUsername] = React.useState('');
+
+    let [usernameValidate, setUsernameValidate] = React.useState(true);
+
     let [isSubmitting, toggleIsSubmitting] = useToggle(false);
 
     const changeUsername = ({ target }) => {
@@ -25,33 +50,30 @@ const ResetPassword = React.memo(({ goBack }) => {
         );
     };
 
-    const RenderInputs = React.useCallback(() => {
-        return (
-            <form method="POST" action="/" onSubmit={e => e.preventDefault()}>
-                <TextField
-                    name="username"
-                    className="input-container"
-                    type="text"
-                    label="username"
-                    color="secondary"
-                    onKeyUp={changeUsername}
-                />
+    const submitForm = event => {
+        event.preventDefault();
+        console.log('Submit');
+    };
 
-                <CustomButtonWithLoading
-                    className="button-container"
-                    type="submit"
-                    loading={isSubmitting}
-                    activeLoading={toggleIsSubmitting}>
-                    Send Link
-                </CustomButtonWithLoading>
-            </form>
-        );
-    }, [isSubmitting, toggleIsSubmitting]);
+    const submitButtonHandler = event => {
+        setUsernameValidate(username.length);
+
+        if (username.length) {
+            toggleIsSubmitting();
+        } else {
+            event.preventDefault();
+        }
+    };
 
     return (
         <CustomScreenWithBackButton goBack={goBack} title="Reset Password">
             <Description />
-            <RenderInputs />
+            <RenderInputs
+                username={{ username, error: !usernameValidate, change: changeUsername }}
+                isSubmitting={isSubmitting}
+                handleSubmit={submitButtonHandler}
+                submitForm={submitForm}
+            />
         </CustomScreenWithBackButton>
     );
 });

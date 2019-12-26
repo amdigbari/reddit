@@ -38,3 +38,14 @@ form {
         color: $theme-secondary;
     }
 }
+
+.animation-error {
+    .MuiFormHelperText-root {
+        display: none;
+        animation: fadeInDown 0.2s linear;
+
+        &.Mui-error {
+            display: block;
+        }
+    }
+}
