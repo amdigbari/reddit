@@ -52,7 +52,7 @@ const CommentModal = ({ modalVisibility, toggleVisibility: toggleModalVisibility
                 <CustomButtonWithLoading
                     className={styles['submit-comment-container']}
                     type="submit"
-                    activeLoading={toggleButtonLoadingVisibility}
+                    clickHandler={toggleButtonLoadingVisibility}
                     loading={buttonLoadingVisibility}>
                     ارسال
                 </CustomButtonWithLoading>
