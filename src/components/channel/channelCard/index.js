@@ -12,7 +12,7 @@ const ChannelCard = ({ channel, showBorder = false, link = true, ...restProps })
     const Description = () => {
         return (
             <div className="description">
-                <p className="name">{channel.name}</p>
+                <p className="name text-truncate">{channel.name}</p>
 
                 <p>{`${channel.members} Member${channel.members > 1 ? 's' : ''}`}</p>
             </div>

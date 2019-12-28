@@ -1,14 +1,20 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
 import { Loading } from './common/CommonComponents';
 import CustomScreen from './common/customScreen/CustomScreen';
 
 const Homepage = lazy(() => import('./homepage'));
+
 const NotFound = lazy(() => import('./notFound'));
+
 const PostScreen = lazy(() => import('./post/postScreen'));
 const PostsScreen = lazy(() => import('./post/postsScreen'));
+
 const ChannelScreen = lazy(() => import('./channel/channelScreen'));
 const ChannelsScreen = lazy(() => import('./channel/channelsScreen'));
+
+const ProfileScreen = lazy(() => import('./profile/profileScreen'));
 
 const SuspenseFallback = () => {
     const containerStyle = {
@@ -39,6 +45,8 @@ const RootRouter = React.memo(() => {
 
                         <Route exact path="/channels/" component={ChannelsScreen} />
                         <Route exact path="/channels/:pk" component={ChannelScreen} />
+
+                        <Route exact path={['/profile/', '/profile/:pk']} component={ProfileScreen} />
 
                         <Route component={NotFound} />
                     </Switch>

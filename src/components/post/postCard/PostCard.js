@@ -26,7 +26,7 @@ const PostCard = React.memo(({ post, showBorder = false, fullCaption = false, ..
 
     return (
         <>
-            <div className={[styles['card-container'], showBorder ? styles['border-bottom'] : ''].join(' ')} {...restProps}>
+            <div className={[styles['card-container'], showBorder ? 'border-bottom' : ''].join(' ')} {...restProps}>
                 <div className={styles.header}>
                     <PostChannel channel={post.channel} />
 
