@@ -7,7 +7,7 @@ import { CustomButtonWithLoading, CustomButton } from '../../common/CommonCompon
 import { useToggle } from '../../common/customHooks';
 import { LIGHT_PRIMARY_COLOR } from '../../../utils/staticUtils';
 
-const ProfileCard = ({ user, showBorder, showEdit = false, link = false, className = '', ...restProps }) => {
+const ProfileCard = ({ user, showBorder = false, showEdit = false, link = false, className = '', ...restProps }) => {
     let [loading, toggleLoading] = useToggle(false);
 
     const followButtonClicked = () => {
