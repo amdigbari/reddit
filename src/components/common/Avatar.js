@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import styles from './styles.module.scss';
 
-const Avatar = ({ src, url, size = 40, style = {} }) => {
+const Avatar = ({ src, url, size = 40 }) => {
     return url ? (
         <div className={[styles.avatar, styles.link].join(' ')} style={{ width: size, height: size }}>
             <img src={src} alt="channel_avatar" width="100%" height="100%" />

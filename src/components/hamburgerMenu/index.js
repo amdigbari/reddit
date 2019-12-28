@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 
 import testProfile from '../../assets/images/test_profile.jpg';
 import styles from './styles.module.scss';
-import ProfileAvatar from '../profile/ProfileAvatar';
+import Avatar from '../common/Avatar';
 
 const SidebarContent = React.memo(props => {
     const ProfileSection = () => {
         return (
             <Link to="#Profile">
                 <div className={[styles['profile-container'], styles['bottom-border']].join(' ')}>
-                    <ProfileAvatar source={testProfile} size={125} />
+                    <Avatar src={testProfile} size={125} />
                     <p className={styles['profile-name']}>ممد ممدیان</p>
                 </div>
             </Link>
