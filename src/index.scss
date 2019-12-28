@@ -49,11 +49,14 @@ h6,
 input,
 textarea {
     color: $gray;
-    text-align: right;
     line-height: 1.4;
 }
 
 body,
 html {
     background-color: $background-color;
+}
+
+.danger {
+    color: $red;
 }

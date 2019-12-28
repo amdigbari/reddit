@@ -4,7 +4,7 @@ import PostCard from '../postCard/PostCard';
 import { samplePost } from '../../../utils/hardcodedData';
 import { FloatAddButton } from '../../common/CommonComponents';
 
-const PostsScreen = React.memo(() => {
+const PostsScreen = React.memo(({ showFloatButton = true }) => {
     const posts = React.useMemo(() => [samplePost, { ...samplePost, pk: 2 }], []);
 
     return (
@@ -13,12 +13,12 @@ const PostsScreen = React.memo(() => {
                 <PostCard
                     post={post}
                     key={post.pk}
-                    {...(index === 0 ? { style: { marginTop: 30 } } : {})}
+                    {...(index === 0 ? { style: { paddingTop: 30 } } : {})}
                     {...(index < array.length - 1 ? { showBorder: true } : {})}
                 />
             ))}
 
-            <FloatAddButton onClick={() => console.log('Add Post')} />
+            {showFloatButton && <FloatAddButton onClick={() => console.log('Add Post')} />}
             {/* TODO: */}
         </>
     );

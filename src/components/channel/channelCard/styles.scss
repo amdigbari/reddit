@@ -1,23 +1,23 @@
 @import '../../common/variables.scss';
 
-.link {
+.border-bottom {
+    border-bottom: 1px solid $overlay-color;
+}
+
+.card {
+    width: 100%;
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
     width: 100%;
     background-color: $theme-light;
     overflow: hidden;
 
-    &.border-bottom {
-        border-bottom: 1px solid $overlay-color;
-    }
-
-    .card {
-        width: 100%;
-        padding: 8px 15px;
-        display: flex;
-        align-items: center;
-        overflow: hidden;
+    &.link {
+        cursor: pointer;
 
         &:hover {
-            * {
+            *:not(button) {
                 color: $gray;
 
                 &.name {
@@ -25,24 +25,31 @@
                 }
             }
         }
+    }
 
-        .description {
-            flex: 1;
-            padding-left: 20px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            justify-content: space-between;
+    .description {
+        flex: 1;
+        padding-left: 20px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        justify-content: space-between;
 
-            p {
-                text-overflow: ellipsis;
-                text-align: left;
-                direction: ltr;
-            }
-
-            .name {
-                transition: color 0.2s linear;
-            }
+        p {
+            text-overflow: ellipsis;
+            text-align: left;
+            direction: ltr;
         }
+
+        .name {
+            transition: color 0.2s linear;
+        }
+    }
+
+    .follow-button {
+        width: 100px;
+        height: 30px;
+        border-radius: 15px;
+        overflow: hidden;
     }
 }

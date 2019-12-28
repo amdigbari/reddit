@@ -11,7 +11,9 @@ export const sampleChannel = {
     name: 'Sample Channel',
     logo: image,
     members: 85,
+    postsCount: 25,
     pk: 1,
+    description: 'Fuck this piece of shit.',
     admins: [
         {
             avatar: image,
