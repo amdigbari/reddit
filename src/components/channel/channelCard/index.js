@@ -6,7 +6,7 @@ import { CustomButtonWithLoading } from '../../common/CommonComponents';
 import './styles.scss';
 import { useToggle } from '../../common/customHooks';
 
-const ChannelCard = ({ channel, showBorder = false, showFollowButton = false, link = true, ...restProps }) => {
+const ChannelCard = ({ channel, showBorder = false, link = true, ...restProps }) => {
     let [loading, toggleLoading] = useToggle(false);
 
     const Description = () => {
@@ -36,13 +36,13 @@ const ChannelCard = ({ channel, showBorder = false, showFollowButton = false, li
         <Link to={`/channels/${channel.pk}`} className={`card link${showBorder ? ' border-bottom' : ''}`} {...restProps}>
             <Avatar src={channel.logo} />
             <Description />
-            {showFollowButton && <FollowButton />}
+            <FollowButton />
         </Link>
     ) : (
         <div className={`card ${showBorder ? ' border-bottom' : ''}`} {...restProps}>
             <Avatar src={channel.logo} />
             <Description />
-            {showFollowButton && <FollowButton />}
+            <FollowButton />
         </div>
     );
 };

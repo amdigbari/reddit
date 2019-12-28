@@ -45,7 +45,7 @@ const ChannelScreen = React.memo(({ match }) => {
 
     return (
         <div className={styles.container}>
-            <ChannelCard channel={channel} showFollowButton showBorder link={false} style={{ paddingTop: 30 }} />
+            <ChannelCard channel={channel} showBorder link={false} style={{ paddingTop: 30 }} />
             <ChannelDescription />
             <ChannelPosts />
         </div>
