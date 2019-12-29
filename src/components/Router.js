@@ -17,6 +17,8 @@ const ChannelsScreen = lazy(() => import('./channel/channelsScreen'));
 const ProfileScreen = lazy(() => import('./profile/profileScreen'));
 const FollowList = lazy(() => import('./profile/followList'));
 
+const NotificationScreen = lazy(() => import('./notification/notificationScreen'));
+
 const SuspenseFallback = () => {
     const containerStyle = {
         width: '100%',
@@ -49,6 +51,8 @@ const RootRouter = React.memo(() => {
 
                         <Route exact path={['/profile/', '/profile/:pk/']} component={ProfileScreen} />
                         <Route exact path={['/followers/:pk/', '/followings/:pk/']} component={FollowList} />
+
+                        <Route exact path="/notifications/" component={NotificationScreen} />
 
                         <Route component={NotFound} />
                     </Switch>

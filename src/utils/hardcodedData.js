@@ -96,3 +96,15 @@ export var samplePost = {
         },
     ],
 };
+
+export var samplePostNotification = {
+    pk: 1,
+    user: sampleUser,
+    post: samplePost,
+    like: false,
+};
+
+export var sampleFollowNotification = {
+    pk: 10,
+    user: sampleUser,
+};
