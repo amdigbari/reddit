@@ -4,7 +4,7 @@ import { Animated } from 'react-animated-css';
 import styles from './styles.module.scss';
 import { ANIMATION_DURATION } from '../../utils/staticUtils';
 
-const Modal = React.memo(({ modalVisibility, children, className, toggleVisibility, ...restProps }) => {
+const Modal = React.memo(({ modalVisibility, children, className = '', toggleVisibility, containerClassName = '', ...restProps }) => {
     return (
         <Animated
             isVisible={modalVisibility}
@@ -14,7 +14,9 @@ const Modal = React.memo(({ modalVisibility, children, className, toggleVisibili
             animationOutDuration={ANIMATION_DURATION}
             className={[styles['modal-background'], className].join(' ')}>
             <div className={styles['modal-container']} onClick={toggleVisibility} {...restProps}>
-                <div onClick={event => event.stopPropagation()}>{children}</div>
+                <div onClick={event => event.stopPropagation()} className={containerClassName}>
+                    {children}
+                </div>
             </div>
         </Animated>
     );
