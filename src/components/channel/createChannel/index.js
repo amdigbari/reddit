@@ -73,7 +73,7 @@ const RenderInputs = ({
                 renderOption={user => <RenderOption user={user} listBox />}
                 multiple
                 autoComplete
-                renderInput={params => <TextField {...params} label="admins" margin="normal" fullWidth />}
+                renderInput={params => <TextField {...params} name="admins" label="admins" margin="normal" fullWidth />}
                 onChange={handleChange}
             />
 
