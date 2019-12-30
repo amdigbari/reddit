@@ -9,6 +9,7 @@ import PostAuthor from './PostAuthor';
 import PostScore from './PostScore';
 import { useToggle } from '../../common/customHooks';
 import CommentModal from '../../comment/CommentModal';
+import PostImage from './PostImage';
 
 const PostCard = React.memo(({ post, showBorder = false, fullCaption = false, ...restProps }) => {
     let [replyPostModalVisibility, toggleReplyPostModalVisibility] = useToggle(false);
@@ -33,11 +34,11 @@ const PostCard = React.memo(({ post, showBorder = false, fullCaption = false, ..
                     <p>{post.date}</p>
                 </div>
 
-                <Link to={`/posts/${post.pk}`}>
-                    <div className={styles['image-container']}>
-                        <img src={post.image} alt="card_image" className={styles['card-image']} />
-                    </div>
-                </Link>
+                {post.image && (
+                    <Link to={`/posts/${post.pk}`}>
+                        <PostImage src={post.image} />
+                    </Link>
+                )}
 
                 {fullCaption ? (
                     <p className={styles['caption-container']}>{post.caption}</p>

@@ -1,15 +1,12 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import { Autocomplete } from '@material-ui/lab/';
 
 import styles from './styles.module.scss';
 import './material_style.scss';
 import Modal from '../../common/Modal';
 import CustomScreenWithBackButton from '../../common/screenWithBackButton/CustomScreenWithBackButton';
-import { CustomButtonWithLoading } from '../../common/CommonComponents';
 import { useToggle } from '../../common/customHooks';
 import { sampleChannel } from '../../../utils/hardcodedData';
-import Avatar from '../../common/Avatar';
+import RenderInputs from './Inputs';
 
 const potentialChannels = [
     sampleChannel,
@@ -20,55 +17,6 @@ const potentialChannels = [
     { ...sampleChannel, pk: 6, name: 'amdigbari5' },
     { ...sampleChannel, pk: 7, name: 'amdigbari6' },
 ];
-
-const RenderInputs = ({
-    channel: { channel, change: changeChannel },
-    caption: { caption, error: captionError, change: changeCaption },
-    image: { image, change: changeImage },
-    isSubmitting,
-    submitForm,
-    handleSubmit,
-}) => {
-    const handleChange = (event, value) => {
-        console.log(value);
-        changeChannel(value);
-    };
-
-    return (
-        <form method="POST" action="/" onSubmit={submitForm}>
-            <div className={styles['channel-container']}>
-                <Autocomplete
-                    options={potentialChannels}
-                    getOptionLabel={channel => channel.name}
-                    autoComplete
-                    disableClearable
-                    defaultValue={channel}
-                    renderInput={params => <TextField {...params} name="channel" label="channel" margin="normal" fullWidth />}
-                    onChange={handleChange}
-                />
-                <Avatar src={channel.logo} size={25} className={styles['channel-logo']} />
-            </div>
-
-            <TextField
-                name="caption"
-                className="input-container animation-error"
-                type="text"
-                label="caption"
-                color="secondary"
-                value={caption}
-                onChange={changeCaption}
-                error={captionError}
-                helperText="caption can't be empty"
-            />
-
-            {/* TODO: add image input */}
-
-            <CustomButtonWithLoading className="button-container" type="submit" loading={isSubmitting} clickHandler={handleSubmit}>
-                Create
-            </CustomButtonWithLoading>
-        </form>
-    );
-};
 
 const CreatePostModal = React.memo(({ modalVisibility, toggleModalVisibility }) => {
     let [channel, setChannel] = React.useState(potentialChannels[0]);
@@ -87,8 +35,18 @@ const CreatePostModal = React.memo(({ modalVisibility, toggleModalVisibility }) 
         setChannel(value);
     };
 
-    const changeImage = value => {
-        setImage(value);
+    const changeImage = imageInput => {
+        if (imageInput) {
+            var file = imageInput.target.files[0];
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+
+            reader.onloadend = function(e) {
+                setImage(reader.result);
+            };
+        } else {
+            setImage(null);
+        }
     };
 
     const submitForm = event => {
@@ -117,6 +75,7 @@ const CreatePostModal = React.memo(({ modalVisibility, toggleModalVisibility }) 
                         isSubmitting={isSubmitting}
                         handleSubmit={submitButtonHandler}
                         submitForm={submitForm}
+                        possibleChannels={potentialChannels}
                     />
                 </div>
             </CustomScreenWithBackButton>
