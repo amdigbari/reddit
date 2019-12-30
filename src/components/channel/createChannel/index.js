@@ -1,11 +1,15 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
+import { Autocomplete } from '@material-ui/lab/';
 
 import styles from './styles.module.scss';
+import './material_style.scss';
 import Modal from '../../common/Modal';
 import CustomScreenWithBackButton from '../../common/screenWithBackButton/CustomScreenWithBackButton';
 import { CustomButtonWithLoading } from '../../common/CommonComponents';
 import { useToggle } from '../../common/customHooks';
+import { sampleUser } from '../../../utils/hardcodedData';
+import Avatar from '../../common/Avatar';
 
 const RenderInputs = ({
     name: { name, error: nameError, change: changeName },
@@ -15,6 +19,31 @@ const RenderInputs = ({
     submitForm,
     handleSubmit,
 }) => {
+    const potentialAdmins = [
+        sampleUser,
+        { ...sampleUser, pk: 2, name: 'amdigbari1' },
+        { ...sampleUser, pk: 3, name: 'amdigbari2' },
+        { ...sampleUser, pk: 4, name: 'amdigbari3' },
+        { ...sampleUser, pk: 5, name: 'amdigbari4' },
+        { ...sampleUser, pk: 6, name: 'amdigbari5' },
+        { ...sampleUser, pk: 7, name: 'amdigbari6' },
+    ];
+
+    const RenderOption = ({ user, listBox = false }) => {
+        return !listBox ? (
+            <div className={styles['option-container']}>
+                <Avatar src={user.avatar} size={25} />
+                <p className={styles['option-text']}>{user.name}</p>
+            </div>
+        ) : (
+            user.name
+        );
+    };
+
+    const handleChange = (event, value) => {
+        changeAdmins(value);
+    };
+
     return (
         <form method="POST" action="/" onSubmit={submitForm}>
             <TextField
@@ -37,15 +66,16 @@ const RenderInputs = ({
                 value={description}
                 onChange={changeDescription}
             />
-            {/* <TextField
-                name="confirm_password"
-                className="input-container animation-error"
-                type="password"
-                label="password"
-                color="secondary"
-                value={admins}
-                onChange={changeAdmins}
-            /> */}
+
+            <Autocomplete
+                options={potentialAdmins}
+                getOptionLabel={user => <RenderOption user={user} />}
+                renderOption={user => <RenderOption user={user} listBox />}
+                multiple
+                autoComplete
+                renderInput={params => <TextField {...params} label="admins" margin="normal" fullWidth />}
+                onChange={handleChange}
+            />
 
             <CustomButtonWithLoading className="button-container" type="submit" loading={isSubmitting} clickHandler={handleSubmit}>
                 Create
@@ -71,8 +101,8 @@ const CreateChannelModal = React.memo(({ modalVisibility, toggleModalVisibility 
         setDescription(target.value.trim());
     };
 
-    const changeAdmins = ({ target }) => {
-        setAdmins(target.value.trim());
+    const changeAdmins = value => {
+        setAdmins(value);
     };
 
     const submitForm = event => {
