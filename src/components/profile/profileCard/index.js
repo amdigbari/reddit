@@ -6,9 +6,11 @@ import Avatar from '../../common/Avatar';
 import { CustomButtonWithLoading, CustomButton } from '../../common/CommonComponents';
 import { useToggle } from '../../common/customHooks';
 import { LIGHT_PRIMARY_COLOR } from '../../../utils/staticUtils';
+import EditProfileModal from '../editProfile';
 
 const ProfileCard = ({ user, showBorder = false, showEdit = false, link = false, className = '', ...restProps }) => {
     let [loading, toggleLoading] = useToggle(false);
+    let [editModalVisibility, toggleEditModalVisibility] = useToggle(false);
 
     const followButtonClicked = () => {
         toggleLoading();
@@ -16,26 +18,29 @@ const ProfileCard = ({ user, showBorder = false, showEdit = false, link = false,
     };
 
     const editButtonClicked = () => {
-        console.log('Edit Profile');
-        //TODO: add edit functionality
+        toggleEditModalVisibility();
     };
 
     const FollowButton = () => {
         return (
-            <div className="buttons-container">
-                {showEdit && (
-                    <CustomButton
-                        color="transparent"
-                        hoverColor={LIGHT_PRIMARY_COLOR}
-                        onClick={editButtonClicked}
-                        className="edit-profile-button">
-                        Edit Profile
-                    </CustomButton>
-                )}
-                <CustomButtonWithLoading className="follow-button" loading={loading} clickHandler={followButtonClicked}>
-                    Follow
-                </CustomButtonWithLoading>
-            </div>
+            <>
+                <div className="buttons-container">
+                    {showEdit && (
+                        <CustomButton
+                            color="transparent"
+                            hoverColor={LIGHT_PRIMARY_COLOR}
+                            onClick={editButtonClicked}
+                            className="edit-profile-button">
+                            Edit Profile
+                        </CustomButton>
+                    )}
+                    <CustomButtonWithLoading className="follow-button" loading={loading} clickHandler={followButtonClicked}>
+                        Follow
+                    </CustomButtonWithLoading>
+                </div>
+
+                {showEdit && <EditProfileModal modalVisibility={editModalVisibility} toggleModalVisibility={toggleEditModalVisibility} />}
+            </>
         );
     };
 
