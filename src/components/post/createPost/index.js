@@ -65,7 +65,7 @@ const CreatePostModal = React.memo(({ modalVisibility, toggleModalVisibility }) 
     };
 
     return (
-        <Modal modalVisibility={modalVisibility} toggleVisibility={toggleModalVisibility} containerClassName={styles['container']}>
+        <Modal modalVisibility={modalVisibility} toggleVisibility={toggleModalVisibility} className={styles['container']}>
             <CustomScreenWithBackButton goBack={toggleModalVisibility} title="Create Post">
                 <div className={styles['container']}>
                     <RenderInputs

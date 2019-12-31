@@ -1,5 +1,9 @@
 @import '../../common/variables.scss';
 
+.MuiPaper-root {
+    background-color: transparent;
+}
+
 .MuiAutocomplete-root {
     width: 100%;
 
