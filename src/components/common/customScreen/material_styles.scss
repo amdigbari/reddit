@@ -1,0 +1,9 @@
+@import '../variables.scss';
+
+.MuiBackdrop-root {
+    background-color: $overlay-color !important;
+}
+
+.MuiDrawer-paper {
+    width: 80%;
+}

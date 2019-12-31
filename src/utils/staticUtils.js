@@ -21,3 +21,6 @@ export const RED = 'rgb(211, 71, 71)';
 
 //Sizes
 export const ICON_MOBILE_SIZE = 30;
+
+//Platform
+export const IS_IOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
