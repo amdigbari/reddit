@@ -14,7 +14,7 @@ const EditProfileModal = React.memo(({ modalVisibility, toggleModalVisibility, u
     let [email, setEmail] = React.useState(user.email || '');
 
     // Not Required
-    let [image, setImage] = React.useState(user.image);
+    let [image, setImage] = React.useState(user.avatar);
     let [phone, setPhone] = React.useState(user.phone || '');
     let [city, setCity] = React.useState(user.city || '');
 

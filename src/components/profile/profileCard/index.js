@@ -39,7 +39,9 @@ const ProfileCard = ({ user, showBorder = false, showEdit = false, link = false,
                     </CustomButtonWithLoading>
                 </div>
 
-                {showEdit && <EditProfileModal modalVisibility={editModalVisibility} toggleModalVisibility={toggleEditModalVisibility} />}
+                {showEdit && (
+                    <EditProfileModal modalVisibility={editModalVisibility} toggleModalVisibility={toggleEditModalVisibility} user={user} />
+                )}
             </>
         );
     };

@@ -5,6 +5,7 @@ import './styles.scss';
 import { CustomButtonWithLoading } from '../common/CommonComponents';
 import { useToggle } from '../common/customHooks';
 import CustomScreenWithBackButton from '../common/screenWithBackButton/CustomScreenWithBackButton';
+import EditProfileModal from '../profile/editProfile';
 
 const textStyle = { width: '80%', textAlign: 'center', margin: '50px auto 0 auto' };
 
@@ -70,6 +71,8 @@ const SignUp = React.memo(({ goBack }) => {
 
     let [isSubmitting, toggleIsSubmitting] = useToggle(false);
 
+    let [editProfileModalVisibility, toggleEditProfileModalVisibility] = useToggle(false);
+
     const changeUsername = ({ target }) => {
         setUsername(target.value.trim());
     };
@@ -104,17 +107,21 @@ const SignUp = React.memo(({ goBack }) => {
     };
 
     return (
-        <CustomScreenWithBackButton goBack={goBack} title="Create Account">
-            <Description />
-            <RenderInputs
-                username={{ username, error: !usernameValidate, change: changeUsername }}
-                password={{ password, error: !passwordValidate, change: changePassword }}
-                confirmPassword={{ confirmPassword, error: !confirmPasswordValidate, change: changeConfirmPassword }}
-                isSubmitting={isSubmitting}
-                handleSubmit={submitButtonHandler}
-                submitForm={submitForm}
-            />
-        </CustomScreenWithBackButton>
+        <>
+            <CustomScreenWithBackButton goBack={goBack} title="Create Account">
+                <Description />
+                <RenderInputs
+                    username={{ username, error: !usernameValidate, change: changeUsername }}
+                    password={{ password, error: !passwordValidate, change: changePassword }}
+                    confirmPassword={{ confirmPassword, error: !confirmPasswordValidate, change: changeConfirmPassword }}
+                    isSubmitting={isSubmitting}
+                    handleSubmit={submitButtonHandler}
+                    submitForm={submitForm}
+                />
+            </CustomScreenWithBackButton>
+
+            <EditProfileModal modalVisibility={editProfileModalVisibility} toggleModalVisibility={toggleEditProfileModalVisibility} />
+        </>
     );
 });
 export default SignUp;

@@ -10,6 +10,7 @@ export const navigationTabs = [
 export var sampleUser = {
     pk: 1,
     name: 'amdigbari',
+    email: 'amirmahdidigbari@yahoo.com',
     followersCount: 85,
     followingsCount: 69,
     postsCount: 125,
