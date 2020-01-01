@@ -8,7 +8,7 @@ import Avatar from '../common/Avatar';
 const SidebarContent = React.memo(props => {
     const ProfileSection = () => {
         return (
-            <Link to="#Profile">
+            <Link to="/profile/">
                 <div className={[styles['profile-container'], styles['bottom-border']].join(' ')}>
                     <Avatar src={testProfile} size={125} />
                     <p className={styles['profile-name']}>ممد ممدیان</p>

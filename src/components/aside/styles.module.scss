@@ -1,0 +1,11 @@
+@import '../common/variables.scss';
+
+.button {
+    width: 65%;
+    height: 35px;
+    margin-top: 20px;
+
+    .link {
+        color: $theme-light !important;
+    }
+}
