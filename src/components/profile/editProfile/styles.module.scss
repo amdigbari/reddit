@@ -86,3 +86,14 @@
     align-items: center;
     justify-content: center;
 }
+
+.change-password {
+    margin-top: 30px;
+    font-size: 17px;
+    transition: color 0.2s linear;
+    cursor: pointer;
+
+    &:hover {
+        color: $theme-secondary;
+    }
+}
