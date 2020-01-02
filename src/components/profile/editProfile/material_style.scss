@@ -1,0 +1,30 @@
+@import '../../common/variables.scss';
+
+.MuiPaper-root {
+    background-color: transparent;
+}
+
+.MuiAutocomplete-root {
+    width: 100%;
+
+    .MuiAutocomplete-input {
+        padding-left: 40px !important;
+    }
+
+    .MuiInputLabel-root {
+        transition: all 200ms linear;
+        &:not(.MuiInputLabel-shrink) {
+            padding-left: 40px !important;
+        }
+    }
+
+    .Mui-focused {
+        &::after {
+            border-bottom: 2px solid $theme-primary;
+        }
+
+        &.MuiInputLabel-root {
+            color: $theme-primary;
+        }
+    }
+}

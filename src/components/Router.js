@@ -50,7 +50,8 @@ const RootRouter = React.memo(() => {
                         <Route exact path="/channels/:pk/" component={ChannelScreen} />
 
                         <Route exact path={['/profile/', '/profile/:pk/']} component={ProfileScreen} />
-                        <Route exact path={['/followers/:pk/', '/followings/:pk/']} component={FollowList} />
+
+                        <Route exact path={['/followers/', '/followings/', '/followers/:pk', '/followings/:pk']} component={FollowList} />
 
                         <Route exact path="/notifications/" component={NotificationScreen} />
 

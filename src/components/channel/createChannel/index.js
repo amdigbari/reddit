@@ -73,7 +73,7 @@ const RenderInputs = ({
                 renderOption={user => <RenderOption user={user} listBox />}
                 multiple
                 autoComplete
-                renderInput={params => <TextField {...params} label="admins" margin="normal" fullWidth />}
+                renderInput={params => <TextField {...params} name="admins" label="admins" margin="normal" fullWidth />}
                 onChange={handleChange}
             />
 
@@ -121,7 +121,7 @@ const CreateChannelModal = React.memo(({ modalVisibility, toggleModalVisibility 
     };
 
     return (
-        <Modal modalVisibility={modalVisibility} toggleVisibility={toggleModalVisibility} containerClassName={styles['container']}>
+        <Modal modalVisibility={modalVisibility} toggleVisibility={toggleModalVisibility} className={styles['container']}>
             <CustomScreenWithBackButton goBack={toggleModalVisibility} title="Create Channel">
                 <div className={styles['container']}>
                     <RenderInputs
