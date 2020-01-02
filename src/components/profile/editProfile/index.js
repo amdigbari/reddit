@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import styles from './styles.module.scss';
 import './material_style.scss';
@@ -8,8 +9,9 @@ import { useToggle } from '../../common/customHooks';
 import RenderInputs from './Inputs';
 import { EMAIL_VALIDATOR, PHONE_VALIDATOR } from '../../../utils/staticUtils';
 import ChangePasswordModal from './changePassword';
+import { unRegisterUser } from '../../../actions/AuthActions';
 
-const EditProfileModal = React.memo(({ modalVisibility, toggleModalVisibility, user = {} }) => {
+const EditProfileModal = React.memo(({ modalVisibility, toggleModalVisibility, user = {}, unregisterUser: logOut }) => {
     // Required
     let [name, setName] = React.useState(user.name || '');
     let [email, setEmail] = React.useState(user.email || '');
@@ -86,6 +88,7 @@ const EditProfileModal = React.memo(({ modalVisibility, toggleModalVisibility, u
                             handleSubmit={submitButtonHandler}
                             submitForm={submitForm}
                             showChangePasswordModal={toggleChangePasswordModalVisibility}
+                            logOut={logOut}
                         />
                     </div>
                 </CustomScreenWithBackButton>
@@ -98,4 +101,9 @@ const EditProfileModal = React.memo(({ modalVisibility, toggleModalVisibility, u
         </>
     );
 });
-export default EditProfileModal;
+
+const mapDispatchToProps = {
+    unregisterUser: unRegisterUser,
+};
+
+export default connect(undefined, mapDispatchToProps)(EditProfileModal);

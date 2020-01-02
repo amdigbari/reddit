@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import testProfile from '../../assets/images/test_profile.jpg';
 import styles from './styles.module.scss';
 import Avatar from '../common/Avatar';
+import { unRegisterUser } from '../../actions/AuthActions';
 
-const SidebarContent = React.memo(props => {
+const SidebarContent = React.memo(({ unRegisterUser: logOut }) => {
     const ProfileSection = () => {
         return (
             <Link to="/profile/">
@@ -43,8 +45,15 @@ const SidebarContent = React.memo(props => {
         <section className={styles['menu-container']}>
             <ProfileSection />
             <LinksSection />
+            <div className={[styles['link-container'], styles['bottom-border'], 'danger'].join(' ')} onClick={logOut}>
+                <p>Log out</p>
+            </div>
         </section>
     );
 });
 
-export default SidebarContent;
+const mapDispatchToProps = {
+    unRegisterUser,
+};
+
+export default connect(undefined, mapDispatchToProps)(SidebarContent);

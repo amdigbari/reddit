@@ -6,6 +6,7 @@ import styles from './styles.module.scss';
 import './material_style.scss';
 import { CustomButtonWithLoading } from '../../common/CommonComponents';
 import Avatar from '../../common/Avatar';
+import { SHOW_ON_DESKTOP } from '../../../utils/staticUtils';
 
 const RenderInputs = ({
     name: { name, change: changeName, error: nameError },
@@ -16,7 +17,8 @@ const RenderInputs = ({
     isSubmitting,
     submitForm,
     handleSubmit,
-    showChangePasswordModal
+    showChangePasswordModal,
+    logOut,
 }) => {
     const clearImage = () => changeImage(null);
 
@@ -96,11 +98,21 @@ const RenderInputs = ({
                 onChange={changeCity}
             />
 
-            <p className={[styles['change-password'], 'danger'].join(' ')} onClick={showChangePasswordModal}>change password</p>
+            <p className={[styles['change-password'], 'danger'].join(' ')} onClick={showChangePasswordModal}>
+                change password
+            </p>
 
             <CustomButtonWithLoading className="button-container" type="submit" loading={isSubmitting} clickHandler={handleSubmit}>
                 Save
             </CustomButtonWithLoading>
+
+            <p
+                className={[styles['change-password'], 'danger'].join(' ')}
+                onClick={logOut}
+                style={{ marginTop: 50 }}
+                desc={SHOW_ON_DESKTOP}>
+                Log Out
+            </p>
         </form>
     );
 };

@@ -6,7 +6,7 @@ export const registerUser = user => dispatch => {
         user,
     });
 };
-export const unregisterUser = () => dispatch => {
+export const unRegisterUser = () => dispatch => {
     dispatch({
         type: UNREGISTER_USER,
     });
