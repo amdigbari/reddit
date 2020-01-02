@@ -35,6 +35,8 @@ a {
 
 .text-truncate {
     text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 a,
@@ -49,11 +51,18 @@ h6,
 input,
 textarea {
     color: $gray;
-    text-align: right;
     line-height: 1.4;
 }
 
 body,
 html {
     background-color: $background-color;
+}
+
+.danger {
+    color: $red;
+}
+
+.border-bottom {
+    border-bottom: 1px solid $overlay-color;
 }

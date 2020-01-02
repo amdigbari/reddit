@@ -1,0 +1,49 @@
+@import '../../common/variables.scss';
+
+.card {
+    width: 100%;
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: $theme-light;
+    overflow: hidden;
+
+    &.link {
+        cursor: pointer;
+
+        &:hover {
+            *:not(button) {
+                color: $gray;
+
+                &.name {
+                    color: $theme-secondary;
+                }
+            }
+
+            button {
+                color: $theme-light;
+            }
+        }
+    }
+
+    .description {
+        flex: 1;
+        padding-left: 20px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        justify-content: space-between;
+
+        .name {
+            transition: color 0.2s linear;
+        }
+    }
+
+    .follow-button {
+        width: 100px;
+        height: 30px;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+}

@@ -1,47 +1,76 @@
 import React from 'react';
-import Sidebar from 'react-sidebar';
+import { useHistory } from 'react-router-dom';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import { connect } from 'react-redux';
 
 import Header from '../../header';
-
 import styles from './styles.module.scss';
-import { useToggle } from '../customHooks';
+import './material_styles.scss';
 import SidebarContent from '../../hamburgerMenu';
-import { SHOW_ON_DESKTOP } from '../../../utils/staticUtils';
+import { SHOW_ON_DESKTOP, IS_IOS } from '../../../utils/staticUtils';
 import Auth from '../../auth/Auth';
+import AsideMenubar from '../../aside';
 
-const CustomScreen = React.memo(({ children, className = '', loginUser, ...restProps }) => {
-    let [menuVisibility, toggleMenuVisibility] = useToggle(false);
+const CustomScreen = React.memo(({ children, className = '', loginUser }) => {
+    let [drawerOpen, setDrawerOpen] = React.useState(false);
 
-    const SidebarComponent = React.useCallback(() => {
-        return <SidebarContent toggleMenuVisibility={toggleMenuVisibility} />;
-    }, [toggleMenuVisibility]);
+    const toggleDrawerOpen = React.useCallback(() => {
+        setDrawerOpen(prevState => !prevState);
+    }, []);
+
+    let history = useHistory();
+
+    React.useEffect(() => {
+        history.listen(() => {
+            setDrawerOpen(false);
+        });
+    }, [history]);
+
+    const SidebarComponent = () => <SidebarContent />;
+
+    const MaterialSidebar = React.useCallback(
+        ({ children }) => {
+            return (
+                <SwipeableDrawer
+                    disableBackdropTransition={!IS_IOS}
+                    disableDiscovery={IS_IOS}
+                    anchor="right"
+                    hysteresis={0.35}
+                    swipeAreaWidth={40}
+                    transitionDuration={200}
+                    open={drawerOpen}
+                    onOpen={toggleDrawerOpen}
+                    onClose={toggleDrawerOpen}>
+                    {children}
+                </SwipeableDrawer>
+            );
+        },
+        [drawerOpen, toggleDrawerOpen],
+    );
 
     return loginUser.username ? (
-        <Sidebar
-            onSetOpen={toggleMenuVisibility}
-            open={menuVisibility}
-            sidebarClassName={styles.sidebar}
-            overlayClassName={styles.overlay}
-            pullRight
-            sidebar={<SidebarComponent />}>
+        <>
             <article className={styles['page-wrapper']}>
-                <Header toggleMenuVisibility={toggleMenuVisibility} />
+                <Header toggleMenuVisibility={toggleDrawerOpen} />
 
                 <main className={styles['main-content']}>
-                    <section className={styles['menubar']} desc={SHOW_ON_DESKTOP}></section>
-                    <article className={[styles['page-content'], className].join(' ')} {...restProps}>
-                        {children}
-                    </article>
+                    <section className={styles['menubar']} desc={SHOW_ON_DESKTOP}>
+                        <AsideMenubar />
+                    </section>
+                    <article className={[styles['page-content'], className].join(' ')}>{children}</article>
                 </main>
             </article>
-        </Sidebar>
+            <MaterialSidebar>
+                <SidebarComponent />
+            </MaterialSidebar>
+        </>
     ) : (
         <Auth />
     );
 });
 
 const mapStateTpProps = state => {
+    console.log(state);
     return { loginUser: state.loginUser };
 };
 

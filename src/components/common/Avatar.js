@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom';
 
 import styles from './styles.module.scss';
 
-const Avatar = ({ src, url }) => {
+const Avatar = ({ src, url, size = 40, style = {}, className = '', ...restProps }) => {
     return url ? (
-        <Link to={url} style={{ marginLeft: 7 }}>
-            <img className={[styles.avatar, styles.link].join(' ')} src={src} alt="channel_avatar" width="40" height="40" />
-        </Link>
+        <div className={[styles.avatar, styles.link, className].join(' ')} style={{ width: size, height: size, ...style }} {...restProps}>
+            <img src={src} alt="channel_avatar" width="100%" height="100%" />
+
+            <Link className={styles['__link']} to={url} />
+        </div>
     ) : (
-        <img className={styles.avatar} src={src} alt="channel_avatar" width="40" height="40" />
+        <img className={[styles.avatar, className].join(' ')} src={src} alt="channel_avatar" width={size} height={size} style={style} {...restProps} />
     );
 };
 export default Avatar;
