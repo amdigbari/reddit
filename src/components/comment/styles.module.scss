@@ -101,6 +101,7 @@
                 border: none;
                 resize: none;
                 border-right: 1px solid $silver-gray;
+                direction: rtl;
 
                 &::-webkit-scrollbar {
                     display: none;
@@ -123,24 +124,6 @@
             width: 75%;
             margin-right: auto;
             margin-left: auto;
-
-            .submit-comment {
-                width: 100%;
-                height: 100%;
-                background-color: $theme-primary;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                border: none;
-                color: $theme-light;
-                font-weight: bold;
-                cursor: pointer;
-                transition: background-color 0.2s linear;
-
-                &:hover {
-                    background-color: $theme-dark-primary;
-                }
-            }
         }
     }
 }

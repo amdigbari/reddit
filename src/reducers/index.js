@@ -1,12 +1,9 @@
 import { combineReducers } from 'redux';
-import { createReducer } from 'redux-orm';
 
-import orm from '../orm';
-
-const ormReducer = createReducer(orm);
+import { registerUserReducer } from './AuthReducers';
 
 const appReducer = combineReducers({
-    ormDatabase: ormReducer,
+    loginUser: registerUserReducer,
 });
 
 export default appReducer;
