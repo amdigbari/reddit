@@ -19,6 +19,7 @@ const RenderInputs = ({ username: { username, error: usernameError, change: chan
                 color="secondary"
                 value={username}
                 onChange={changeUsername}
+                autoFocus
                 error={usernameError}
                 helperText="username can't be empty"
             />

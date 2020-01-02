@@ -1,24 +1,27 @@
 import React from 'react';
-import { Animated } from 'react-animated-css';
+import MaterialModal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
 import styles from './styles.module.scss';
+import './material_styles.scss';
 import { ANIMATION_DURATION } from '../../utils/staticUtils';
 
-const Modal = React.memo(({ modalVisibility, children, className = '', toggleVisibility, containerClassName = '', ...restProps }) => {
+const Modal = React.memo(({ modalVisibility, children, className = '', toggleVisibility, ...restProps }) => {
     return (
-        <Animated
-            isVisible={modalVisibility}
-            animationIn="slideInUp"
-            animationOut="slideOutDown"
-            animationInDuration={ANIMATION_DURATION}
-            animationOutDuration={ANIMATION_DURATION}
-            className={[styles['modal-background'], className].join(' ')}>
-            <div className={styles['modal-container']} onClick={toggleVisibility} {...restProps}>
-                <div onClick={event => event.stopPropagation()} className={containerClassName}>
-                    {children}
-                </div>
-            </div>
-        </Animated>
+        <MaterialModal
+            open={modalVisibility}
+            onClose={toggleVisibility}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+                timeout: ANIMATION_DURATION,
+            }}
+            className={styles['modal-background']}>
+            <Fade in={modalVisibility} style={{ border: 'none !important', outline: 'none !important' }}>
+                <div className={className}>{children}</div>
+            </Fade>
+        </MaterialModal>
     );
 });
 export default Modal;

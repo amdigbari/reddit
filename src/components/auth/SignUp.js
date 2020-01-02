@@ -5,6 +5,7 @@ import './styles.scss';
 import { CustomButtonWithLoading } from '../common/CommonComponents';
 import { useToggle } from '../common/customHooks';
 import CustomScreenWithBackButton from '../common/screenWithBackButton/CustomScreenWithBackButton';
+import EditProfileModal from '../profile/editProfile';
 
 const textStyle = { width: '80%', textAlign: 'center', margin: '50px auto 0 auto' };
 
@@ -26,6 +27,7 @@ const RenderInputs = ({
                 color="secondary"
                 value={username}
                 onChange={changeUsername}
+                autoFocus
                 error={usernameError}
                 helperText="username can't be empty"
             />
@@ -59,7 +61,7 @@ const RenderInputs = ({
     );
 };
 
-const SignUp = React.memo(({ goBack }) => {
+const SignUp = React.memo(({ goBack, registerUser }) => {
     let [username, setUsername] = React.useState('');
     let [password, setPassword] = React.useState('');
     let [confirmPassword, setConfirmPassword] = React.useState('');
@@ -69,6 +71,8 @@ const SignUp = React.memo(({ goBack }) => {
     let [confirmPasswordValidate, setConfirmPasswordValidate] = React.useState(true);
 
     let [isSubmitting, toggleIsSubmitting] = useToggle(false);
+
+    let [editProfileModalVisibility, toggleEditProfileModalVisibility] = useToggle(false);
 
     const changeUsername = ({ target }) => {
         setUsername(target.value.trim());
@@ -88,7 +92,8 @@ const SignUp = React.memo(({ goBack }) => {
 
     const submitForm = event => {
         event.preventDefault();
-        console.log('Submit');
+        registerUser();
+        // console.log('Submit');
     };
 
     const submitButtonHandler = event => {
@@ -104,17 +109,21 @@ const SignUp = React.memo(({ goBack }) => {
     };
 
     return (
-        <CustomScreenWithBackButton goBack={goBack} title="Create Account">
-            <Description />
-            <RenderInputs
-                username={{ username, error: !usernameValidate, change: changeUsername }}
-                password={{ password, error: !passwordValidate, change: changePassword }}
-                confirmPassword={{ confirmPassword, error: !confirmPasswordValidate, change: changeConfirmPassword }}
-                isSubmitting={isSubmitting}
-                handleSubmit={submitButtonHandler}
-                submitForm={submitForm}
-            />
-        </CustomScreenWithBackButton>
+        <>
+            <CustomScreenWithBackButton goBack={goBack} title="Create Account">
+                <Description />
+                <RenderInputs
+                    username={{ username, error: !usernameValidate, change: changeUsername }}
+                    password={{ password, error: !passwordValidate, change: changePassword }}
+                    confirmPassword={{ confirmPassword, error: !confirmPasswordValidate, change: changeConfirmPassword }}
+                    isSubmitting={isSubmitting}
+                    handleSubmit={submitButtonHandler}
+                    submitForm={submitForm}
+                />
+            </CustomScreenWithBackButton>
+
+            <EditProfileModal modalVisibility={editProfileModalVisibility} toggleModalVisibility={toggleEditProfileModalVisibility} />
+        </>
     );
 });
 export default SignUp;
