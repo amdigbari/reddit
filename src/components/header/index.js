@@ -1,56 +1,30 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import styles from './styles.module.scss';
-import RedditLogo from '../common/RedditLogo';
+import { RedditLogo } from '../common/CommonComponents';
 import SearchBar from '../common/searchbar/SearchBar';
-import ProfileAvatar from '../profile/ProfileAvatar';
 import testProfile from '../../assets/images/test_profile.jpg';
-import { Animated } from 'react-animated-css';
-import { ANIMATION_DURATION } from '../../utils/staticUtils';
+import { SHOW_ON_DESKTOP, SHOW_ON_DEVICE } from '../../utils/staticUtils';
 import SearchbarIcon from '../common/searchbar/SearchbarIcon';
 import HamburgerIcon from '../hamburgerMenu/HamburgerIcon';
+import Avatar from '../common/Avatar';
 
 const Header = React.memo(({ toggleMenuVisibility: openBurgerMenu }) => {
-    let [profilePopupVisibility, setProfilePopupVisibility] = React.useState(false);
-
-    const activatePopup = () => setProfilePopupVisibility(true);
-
-    const deactivatePopup = () => setProfilePopupVisibility(false);
-
     return (
         <header className={styles.container}>
             <RedditLogo />
 
-            <SearchBar search={console.log} desc="showOnDesktop" />
+            <SearchBar search={console.log} desc={SHOW_ON_DESKTOP} />
 
             <>
-                <div
-                    className={styles['avatar-container']}
-                    desc="showOnDesktop"
-                    onMouseEnter={activatePopup}
-                    onMouseLeave={deactivatePopup}>
-                    <ProfileAvatar source={testProfile} />
-
-                    <Animated
-                        animationIn="fadeIn"
-                        animationOut="fadeOut"
-                        animationInDuration={ANIMATION_DURATION}
-                        animationOutDuration={ANIMATION_DURATION}
-                        isVisible={profilePopupVisibility}
-                        className={styles['popup-container']}>
-                        <div className={styles.popup}>
-                            <Link to="#profile">پروفایل</Link>
-                            <Link to="#posts">پست‌ها</Link>
-                            <Link to="#channels">کانال‌ها</Link>
-                        </div>
-                    </Animated>
+                <div className={styles['avatar-container']} desc={SHOW_ON_DESKTOP}>
+                    <Avatar src={testProfile} url="/profile/" size={55} />
                 </div>
             </>
 
             <div>
-                <SearchbarIcon desc="showOnDevice" style={{ marginRight: 15 }} />
-                <HamburgerIcon desc="showOnDevice" onClick={openBurgerMenu} />
+                <SearchbarIcon desc={SHOW_ON_DEVICE} style={{ marginRight: 15 }} />
+                <HamburgerIcon desc={SHOW_ON_DEVICE} onClick={openBurgerMenu} />
             </div>
         </header>
     );

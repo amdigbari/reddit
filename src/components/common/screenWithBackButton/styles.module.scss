@@ -1,0 +1,46 @@
+@import '../variables.scss';
+
+.main-container {
+    width: 100%;
+    height: 100%;
+    background-color: $background-color;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    align-items: center;
+
+    .header {
+        width: 100%;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        background-color: $theme-light;
+        @include shadow;
+
+        .back-button {
+            color: $silver-gray;
+            transform: scale(1.2);
+            cursor: pointer;
+            transition: color 0.2s linear;
+
+            &:hover {
+                color: $theme-secondary;
+            }
+        }
+    }
+
+    .page-content {
+        width: 100%;
+        max-width: 600px;
+        flex: 1;
+        overflow: scroll;
+
+        &::-webkit-scrollbar {
+            display: none;
+            width: 0;
+            height: 0;
+        }
+    }
+}

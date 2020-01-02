@@ -6,38 +6,25 @@
     flex: 1;
     overflow: hidden;
     display: flex;
+    justify-content: center;
 
-    .searchbar {
+    .searchbar-wrapper {
         width: 100%;
-        border: none;
-        outline: none;
-        border-bottom: 1px solid $brown-gray;
-        color: $short-text-color;
-        direction: rtl;
-        padding: 6px 5px;
+        max-width: 550px;
+        display: flex;
+        position: relative;
 
-        &::placeholder {
-            color: $brown-gray;
-            opacity: 0.75;
-        }
+        .searchbar {
+            width: 100%;
+            color: $short-text-color;
+            direction: rtl;
+            padding: 6px 5px;
+            background-color: transparent;
 
-        &:focus {
-            outline: none;
-
-            & ~ .bottombar {
-                width: 100%;
+            &::placeholder {
+                color: $brown-gray;
+                opacity: 0.75;
             }
         }
-    }
-
-    .bottombar {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        width: 0;
-        height: 0;
-        border: none;
-        border-bottom: 1px solid $theme-primary;
-        transition: all ease 0.2s;
     }
 }

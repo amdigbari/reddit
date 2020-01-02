@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './styles.module.scss';
 import { useDepsChanged } from '../customHooks';
 import { SEARCH_DELAY } from '../../../utils/staticUtils';
+import Input from '@material-ui/core/Input';
 
 const SearchBar = React.memo(({ search, ...restProps }) => {
     let interval = React.useRef();
@@ -37,14 +38,16 @@ const SearchBar = React.memo(({ search, ...restProps }) => {
 
     return (
         <div className={styles['searchbar-container']} {...restProps}>
-            <input
-                className={[styles.searchbar, 'small-mobile'].join(' ')}
-                type="text"
-                placeholder="جست‌وجو کنید..."
-                onKeyDown={keyDownHandler}
-                onKeyUp={keyUpHandler}
-            />
-            <span className={[styles.bottombar, 'bottombar'].join(' ')}></span>
+            <div className={styles['searchbar-wrapper']}>
+                <Input
+                    className={[styles.searchbar, 'small-mobile'].join(' ')}
+                    type="text"
+                    placeholder="جست‌وجو کنید..."
+                    onKeyDown={keyDownHandler}
+                    onKeyUp={keyUpHandler}
+                    color="secondary"
+                />
+            </div>
         </div>
     );
 });
