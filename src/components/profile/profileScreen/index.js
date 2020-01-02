@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { sampleUser } from '../../../utils/hardcodedData';
 import ProfileCard from '../profileCard';
@@ -27,14 +28,18 @@ const ProfileScreen = React.memo(({ match }) => {
                             <h4 className="danger">{user.postsCount}</h4>
                             <p>Posts</p>
                         </div>
-                        <div>
-                            <h4 className="danger">{user.followersCount}</h4>
-                            <p>Followers</p>
-                        </div>
-                        <div>
-                            <h4 className="danger">{user.followingsCount}</h4>
-                            <p>Followings</p>
-                        </div>
+                        <Link to={`/followers/${userPk ? `${userPk}/` : ''}`}>
+                            <div>
+                                <h4 className="danger">{user.followersCount}</h4>
+                                <p>Followers</p>
+                            </div>
+                        </Link>
+                        <Link to={`/followings/${userPk ? `${userPk}/` : ''}`}>
+                            <div>
+                                <h4 className="danger">{user.followingsCount}</h4>
+                                <p>Followings</p>
+                            </div>
+                        </Link>
                     </div>
                 </div>
             </>
@@ -44,7 +49,7 @@ const ProfileScreen = React.memo(({ match }) => {
     const UserPosts = () => {
         return (
             <div className="posts-container">
-                <PostsScreen showFloatButton={false} />
+                <PostsScreen showFloatButton={false} authorsLink={false} />
             </div>
         );
     };
