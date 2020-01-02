@@ -1,0 +1,62 @@
+@import '../common/variables.scss';
+
+.container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 20px;
+    z-index: 2;
+    background-color: $theme-light;
+
+    @include shadow;
+
+    @media screen and (max-width: 991px) {
+        padding: 8px 10px 8px 5px;
+    }
+}
+
+.avatar-container {
+    cursor: pointer;
+    position: relative;
+
+    .popup-container {
+        position: absolute;
+        width: 150px;
+        right: 0;
+        top: 57px;
+        background-color: $theme-light;
+        border-radius: 3px;
+        padding: 10px 3px 4px 3px;
+        direction: rtl;
+        @include shadow;
+
+        &::before {
+            content: '';
+            position: absolute;
+            display: block;
+            width: 0.5rem;
+            height: 0.5rem;
+            background: white;
+            top: -4px;
+            right: 22.5px;
+            transform: rotate(45deg);
+            box-shadow: -3px -3px 4px $brown-gray;
+        }
+
+        .popup {
+            display: flex;
+            flex-direction: column;
+
+            & > * {
+                padding: 0 7px;
+                margin-bottom: 6px;
+
+                &:not(:last-child) {
+                    padding-bottom: 6px;
+                    border-bottom: 1px solid $overlay-color;
+                }
+            }
+        }
+    }
+}

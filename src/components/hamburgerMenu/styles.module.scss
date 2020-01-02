@@ -1,0 +1,33 @@
+@import '../common/variables.scss';
+
+.menu-container {
+    height: 100%;
+    width: 100%;
+    background-color: $theme-light;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    .profile-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+        background-color: #eee1ac8c;
+
+        .profile-name {
+            font-size: 18px;
+            margin-top: 12px;
+            color: $theme-primary;
+        }
+    }
+
+    .link-container {
+        padding: 15px;
+        direction: rtl;
+    }
+}
+
+.bottom-border {
+    border-bottom: 1px solid $overlay-color;
+}

@@ -1,0 +1,68 @@
+@import './libraries/iran_sans_font/iransans-fontface.css';
+@import './libraries/normalizer/normalizer.css';
+@import './libraries//animate_css/animate_css.css';
+@import './components/common/variables.scss';
+
+[desc='showOnDevice'] {
+    @media screen and (min-width: 992px) {
+        display: none !important;
+    }
+}
+
+[desc='showOnDesktop'] {
+    @media screen and (max-width: 991px) {
+        display: none !important;
+    }
+}
+
+a {
+    * {
+        transition: color 0.2s linear;
+    }
+
+    &:hover {
+        * {
+            color: $theme-secondary;
+        }
+    }
+}
+
+.small-mobile {
+    @media screen and (max-width: 991px) {
+        font-size: 80%;
+    }
+}
+
+.text-truncate {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+a,
+span,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+textarea {
+    color: $gray;
+    line-height: 1.4;
+}
+
+body,
+html {
+    background-color: $background-color;
+}
+
+.danger {
+    color: $red;
+}
+
+.border-bottom {
+    border-bottom: 1px solid $overlay-color;
+}

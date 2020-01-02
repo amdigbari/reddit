@@ -1,0 +1,51 @@
+@import '../common/variables.scss';
+
+form {
+    width: 100%;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .input-container {
+        width: 80%;
+
+        &:not(:nth-child(1)) {
+            margin-top: 15px;
+        }
+
+        input {
+            text-align: left;
+            direction: ltr;
+        }
+    }
+
+    .button-container {
+        border-radius: 20px;
+        margin-top: 50px;
+        width: 80%;
+        height: 40px;
+        overflow: hidden;
+    }
+}
+
+.forgot-password {
+    color: $theme-primary;
+    cursor: pointer;
+    transition: color 0.2s linear;
+
+    &:hover {
+        color: $theme-secondary;
+    }
+}
+
+.animation-error {
+    .MuiFormHelperText-root {
+        display: none;
+        animation: fadeInDown 0.2s linear;
+
+        &.Mui-error {
+            display: block;
+        }
+    }
+}

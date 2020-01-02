@@ -1,0 +1,18 @@
+$theme-light: #fff;
+$gray: #4a4a4a;
+$silver-gray: #777;
+$brown-gray: #b6a885;
+$short-text-color: #7c6a46;
+$theme-primary: #ff6265;
+$theme-dark-primary: #de5356;
+$theme-light-primary: #ff8688;
+$theme-secondary: #c2b526;
+$overlay-color: #7773;
+$background-color: #f1efea;
+$image-background: #dcdcdc21;
+$green: rgb(40, 174, 68);
+$red: #ff2626;
+
+@mixin shadow {
+    box-shadow: 0 0 6px 1px $brown-gray;
+}

@@ -1,0 +1,30 @@
+@import '../variables.scss';
+
+.searchbar-container {
+    position: relative;
+    margin: 0 30px;
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+
+    .searchbar-wrapper {
+        width: 100%;
+        max-width: 550px;
+        display: flex;
+        position: relative;
+
+        .searchbar {
+            width: 100%;
+            color: $short-text-color;
+            direction: rtl;
+            padding: 6px 5px;
+            background-color: transparent;
+
+            &::placeholder {
+                color: $brown-gray;
+                opacity: 0.75;
+            }
+        }
+    }
+}
