@@ -6,6 +6,7 @@
     padding: 15px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
     .name-container {
         flex: 1;
@@ -23,24 +24,12 @@
     }
 
     .buttons-container {
-        display: flex;
-
-        @media screen and (max-width: 991px) {
-            display: block;
-
-            .edit-profile-button {
-                margin-bottom: 5px;
-                margin-right: 0;
-            }
-        }
-
         .edit-profile-button {
             width: 125px;
             height: 30px;
             border: 1px solid $theme-light-primary;
             border-radius: 15px;
             overflow: hidden;
-            margin-right: 10px;
             color: $theme-light-primary;
             transition: all 0.2s linear;
 

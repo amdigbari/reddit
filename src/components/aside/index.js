@@ -9,18 +9,23 @@ const AsideMenubar = React.memo(() => {
         return (
             <>
                 <CustomButton className={styles.button}>
-                    <Link to="/posts/">
+                    <Link to="/posts/" className={styles['link-wrapper']}>
                         <p className={styles.link}>Posts</p>
                     </Link>
                 </CustomButton>
                 <CustomButton className={styles.button}>
-                    <Link to="/channels/">
+                    <Link to="/channels/" className={styles['link-wrapper']}>
                         <p className={styles.link}>Channels</p>
                     </Link>
                 </CustomButton>
                 <CustomButton className={styles.button}>
-                    <Link to="/profile/">
+                    <Link to="/profile/" className={styles['link-wrapper']}>
                         <p className={styles.link}>Profile</p>
+                    </Link>
+                </CustomButton>
+                <CustomButton className={styles.button}>
+                    <Link to="/notifications/" className={styles['link-wrapper']}>
+                        <p className={styles.link}>Notifications</p>
                     </Link>
                 </CustomButton>
             </>

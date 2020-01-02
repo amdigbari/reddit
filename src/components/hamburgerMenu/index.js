@@ -30,6 +30,11 @@ const SidebarContent = React.memo(props => {
                         <p>Channels</p>
                     </div>
                 </Link>
+                <Link to="/notifications/">
+                    <div className={[styles['link-container'], styles['bottom-border']].join(' ')}>
+                        <p>Notifications</p>
+                    </div>
+                </Link>
             </>
         );
     };

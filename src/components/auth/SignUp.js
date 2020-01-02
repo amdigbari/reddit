@@ -27,6 +27,7 @@ const RenderInputs = ({
                 color="secondary"
                 value={username}
                 onChange={changeUsername}
+                autoFocus
                 error={usernameError}
                 helperText="username can't be empty"
             />
@@ -60,7 +61,7 @@ const RenderInputs = ({
     );
 };
 
-const SignUp = React.memo(({ goBack }) => {
+const SignUp = React.memo(({ goBack, registerUser }) => {
     let [username, setUsername] = React.useState('');
     let [password, setPassword] = React.useState('');
     let [confirmPassword, setConfirmPassword] = React.useState('');
@@ -91,7 +92,8 @@ const SignUp = React.memo(({ goBack }) => {
 
     const submitForm = event => {
         event.preventDefault();
-        console.log('Submit');
+        registerUser();
+        // console.log('Submit');
     };
 
     const submitButtonHandler = event => {

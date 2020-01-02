@@ -47,15 +47,15 @@ export const CustomButton = ({
     children,
     ...restProps
 }) => {
-    let [isHover, toggleIsHover] = useToggle(false);
+    let [isHover, setIsIsHover] = React.useState(false);
 
     return (
         <button
             className={[styles['custom-button'], className].join(' ')}
             style={{ backgroundColor: isHover ? hoverColor : color, ...style }}
             {...restProps}
-            onMouseEnter={toggleIsHover}
-            onMouseLeave={toggleIsHover}>
+            onMouseEnter={() => setIsIsHover(true)}
+            onMouseLeave={() => setIsIsHover(false)}>
             {children}
         </button>
     );
