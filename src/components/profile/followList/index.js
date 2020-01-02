@@ -29,7 +29,7 @@ const FollowList = React.memo(({ match, history }) => {
         return (
             <div className={styles['list-container']}>
                 {usersList.map((user, index, array) => (
-                    <ProfileCard user={user} showBorder={index < array.length - 1} link />
+                    <ProfileCard key={user.pk} user={user} showBorder={index < array.length - 1} link />
                 ))}
             </div>
         );

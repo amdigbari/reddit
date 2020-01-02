@@ -11,9 +11,11 @@ import EditProfileModal from '../editProfile';
 const ProfileCard = ({ user, showBorder = false, showEdit = false, link = false, className = '', ...restProps }) => {
     let [loading, toggleLoading] = useToggle(false);
     let [editModalVisibility, toggleEditModalVisibility] = useToggle(false);
+    let [isFollow, toggleIsFollow] = useToggle(false);
 
     const followButtonClicked = () => {
-        toggleLoading();
+        // toggleLoading();
+        toggleIsFollow();
         //TODO: add toggle follow functionality
     };
 
@@ -21,11 +23,27 @@ const ProfileCard = ({ user, showBorder = false, showEdit = false, link = false,
         toggleEditModalVisibility();
     };
 
+    const RenderFollowButton = React.useCallback(() => {
+        return isFollow ? (
+            <CustomButton className="follow-button" onClick={followButtonClicked}>
+                UnFollow
+            </CustomButton>
+        ) : (
+            <CustomButton
+                className="edit-profile-button"
+                color="transparent"
+                hoverColor={LIGHT_PRIMARY_COLOR}
+                onClick={followButtonClicked}>
+                Follow
+            </CustomButton>
+        );
+    }, [isFollow]);
+
     const FollowButton = () => {
         return (
             <>
                 <div className="buttons-container">
-                    {showEdit && (
+                    {showEdit ? (
                         <CustomButton
                             color="transparent"
                             hoverColor={LIGHT_PRIMARY_COLOR}
@@ -33,10 +51,9 @@ const ProfileCard = ({ user, showBorder = false, showEdit = false, link = false,
                             className="edit-profile-button">
                             Edit Profile
                         </CustomButton>
+                    ) : (
+                        <RenderFollowButton />
                     )}
-                    <CustomButtonWithLoading className="follow-button" loading={loading} clickHandler={followButtonClicked}>
-                        Follow
-                    </CustomButtonWithLoading>
                 </div>
 
                 {showEdit && (
@@ -46,20 +63,24 @@ const ProfileCard = ({ user, showBorder = false, showEdit = false, link = false,
         );
     };
 
-    return link ? (
-        <Link to={`/profile/${user.pk}`} className={`container${showBorder ? ' border-bottom' : ''} ${className}`} {...restProps}>
+    const RenderProfileAvatar = () => (
+        <div style={{ display: 'flex', alignItems: 'center' }}>
             <Avatar src={user.avatar} />
             <div className="name-container">
                 <p className="text-truncate">{user.name}</p>
             </div>
-            <FollowButton />
-        </Link>
-    ) : (
+        </div>
+    );
+
+    return (
         <div className={`container${showBorder ? ' border-bottom' : ''} ${className}`} {...restProps}>
-            <Avatar src={user.avatar} />
-            <div className="name-container">
-                <p className="text-truncate">{user.name}</p>
-            </div>
+            {link ? (
+                <Link to={`/profile/${user.pk}`}>
+                    <RenderProfileAvatar />
+                </Link>
+            ) : (
+                <RenderProfileAvatar />
+            )}
             <FollowButton />
         </div>
     );
