@@ -3,8 +3,12 @@ import React from 'react';
 import ChannelCard from '../channelCard';
 import { sampleChannel } from '../../../utils/hardcodedData';
 import { FloatAddButton } from '../../common/CommonComponents';
+import CreateChannelModal from '../createChannel';
+import { useToggle } from '../../common/customHooks';
 
 const ChannelsScreen = React.memo(() => {
+    let [modalVisibility, toggleModalVisibility] = useToggle(false);
+
     const channels = React.useMemo(() => [sampleChannel, { ...sampleChannel, pk: 2 }], []);
 
     return (
@@ -18,8 +22,8 @@ const ChannelsScreen = React.memo(() => {
                 />
             ))}
 
-            <FloatAddButton onClick={() => console.log('Add Channel')} />
-            {/* TODO: */}
+            <FloatAddButton onClick={toggleModalVisibility} />
+            <CreateChannelModal modalVisibility={modalVisibility} toggleModalVisibility={toggleModalVisibility} />
         </>
     );
 });

@@ -1,11 +1,11 @@
 dependencies:
   '@material-ui/core': 4.8.0_react-dom@16.12.0+react@16.12.0
+  '@material-ui/lab': 4.0.0-alpha.37_035597bd30fc39d6bd322d6817c5965e
   '@testing-library/jest-dom': 4.2.4
   '@testing-library/react': 9.4.0_react-dom@16.12.0+react@16.12.0
   '@testing-library/user-event': 7.1.2
   node-sass: 4.13.0
   react: 16.12.0
-  react-animated-css: 1.2.1
   react-dom: 16.12.0_react@16.12.0
   react-helmet: 5.2.1_react@16.12.0
   react-icons: 3.8.0_react@16.12.0
@@ -13,10 +13,7 @@ dependencies:
   react-redux: 7.1.3_9a2f9d4864311d39d6f2623bd2f887e8
   react-router-dom: 5.1.2_react@16.12.0
   react-scripts: 3.3.0_node-sass@4.13.0
-  react-sidebar: 3.0.2_react-dom@16.12.0+react@16.12.0
-  react-textarea-autosize: 7.1.2_react@16.12.0
   redux: 4.0.4
-  redux-orm: 0.15.1
   redux-thunk: 2.3.0
 devDependencies:
   reactotron-react-js: 3.3.7
@@ -1330,6 +1327,25 @@ packages:
       react-dom: ^16.8.0
     resolution:
       integrity: sha512-ODyvWlDOP0D3tU32wVlYRNrdS+LeJxB3xJbXdDxq6gnG4JhKk79+ylP0cImjPBI2yEZw0hcYHWFZOGD+0R1X4g==
+  /@material-ui/lab/4.0.0-alpha.37_035597bd30fc39d6bd322d6817c5965e:
+    dependencies:
+      '@babel/runtime': 7.7.7
+      '@material-ui/core': 4.8.0_react-dom@16.12.0+react@16.12.0
+      '@material-ui/utils': 4.7.1_react-dom@16.12.0+react@16.12.0
+      clsx: 1.0.4
+      prop-types: 15.7.2
+      react: 16.12.0
+      react-dom: 16.12.0_react@16.12.0
+      react-is: 16.12.0
+    dev: false
+    engines:
+      node: '>=8.0.0'
+    peerDependencies:
+      '@material-ui/core': ^4.7.0
+      react: ^16.8.0
+      react-dom: ^16.8.0
+    resolution:
+      integrity: sha512-OebQZqKYDO44vER5ZDHDjXF9/rq0Hqq5IRfgKwM1JzlzAZINd6RPX0xrh78psZ1mOWsgAteCY6/zPSHRPXAkqw==
   /@material-ui/styles/4.7.1_react-dom@16.12.0+react@16.12.0:
     dependencies:
       '@babel/runtime': 7.7.7
@@ -2466,14 +2482,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-eqj0hVcJUR57/Ug2zE1Yswsw4LhuqqHhD+8v120T1cl3kjg76QwtyBrdIk4WVwK+lAhBJVYCd/v+4nc4y+8JsA==
-  /babel-polyfill/6.26.0:
-    dependencies:
-      babel-runtime: 6.26.0
-      core-js: 2.6.11
-      regenerator-runtime: 0.10.5
-    dev: false
-    resolution:
-      integrity: sha1-N5k3q8Z9eJWXCtxiHyhM2WbPIVM=
   /babel-preset-jest/24.9.0_@babel+core@7.7.4:
     dependencies:
       '@babel/core': 7.7.4
@@ -2659,10 +2667,6 @@ packages:
     dev: false
     resolution:
       integrity: sha1-EsJe/kCkXjwyPrhnWgoM5XsiNx8=
-  /browser-or-node/1.2.1:
-    dev: false
-    resolution:
-      integrity: sha512-sVIA0cysIED0nbmNOm7sZzKfgN1rpFmrqvLZaFWspaBAftfQcezlC81G6j6U2RJf4Lh66zFxrCeOsvkUXIcPWg==
   /browser-process-hrtime/0.1.3:
     dev: false
     resolution:
@@ -3028,10 +3032,6 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-qOhPa/Fj7s6TY8H8esGu5QNpMMQxz79h+urzrNYN6mn+9BnxlDGf5QZ+XeCDsxSjPqsSR56XOZOJmpeurnLMeg==
-  /classnames/2.2.6:
-    dev: false
-    resolution:
-      integrity: sha512-JR/iSQOSt+LQIWwrwEzJ9uk0xfN3mTVYMwt1Ir5mUcSN6pU+V4zQFFaJsclJbPuAUQH+yfWef6tm7l1quW3C8Q==
   /clean-css/4.2.1:
     dependencies:
       source-map: 0.6.1
@@ -3350,11 +3350,6 @@ packages:
     requiresBuild: true
     resolution:
       integrity: sha512-wB0QtKAofWigiISuT1Tej3hKgq932fB//Lf1VoPbiLpTYlHY0nIDhgF+q1na0DAKFHH5wGCirkAknOmDN8ijXA==
-  /core-js/1.2.7:
-    deprecated: 'core-js@<3 is no longer maintained and not recommended for usage due to the number of issues. Please, upgrade your dependencies to the actual version of core-js@3.'
-    dev: false
-    resolution:
-      integrity: sha1-ZSKUwUZR2yj6k70tX/KYOk8IxjY=
   /core-js/2.6.11:
     deprecated: 'core-js@<3 is no longer maintained and not recommended for usage due to the number of issues. Please, upgrade your dependencies to the actual version of core-js@3.'
     dev: false
@@ -3421,14 +3416,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-MJG9liiZ+ogc4TzUwuvbER1JRdgvUFSB5+VR/g5h82fGaIRWMWddtKBHi7/sVhfjQZ6SehlyhvQYrcYkaUIpLg==
-  /create-react-class/15.6.3:
-    dependencies:
-      fbjs: 0.8.17
-      loose-envify: 1.4.0
-      object-assign: 4.1.1
-    dev: false
-    resolution:
-      integrity: sha512-M+/3Q6E6DLO6Yx3OwrWjwHBnvfXXYA7W+dFjt/ZDBemHO1DDZhsalX/NUtnTYclN6GfnBDRh4qRHjcDHmlJBJg==
   /cross-spawn/3.0.1:
     dependencies:
       lru-cache: 4.1.5
@@ -4097,12 +4084,6 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha1-rT/0yG7C0CkyL1oCw6mmBslbP1k=
-  /encoding/0.1.12:
-    dependencies:
-      iconv-lite: 0.4.24
-    dev: false
-    resolution:
-      integrity: sha1-U4tm8+5izRq1HsMjgp0flIDHS+s=
   /end-of-stream/1.4.4:
     dependencies:
       once: 1.4.0
@@ -4712,18 +4693,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-DkPJKQeY6kKwmuMretBhr7G6Vodr7bFwDYTXIkfG1gjvNpaxBTQV3PbXg6bR1c1UP4jPOX0jHUbbHANL9vRjVg==
-  /fbjs/0.8.17:
-    dependencies:
-      core-js: 1.2.7
-      isomorphic-fetch: 2.2.1
-      loose-envify: 1.4.0
-      object-assign: 4.1.1
-      promise: 7.3.1
-      setimmediate: 1.0.5
-      ua-parser-js: 0.7.20
-    dev: false
-    resolution:
-      integrity: sha1-xNWY6taUkRJlPWWIsBpc3Nn5D90=
   /figgy-pudding/3.5.1:
     dev: false
     resolution:
@@ -5603,13 +5572,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-O3sR1/opvCDGLEVcvrGTMtLac8GJ5IwZC4puPrLuRj3l7ICKvkmA0vGuU9OW8mV9WIBRnaxp5GJh9IEAaNOoYg==
-  /immutable-ops/0.7.0:
-    dependencies:
-      '@babel/runtime': 7.7.6
-      ramda: 0.26.1
-    dev: false
-    resolution:
-      integrity: sha512-5tOOKVgMr3fzSX92vMJTf8CchlVxSmMm1m7nnv4pXZ6w5feLmBFIAFA1arQ+TM785kd0nzV1kUvDWlytpEnQZw==
   /import-cwd/2.1.0:
     dependencies:
       import-from: 2.1.0
@@ -6151,13 +6113,6 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
-  /isomorphic-fetch/2.2.1:
-    dependencies:
-      node-fetch: 1.7.3
-      whatwg-fetch: 3.0.0
-    dev: false
-    resolution:
-      integrity: sha1-YRrhrPFPXoH3KVB0coGf6XM1WKk=
   /isstream/0.1.2:
     dev: false
     resolution:
@@ -7575,13 +7530,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-rmTZ9kz+f3rCvK2TD1Ue/oZlns7OGoIWP4fc3llxxRXlOkHKoWPPWJOfFYpITabSow43QJbRIoHQXtt10VldyQ==
-  /node-fetch/1.7.3:
-    dependencies:
-      encoding: 0.1.12
-      is-stream: 1.1.0
-    dev: false
-    resolution:
-      integrity: sha512-NhZ4CsKx7cYm2vSrBAr2PvFOe6sWDf0UYLRqA6svUYg7+/TSfVAu49jYC4BvQ4Sms9SZgdqGBgroqfDhJdTyKQ==
   /node-forge/0.9.0:
     dev: false
     engines:
@@ -9219,12 +9167,6 @@ packages:
     dev: false
     resolution:
       integrity: sha1-mEcocL8igTL8vdhoEputEsPAKeM=
-  /promise/7.3.1:
-    dependencies:
-      asap: 2.0.6
-    dev: false
-    resolution:
-      integrity: sha512-nolQXZ/4L+bP/UGlkfaIujX9BKxGwmQ9OT4mOt5yvy8iK1h3wqTEJCijzGANTCCl9nWjY41juyAn2K3Q1hLLTg==
   /promise/8.0.3:
     dependencies:
       asap: 2.0.6
@@ -9366,10 +9308,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-Sq4CW4QhwOHE8ucn6J34MqtZCeWFP2aQSmrlroYgqAV1PjStIhJXxYuTgUIfkEk7zTLjmIjLmU5q+fbD1NnOJA==
-  /ramda/0.26.1:
-    dev: false
-    resolution:
-      integrity: sha512-hLWjpy7EnsDBb0p+Z3B7rPi3GDeRG5ZtiI33kJhTt+ORCd38AbAIjB/9zRIUoeTbE/AVX5ZkU7m6bznsvrf8eQ==
   /randombytes/2.1.0:
     dependencies:
       safe-buffer: 5.2.0
@@ -9400,25 +9338,6 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha512-4Oz8DUIwdvoa5qMJelxipzi/iJIi40O5cGV1wNYp5hvZP8ZN0T+jiNkL0QepXs+EsQ9XJ8ipEDoiH70ySUJP3Q==
-  /re-reselect/3.4.0_reselect@3.0.1:
-    dependencies:
-      reselect: 3.0.1
-    dev: false
-    peerDependencies:
-      reselect: '>1.0.0'
-    resolution:
-      integrity: sha512-JsecfN+JlckncVXTWFWjn0Vk6uInl8GSf4eEd9tTk5qXHlgqkPdILpnYpgZcISXNYAzvfvsCZviaDk8AxyS5sg==
-  /react-animated-css/1.2.1:
-    dependencies:
-      babel-polyfill: 6.26.0
-      browser-or-node: 1.2.1
-      classnames: 2.2.6
-      lodash: 4.17.15
-      prop-types: 15.7.2
-      react: 15.6.2
-    dev: false
-    resolution:
-      integrity: sha512-/6jtyCdTRw658CQTcMPwxN0ueLBlkqno7eKOLIyeNwn+rpq/smei4AwJooXW0i+Db+9YiP8QbkJ6pEwZDRAxxQ==
   /react-app-polyfill/1.0.5:
     dependencies:
       core-js: 3.5.0
@@ -9652,28 +9571,6 @@ packages:
       react: ^0.13.0 || ^0.14.0 || ^15.0.0 || ^16.0.0
     resolution:
       integrity: sha512-v1ht1aHg5k/thv56DRcjw+WtojuuDHFUgGfc+bFHOWsF4ZK6C2V57DO0Or0GPsg6+LSTE0M6Ry/gfzhzSwbc5w==
-  /react-sidebar/3.0.2_react-dom@16.12.0+react@16.12.0:
-    dependencies:
-      '@babel/runtime': 7.7.6
-      prop-types: 15.7.2
-      react: 16.12.0
-      react-dom: 16.12.0_react@16.12.0
-    dev: false
-    peerDependencies:
-      react: '>=16.4.2'
-      react-dom: '>=16.4.2'
-    resolution:
-      integrity: sha512-LG/JO1cJvdRqSmUT+DOhJrml/b45/UqM9nm8emcgbJb5EKNegKCObZcrRqyzVix42VfFf0odytviAAFEYYTu1Q==
-  /react-textarea-autosize/7.1.2_react@16.12.0:
-    dependencies:
-      '@babel/runtime': 7.7.7
-      prop-types: 15.7.2
-      react: 16.12.0
-    dev: false
-    peerDependencies:
-      react: '>=0.14.0 <17.0.0'
-    resolution:
-      integrity: sha512-uH3ORCsCa3C6LHxExExhF4jHoXYCQwE5oECmrRsunlspaDAbS4mGKNlWZqjLfInWtFQcf0o1n1jC/NGXFdUBCg==
   /react-transition-group/4.3.0_react-dom@16.12.0+react@16.12.0:
     dependencies:
       '@babel/runtime': 7.7.7
@@ -9688,18 +9585,6 @@ packages:
       react-dom: '>=16.6.0'
     resolution:
       integrity: sha512-1qRV1ZuVSdxPlPf4O8t7inxUGpdyO5zG9IoNfJxSO0ImU2A1YWkEQvFPuIPZmMLkg5hYs7vv5mMOyfgSkvAwvw==
-  /react/15.6.2:
-    dependencies:
-      create-react-class: 15.6.3
-      fbjs: 0.8.17
-      loose-envify: 1.4.0
-      object-assign: 4.1.1
-      prop-types: 15.7.2
-    dev: false
-    engines:
-      node: '>=0.10.0'
-    resolution:
-      integrity: sha1-26BDSrQ5z+gvEI8PURZjkIF5qnI=
   /react/16.12.0:
     dependencies:
       loose-envify: 1.4.0
@@ -9853,16 +9738,6 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-6tDA8g98We0zd0GvVeMT9arEOnTw9qM03L9cJXaCjrip1OO764RDBLBfrB4cwzNGDj5OA5ioymC9GkizgWJDUg==
-  /redux-orm/0.15.1:
-    dependencies:
-      '@babel/runtime': 7.7.6
-      immutable-ops: 0.7.0
-      lodash: 4.17.15
-      re-reselect: 3.4.0_reselect@3.0.1
-      reselect: 3.0.1
-    dev: false
-    resolution:
-      integrity: sha512-d/DVAXhqdlp3JxvURDrnJ4aQI9fiZTau9TtEAJakwDaaJBIF65JMX3zCZZ64QDt8RLBkcxjMIhebKY5hG5WiQQ==
   /redux-thunk/2.3.0:
     dev: false
     resolution:
@@ -9885,10 +9760,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-1G6jJVDWrt0rK99kBjvEtziZNCICAuvIPkSiUFIQxVP06RCVpq3dmDo2oi6ABpYaDYaTRr67BEhL8r1wgEZZKg==
-  /regenerator-runtime/0.10.5:
-    dev: false
-    resolution:
-      integrity: sha1-M2w+/BIgrc7dosn6tntaeVWjNlg=
   /regenerator-runtime/0.11.1:
     dev: false
     resolution:
@@ -10070,10 +9941,6 @@ packages:
     dev: false
     resolution:
       integrity: sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
-  /reselect/3.0.1:
-    dev: false
-    resolution:
-      integrity: sha1-79qpjqdFEyTQkrKyFjpqHXqaIUc=
   /resolve-cwd/2.0.0:
     dependencies:
       resolve-from: 3.0.0
@@ -11396,10 +11263,6 @@ packages:
     dev: false
     resolution:
       integrity: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
-  /ua-parser-js/0.7.20:
-    dev: false
-    resolution:
-      integrity: sha512-8OaIKfzL5cpx8eCMAhhvTlft8GYF8b2eQr6JkCyVdrgjcytyOmPCXrqXFcUnhonRpLlh5yxEZVohm6mzaowUOw==
   /uglify-js/3.4.10:
     dependencies:
       commander: 2.19.0
@@ -12185,12 +12048,12 @@ packages:
       integrity: sha1-a6MY6xaWFyf10oT46gA+jWFU0Mg=
 specifiers:
   '@material-ui/core': ^4.8.0
+  '@material-ui/lab': ^4.0.0-alpha.37
   '@testing-library/jest-dom': ^4.2.4
   '@testing-library/react': ^9.4.0
   '@testing-library/user-event': ^7.1.2
   node-sass: ^4.13.0
   react: ^16.12.0
-  react-animated-css: ^1.2.1
   react-dom: ^16.12.0
   react-helmet: ^5.2.1
   react-icons: ^3.8.0
@@ -12198,10 +12061,7 @@ specifiers:
   react-redux: ^7.1.3
   react-router-dom: ^5.1.2
   react-scripts: 3.3.0
-  react-sidebar: ^3.0.2
-  react-textarea-autosize: ^7.1.2
   reactotron-react-js: ^3.3.7
   reactotron-redux: ^3.1.2
   redux: ^4.0.4
-  redux-orm: ^0.15.1
   redux-thunk: ^2.3.0

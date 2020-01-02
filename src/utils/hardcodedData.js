@@ -9,7 +9,9 @@ export const navigationTabs = [
 
 export var sampleUser = {
     pk: 1,
+    username: 'fuck you',
     name: 'amdigbari',
+    email: 'amirmahdidigbari@yahoo.com',
     followersCount: 85,
     followingsCount: 69,
     postsCount: 125,
@@ -95,4 +97,16 @@ export var samplePost = {
             ],
         },
     ],
+};
+
+export var samplePostNotification = {
+    pk: 1,
+    user: sampleUser,
+    post: samplePost,
+    like: false,
+};
+
+export var sampleFollowNotification = {
+    pk: 10,
+    user: sampleUser,
 };

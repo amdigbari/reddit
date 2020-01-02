@@ -1,5 +1,5 @@
 import React from 'react';
-import Textarea from 'react-textarea-autosize';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 import image from '../../assets/images/test_profile.jpg';
 import styles from './styles.module.scss';
@@ -37,9 +37,9 @@ const CommentModal = ({ modalVisibility, toggleVisibility: toggleModalVisibility
         return (
             <form action="/" method="POST" onSubmit={event => event.preventDefault()} className={styles['comment-form']}>
                 <div className={styles['comment-input-container']}>
-                    <Textarea
-                        minRows={1}
-                        maxRows={6}
+                    <TextareaAutosize
+                        rowsMin={1}
+                        rowsMax={6}
                         maxLength="500"
                         placeholder="بنویسید..."
                         name="comment"
