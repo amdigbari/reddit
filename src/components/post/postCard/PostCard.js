@@ -11,7 +11,7 @@ import { useToggle } from '../../common/customHooks';
 import CommentModal from '../../comment/CommentModal';
 import PostImage from './PostImage';
 
-const PostCard = React.memo(({ post, showBorder = false, fullCaption = false, ...restProps }) => {
+const PostCard = React.memo(({ post, showBorder = false, fullCaption = false, channelLink = true, authorLink=true, ...restProps }) => {
     let [replyPostModalVisibility, toggleReplyPostModalVisibility] = useToggle(false);
 
     const ReadMore = () => {
@@ -29,7 +29,7 @@ const PostCard = React.memo(({ post, showBorder = false, fullCaption = false, ..
         <>
             <div className={[styles['card-container'], showBorder ? 'border-bottom' : ''].join(' ')} {...restProps}>
                 <div className={styles.header}>
-                    <PostChannel channel={post.channel} />
+                    <PostChannel channel={post.channel} link={channelLink} />
 
                     <p>{post.date}</p>
                 </div>
@@ -54,7 +54,7 @@ const PostCard = React.memo(({ post, showBorder = false, fullCaption = false, ..
                 )}
 
                 <div className={styles.footer}>
-                    <PostAuthor author={post.author} />
+                    <PostAuthor author={post.author} link={authorLink} />
 
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         <span style={{ marginRight: 6 }}>21</span>

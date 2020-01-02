@@ -7,6 +7,7 @@ import CustomScreenWithBackButton from '../../common/screenWithBackButton/Custom
 import { useToggle } from '../../common/customHooks';
 import RenderInputs from './Inputs';
 import { EMAIL_VALIDATOR, PHONE_VALIDATOR } from '../../../utils/staticUtils';
+import ChangePasswordModal from './changePassword';
 
 const EditProfileModal = React.memo(({ modalVisibility, toggleModalVisibility, user = {} }) => {
     // Required
@@ -23,6 +24,8 @@ const EditProfileModal = React.memo(({ modalVisibility, toggleModalVisibility, u
     let [phoneValidate, setPhoneValidate] = React.useState(true);
 
     let [isSubmitting, toggleIsSubmitting] = useToggle(false);
+
+    let [changePasswordModalVisibility, toggleChangePasswordModalVisibility] = useToggle(false);
 
     const changeName = ({ target }) => {
         setName(target.value.trim());
@@ -69,22 +72,30 @@ const EditProfileModal = React.memo(({ modalVisibility, toggleModalVisibility, u
     };
 
     return (
-        <Modal modalVisibility={modalVisibility} toggleVisibility={toggleModalVisibility} className={styles['container']}>
-            <CustomScreenWithBackButton goBack={toggleModalVisibility} title="Edit Profile">
-                <div className={styles['container']}>
-                    <RenderInputs
-                        name={{ name, change: changeName, error: !nameValidate }}
-                        email={{ email, error: !emailValidate, change: changeEmail }}
-                        phone={{ phone, change: changePhone, error: !phoneValidate }}
-                        image={{ image, change: changeImage }}
-                        city={{ city, change: changeCity }}
-                        isSubmitting={isSubmitting}
-                        handleSubmit={submitButtonHandler}
-                        submitForm={submitForm}
-                    />
-                </div>
-            </CustomScreenWithBackButton>
-        </Modal>
+        <>
+            <Modal modalVisibility={modalVisibility} toggleVisibility={toggleModalVisibility} className={styles['container']}>
+                <CustomScreenWithBackButton goBack={toggleModalVisibility} title="Edit Profile">
+                    <div className={styles['container']}>
+                        <RenderInputs
+                            name={{ name, change: changeName, error: !nameValidate }}
+                            email={{ email, error: !emailValidate, change: changeEmail }}
+                            phone={{ phone, change: changePhone, error: !phoneValidate }}
+                            image={{ image, change: changeImage }}
+                            city={{ city, change: changeCity }}
+                            isSubmitting={isSubmitting}
+                            handleSubmit={submitButtonHandler}
+                            submitForm={submitForm}
+                            showChangePasswordModal={toggleChangePasswordModalVisibility}
+                        />
+                    </div>
+                </CustomScreenWithBackButton>
+            </Modal>
+
+            <ChangePasswordModal
+                modalVisibility={changePasswordModalVisibility}
+                toggleModalVisibility={toggleChangePasswordModalVisibility}
+            />
+        </>
     );
 });
 export default EditProfileModal;

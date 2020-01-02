@@ -16,6 +16,7 @@ const RenderInputs = ({
     isSubmitting,
     submitForm,
     handleSubmit,
+    showChangePasswordModal
 }) => {
     const clearImage = () => changeImage(null);
 
@@ -94,6 +95,8 @@ const RenderInputs = ({
                 value={city}
                 onChange={changeCity}
             />
+
+            <p className={[styles['change-password'], 'danger'].join(' ')} onClick={showChangePasswordModal}>change password</p>
 
             <CustomButtonWithLoading className="button-container" type="submit" loading={isSubmitting} clickHandler={handleSubmit}>
                 Save
