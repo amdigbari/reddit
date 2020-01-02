@@ -1,0 +1,15 @@
+@import '../../common/variables.scss';
+
+.MuiAutocomplete-root {
+    width: 80%;
+
+    .Mui-focused {
+        &::after {
+            border-bottom: 2px solid $theme-primary;
+        }
+
+        &.MuiInputLabel-root {
+            color: $theme-primary;
+        }
+    }
+}

@@ -9,8 +9,9 @@ import PostAuthor from './PostAuthor';
 import PostScore from './PostScore';
 import { useToggle } from '../../common/customHooks';
 import CommentModal from '../../comment/CommentModal';
+import PostImage from './PostImage';
 
-const PostCard = React.memo(({ post, showBorder = false, fullCaption = false, ...restProps }) => {
+const PostCard = React.memo(({ post, showBorder = false, fullCaption = false, channelLink = true, authorLink=true, ...restProps }) => {
     let [replyPostModalVisibility, toggleReplyPostModalVisibility] = useToggle(false);
 
     const ReadMore = () => {
@@ -28,16 +29,16 @@ const PostCard = React.memo(({ post, showBorder = false, fullCaption = false, ..
         <>
             <div className={[styles['card-container'], showBorder ? 'border-bottom' : ''].join(' ')} {...restProps}>
                 <div className={styles.header}>
-                    <PostChannel channel={post.channel} />
+                    <PostChannel channel={post.channel} link={channelLink} />
 
                     <p>{post.date}</p>
                 </div>
 
-                <Link to={`/posts/${post.pk}`}>
-                    <div className={styles['image-container']}>
-                        <img src={post.image} alt="card_image" className={styles['card-image']} />
-                    </div>
-                </Link>
+                {post.image && (
+                    <Link to={`/posts/${post.pk}`}>
+                        <PostImage src={post.image} />
+                    </Link>
+                )}
 
                 {fullCaption ? (
                     <p className={styles['caption-container']}>{post.caption}</p>
@@ -53,7 +54,7 @@ const PostCard = React.memo(({ post, showBorder = false, fullCaption = false, ..
                 )}
 
                 <div className={styles.footer}>
-                    <PostAuthor author={post.author} />
+                    <PostAuthor author={post.author} link={authorLink} />
 
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                         <span style={{ marginRight: 6 }}>21</span>

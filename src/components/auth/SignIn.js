@@ -26,6 +26,7 @@ const RenderInputs = ({
                 value={username}
                 onChange={changeUsername}
                 error={usernameError}
+                autoFocus
                 helperText="username can't be empty"
             />
             <TextField
@@ -47,7 +48,7 @@ const RenderInputs = ({
     );
 };
 
-const SignIn = React.memo(({ showForgotPasswordPage, goBack }) => {
+const SignIn = React.memo(({ showForgotPasswordPage, goBack, registerUser }) => {
     let [username, setUsername] = React.useState('');
     let [password, setPassword] = React.useState('');
 
@@ -78,7 +79,8 @@ const SignIn = React.memo(({ showForgotPasswordPage, goBack }) => {
 
     const submitForm = event => {
         event.preventDefault();
-        console.log('Submit');
+        registerUser();
+        // console.log('Submit');
     };
 
     const submitButtonHandler = event => {
