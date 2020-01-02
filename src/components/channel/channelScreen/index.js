@@ -38,7 +38,7 @@ const ChannelScreen = React.memo(({ match }) => {
     const ChannelPosts = () => {
         return (
             <div className={styles['posts-container']}>
-                <PostsScreen showFloatButton={false} />
+                <PostsScreen showFloatButton={false} channelsLink={false} />
             </div>
         );
     };

@@ -1,9 +1,5 @@
 @import '../../common/variables.scss';
 
-.border-bottom {
-    border-bottom: 1px solid $overlay-color;
-}
-
 .card {
     width: 100%;
     padding: 8px 15px;
@@ -24,6 +20,10 @@
                     color: $theme-secondary;
                 }
             }
+
+            button {
+                color: $theme-light;
+            }
         }
     }
 
@@ -34,12 +34,6 @@
         flex-direction: column;
         overflow: hidden;
         justify-content: space-between;
-
-        p {
-            text-overflow: ellipsis;
-            text-align: left;
-            direction: ltr;
-        }
 
         .name {
             transition: color 0.2s linear;

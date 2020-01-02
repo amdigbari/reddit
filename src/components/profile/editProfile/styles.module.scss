@@ -1,0 +1,99 @@
+@import '../../common//variables.scss';
+
+.container {
+    width: 100%;
+    height: 100%;
+
+    .option-container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+
+        .option-text {
+            margin-left: 7px;
+        }
+    }
+
+    .channel-container {
+        position: relative;
+        width: 80%;
+    }
+
+    .channel-logo {
+        position: absolute;
+        top: 35px;
+        left: 5px;
+    }
+
+    .add-image-container {
+        margin-top: 25px;
+        width: 80%;
+        display: flex;
+        justify-content: center;
+
+        .image-preview-container {
+            width: max-content;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+
+            .edit-image-container {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background-image: linear-gradient(to bottom, transparent, $gray);
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                padding: 7px 15px;
+            }
+        }
+    }
+}
+
+.add-image-wrapper {
+    position: relative;
+    width: max-content;
+
+    .add-image-input {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        opacity: 0;
+        cursor: pointer;
+    }
+}
+
+.icon {
+    color: $theme-light;
+    transition: color 0.2s linear;
+    cursor: pointer;
+
+    &:hover {
+        color: $theme-secondary;
+    }
+}
+
+.add-image-background {
+    background-color: $silver-gray;
+    border-radius: 100%;
+    width: 75px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.change-password {
+    margin-top: 30px;
+    font-size: 17px;
+    transition: color 0.2s linear;
+    cursor: pointer;
+
+    &:hover {
+        color: $theme-secondary;
+    }
+}

@@ -1,0 +1,48 @@
+@import '../../common/variables.scss';
+
+.container {
+    width: 100%;
+    background-color: $theme-light;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .name-container {
+        flex: 1;
+        overflow: hidden;
+        padding: 0 15px;
+        p {
+            font-size: 17px;
+        }
+    }
+
+    &:hover {
+        .follow-button button {
+            color: $theme-light;
+        }
+    }
+
+    .buttons-container {
+        .edit-profile-button {
+            width: 125px;
+            height: 30px;
+            border: 1px solid $theme-light-primary;
+            border-radius: 15px;
+            overflow: hidden;
+            color: $theme-light-primary;
+            transition: all 0.2s linear;
+
+            &:hover {
+                color: $theme-light;
+            }
+        }
+
+        .follow-button {
+            width: 125px;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+    }
+}
