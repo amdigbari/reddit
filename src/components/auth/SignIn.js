@@ -80,7 +80,6 @@ const SignIn = React.memo(({ showForgotPasswordPage, goBack, registerUser }) => 
     const submitForm = event => {
         event.preventDefault();
         registerUser();
-        // console.log('Submit');
     };
 
     const submitButtonHandler = event => {

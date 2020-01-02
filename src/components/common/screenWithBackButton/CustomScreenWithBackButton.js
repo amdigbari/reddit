@@ -4,13 +4,13 @@ import { MdChevronLeft } from 'react-icons/md';
 import styles from './styles.module.scss';
 import { SILVER_GRAY } from '../../../utils/staticUtils';
 
-const CustomScreenWithBackButton = ({ goBack, title, children, ...restProps }) => {
+const CustomScreenWithBackButton = ({ goBack, title, renderTitle, children, ...restProps }) => {
     return (
         <div className={styles['main-container']} {...restProps}>
             <header className={styles.header}>
                 <MdChevronLeft className={styles['back-button']} size={30} onClick={goBack} />
 
-                <p>{title}</p>
+                {title ? <p>{title}</p> : renderTitle()}
 
                 <MdChevronLeft color={SILVER_GRAY} size={30} style={{ visibility: 'hidden' }} />
             </header>

@@ -34,7 +34,6 @@ const CustomScreen = React.memo(({ children, className = '', loginUser }) => {
                 <SwipeableDrawer
                     disableBackdropTransition={!IS_IOS}
                     disableDiscovery={IS_IOS}
-                    anchor="right"
                     hysteresis={0.35}
                     swipeAreaWidth={40}
                     transitionDuration={200}
@@ -70,7 +69,6 @@ const CustomScreen = React.memo(({ children, className = '', loginUser }) => {
 });
 
 const mapStateTpProps = state => {
-    console.log(state);
     return { loginUser: state.loginUser };
 };
 

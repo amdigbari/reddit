@@ -1,0 +1,13 @@
+@import '../../common/variables.scss';
+
+.container {
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    right: 0;
+    padding: 15px;
+    background-color: $theme-light;
+    display: flex;
+    justify-content: center;
+    @include shadow;
+}

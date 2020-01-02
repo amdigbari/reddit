@@ -93,7 +93,6 @@ const SignUp = React.memo(({ goBack, registerUser }) => {
     const submitForm = event => {
         event.preventDefault();
         registerUser();
-        // console.log('Submit');
     };
 
     const submitButtonHandler = event => {

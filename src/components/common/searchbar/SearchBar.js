@@ -4,8 +4,9 @@ import styles from './styles.module.scss';
 import { useDepsChanged } from '../customHooks';
 import { SEARCH_DELAY } from '../../../utils/staticUtils';
 import Input from '@material-ui/core/Input';
+import SearchResultPopup from '../../search/searchResultPopup';
 
-const SearchBar = React.memo(({ search, ...restProps }) => {
+const SearchBar = React.memo(({ search, autoFocus = false, renderResults, setLoading, ...restProps }) => {
     let interval = React.useRef();
 
     let [isTyping, setIsTyping] = React.useState(false);
@@ -21,7 +22,7 @@ const SearchBar = React.memo(({ search, ...restProps }) => {
         resetTimeout();
     };
 
-    const keyUpHandler = ({ target }) => {
+    const changeHandler = ({ target }) => {
         setSearchQuery(target.value.trim());
         resetTimeout();
 
@@ -31,8 +32,9 @@ const SearchBar = React.memo(({ search, ...restProps }) => {
     };
 
     let isTypingChangedHandler = React.useCallback(() => {
+        setLoading && setLoading(isTyping);
         !isTyping && searchQuery.length && search(searchQuery);
-    }, [isTyping, searchQuery, search]);
+    }, [isTyping, searchQuery, search, setLoading]);
 
     useDepsChanged(isTypingChangedHandler, [isTyping]);
 
@@ -44,9 +46,13 @@ const SearchBar = React.memo(({ search, ...restProps }) => {
                     type="text"
                     placeholder="جست‌وجو کنید..."
                     onKeyDown={keyDownHandler}
-                    onKeyUp={keyUpHandler}
+                    onChange={changeHandler}
+                    value={searchQuery}
                     color="secondary"
+                    autoFocus={autoFocus}
                 />
+
+                {renderResults && searchQuery.length ? <SearchResultPopup renderResults={renderResults} loading={isTyping} /> : ''}
             </div>
         </div>
     );
