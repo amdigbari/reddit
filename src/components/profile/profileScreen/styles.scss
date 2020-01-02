@@ -1,0 +1,31 @@
+@import '../../common/variables.scss';
+
+.description-container {
+    width: 100%;
+    background-color: $theme-light;
+    padding: 20px;
+    border-bottom: 1px solid $overlay-color;
+
+    .description-text {
+        text-align: justify;
+        margin-top: 7px;
+        margin-left: 7px;
+    }
+
+    .stats-wrapper {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 7px;
+    }
+}
+
+.profile-card {
+    padding-top: 30px;
+}
+
+.posts-container {
+    width: 100%;
+    background-color: $theme-light;
+}

@@ -30,10 +30,14 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding-top: 50px;
         }
 
         & > .page-content {
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             overflow-y: scroll;
             overflow-x: hidden;
 
