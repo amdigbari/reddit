@@ -8,6 +8,7 @@ import { CustomButton } from '../common/CommonComponents';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import ResetPassword from './ResetPassword';
+import { sampleUser } from '../../utils/hardcodedData';
 
 const PAGE_TYPES = {
     auth: 'auth',
@@ -53,6 +54,12 @@ const Auth = React.memo(({ loginUser, registerUser, unregisterUser }) => {
         );
     };
 
+    const sampleRegisterUser = () => {
+        setTimeout(() => {
+            registerUser(sampleUser);
+        }, 500);
+    };
+
     return (
         <div className={styles.container}>
             <div className={styles['auth-container']} style={{ maxWidth: page === PAGE_TYPES.auth ? 600 : 'unset' }}>
@@ -63,9 +70,9 @@ const Auth = React.memo(({ loginUser, registerUser, unregisterUser }) => {
                         <SignUpButton />
                     </>
                 ) : page === PAGE_TYPES.login ? (
-                    <SignIn goBack={showAuthPage} showForgotPasswordPage={showForgotPasswordPage} />
+                    <SignIn goBack={showAuthPage} showForgotPasswordPage={showForgotPasswordPage} registerUser={sampleRegisterUser} />
                 ) : page === PAGE_TYPES.signUp ? (
-                    <SignUp goBack={showAuthPage} />
+                    <SignUp goBack={showAuthPage} registerUser={sampleRegisterUser} />
                 ) : (
                     <ResetPassword goBack={showLoginPage} />
                 )}

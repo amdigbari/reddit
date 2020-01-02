@@ -101,6 +101,7 @@
                 border: none;
                 resize: none;
                 border-right: 1px solid $silver-gray;
+                direction: rtl;
 
                 &::-webkit-scrollbar {
                     display: none;
