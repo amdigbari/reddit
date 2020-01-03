@@ -6,6 +6,7 @@ import styles from './styles.module.scss';
 import Avatar from '../common/Avatar';
 import { useToggle } from '../common/customHooks';
 import CommentModal from './CommentModal';
+import { CustomLinkify } from '../common/CommonComponents';
 
 const Comment = ({ comment, isReply = false }) => {
     let [replyPostModalVisibility, toggleReplyPostModalVisibility] = useToggle(false);
@@ -14,7 +15,7 @@ const Comment = ({ comment, isReply = false }) => {
         <>
             <div className={[styles['comment-container'], isReply ? styles.reply : ''].join(' ')}>
                 <div className={styles['comment-header']}>
-                    <Link to={'#'}>
+                    <Link to={`/profile/${comment.author.pk}`}>
                         <div className={styles['comment-author']}>
                             <Avatar src={comment.author.avatar} />
                             <p style={{ marginLeft: 10 }}>{comment.author.name}</p>
@@ -24,7 +25,9 @@ const Comment = ({ comment, isReply = false }) => {
                     <p>{comment.date}</p>
                 </div>
 
-                <p className={styles['comment-text']}>{comment.text}</p>
+                <CustomLinkify>
+                    <p className={styles['comment-text']}>{comment.text}</p>
+                </CustomLinkify>
 
                 <FaRegComment className={styles['reply-comment']} onClick={toggleReplyPostModalVisibility} />
 
