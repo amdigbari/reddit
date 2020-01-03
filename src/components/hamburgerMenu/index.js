@@ -13,7 +13,7 @@ const SidebarContent = React.memo(({ unRegisterUser: logOut }) => {
             <Link to="/profile/">
                 <div className={[styles['profile-container'], styles['bottom-border']].join(' ')}>
                     <Avatar src={testProfile} size={125} />
-                    <p className={styles['profile-name']}>ممد ممدیان</p>
+                    <p className={styles['profile-name']}>Dier Cohen</p>
                 </div>
             </Link>
         );

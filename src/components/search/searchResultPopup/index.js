@@ -6,7 +6,7 @@ import { Loading } from '../../common/CommonComponents';
 const SearchResultPopup = ({ renderResults, className = '', loading, ...restProps }) => {
     return (
         <div className={[styles['container'], className].join(' ')} {...restProps}>
-            {loading ? <Loading /> : renderResults()}
+            <Loading />
         </div>
     );
 };

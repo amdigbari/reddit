@@ -2,12 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Avatar from '../../common/Avatar';
-import { CustomButtonWithLoading } from '../../common/CommonComponents';
+import { CustomButton } from '../../common/CommonComponents';
 import './styles.scss';
 import { useToggle } from '../../common/customHooks';
+import { LIGHT_PRIMARY_COLOR } from '../../../utils/staticUtils';
 
 const ChannelCard = ({ channel, showBorder = false, link = true, ...restProps }) => {
     let [loading, toggleLoading] = useToggle(false);
+    let [isFollow, toggleIsFollow] = useToggle(false);
 
     const Description = () => {
         return (
@@ -20,28 +22,37 @@ const ChannelCard = ({ channel, showBorder = false, link = true, ...restProps })
     };
 
     const followButtonClicked = () => {
-        toggleLoading();
+        // toggleLoading();
+        toggleIsFollow();
         //TODO: add toggle follow functionality
     };
 
     const FollowButton = () => {
-        return (
-            <CustomButtonWithLoading className="follow-button" loading={loading} clickHandler={followButtonClicked}>
+        return isFollow ? (
+            <CustomButton className="un-follow-button" onClick={followButtonClicked}>
+                UnFollow
+            </CustomButton>
+        ) : (
+            <CustomButton className="follow-button" color="transparent" hoverColor={LIGHT_PRIMARY_COLOR} onClick={followButtonClicked}>
                 Follow
-            </CustomButtonWithLoading>
+            </CustomButton>
         );
     };
 
-    return link ? (
-        <Link to={`/channels/${channel.pk}`} className={`card link${showBorder ? ' border-bottom' : ''}`} {...restProps}>
-            <Avatar src={channel.logo} />
-            <Description />
-            <FollowButton />
-        </Link>
-    ) : (
+    return (
         <div className={`card ${showBorder ? ' border-bottom' : ''}`} {...restProps}>
-            <Avatar src={channel.logo} />
-            <Description />
+            {link ? (
+                <Link to={`/channels/${channel.pk}`} className={`link`}>
+                    <Avatar src={channel.logo} />
+                    <Description />
+                </Link>
+            ) : (
+                <>
+                    <Avatar src={channel.logo} />
+                    <Description />
+                </>
+            )}
+
             <FollowButton />
         </div>
     );

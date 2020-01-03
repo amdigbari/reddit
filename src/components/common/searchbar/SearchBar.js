@@ -44,7 +44,7 @@ const SearchBar = React.memo(({ search, autoFocus = false, renderResults, setLoa
                 <Input
                     className={[styles.searchbar, 'small-mobile'].join(' ')}
                     type="text"
-                    placeholder="جست‌وجو کنید..."
+                    placeholder="Search..."
                     onKeyDown={keyDownHandler}
                     onChange={changeHandler}
                     value={searchQuery}

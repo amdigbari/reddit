@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiPlus } from 'react-icons/fi';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import styles from './styles.module.scss';
 import logo from '../../assets/images/reddit_logo.png';
-import { useToggle } from './customHooks';
 import { PRIMARY_COLOR, DARK_PRIMARY_COLOR, LIGHT_COLOR } from '../../utils/staticUtils';
 
 export const RedditLogo = () => {
@@ -15,18 +15,7 @@ export const RedditLogo = () => {
     );
 };
 
-export const Loading = ({ size = 45 }) => {
-    const inlineStyles = { width: size, height: size };
-
-    return (
-        <div className={styles['loading-spinner-wrapper']} style={inlineStyles}>
-            <div className={styles['loading-spinner']}></div>
-            <div className={styles['loading-spinner']}></div>
-            <div className={styles['loading-spinner']}></div>
-            <div className={styles['loading-spinner']}></div>
-        </div>
-    );
-};
+export const Loading = ({ size = 45 }) => <CircularProgress color="secondary" size={size} />;
 
 export const ButtonLoading = ({ color, visible }) => {
     return (
