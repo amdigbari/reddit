@@ -63,8 +63,7 @@ export var sampleChannel = {
 export var samplePost = {
     pk: 1,
     image,
-    caption:
-        'اغلب افراد تمایل دارند جملات آموزنده و فلسفی را سرلوحه زندگی خود قرار دارند زیرا این جملات دارای مفهومی هستند که راه درست زندگی کردن را به افراد نشان می دهند و با کمی دقت و توجه به این جملات می توان تجربه های خوبی را از آن ها آموخت. در ادامه متن فلسفی بلند با انواع جملات پرمحتوا و دلنشین را مطالعه خواهید کرد.',
+    caption: `Miusov, as a man man of breeding and deilcacy, could not but feel some inwrd qualms, when he reached the Father Superior's with Ivan: he felt ashamed of havin lost his temper. He felt that he ought to have disdaimed that despicable wretch, Fyodor Pavlovitch, too much to have been upset by him in Father Zossima's cell, and so to have forgotten himself. "Teh monks were not to blame, in any case," he reflceted, on the steps. "And if they're decent people here (and the Father Superior, I understand, is a nobleman) why not be friendly and courteous withthem? I won't argue, I'll fall in with everything, I'll win them by politness, and show them that I've nothing to do with that Aesop, thta buffoon, that Pierrot, and have merely been takken in over this affair, just as they have."`,
     channel: sampleChannel,
     author: {
         avatar: image,
@@ -72,15 +71,14 @@ export var samplePost = {
     },
     score: 10,
     userScore: 1,
-    date: 'همین الان:/',
+    date: 'just now:/',
     comments: [
         {
             pk: 1,
             author: sampleUser,
-            date: 'دیروز',
+            date: 'yesterday',
 
-            text:
-                'افراد تمایل دارند جملات آموزنده و فلسفی را سرلوحه زندگی خود قرار دارند زیرا این جملات دارای مفهومی هستند که راه درست زندگی کردن را به افراد نشان می دهند و با کمی دقت و توجه به این جملات می توان تجربه های خوبی را از آن ها آموخت. در ادامه متن فلسفی بلند با انواع جملات پرمحتوا و دلنشین را مطالعه خواهید کرد.',
+            text: `Miusov, as a man man of breeding and deilcacy, could not but feel some inwrd qualms, when he reached the Father Superior's with Ivan: he felt ashamed of havin lost his temper. He felt that he ought to have disdaimed that despicable wretch, Fyodor Pavlovitch, too much to have been upset by him in Father Zossima's cell, and so to have forgotten himself. "Teh monks were not to blame, in any case," he reflceted, on the steps. "And if they're decent people here (and the Father Superior, I understand, is a nobleman) why not be friendly and courteous withthem? I won't argue, I'll fall in with everything, I'll win them by politness, and show them that I've nothing to do with that Aesop, thta buffoon, that Pierrot, and have merely been takken in over this affair, just as they have."`,
             replies: [
                 {
                     pk: 2,
@@ -88,10 +86,9 @@ export var samplePost = {
                         avatar: image,
                         name: 'amdigbari',
                     },
-                    date: 'دیروز',
+                    date: 'yesterday',
 
-                    text:
-                        'افراد تمایل دارند جملات آموزنده و فلسفی را سرلوحه زندگی خود قرار دارند زیرا این جملات دارای مفهومی هستند که راه درست زندگی کردن را به افراد نشان می دهند و با کمی دقت و توجه به این جملات می توان تجربه های خوبی را از آن ها آموخت. در ادامه متن فلسفی بلند با انواع جملات پرمحتوا و دلنشین را مطالعه خواهید کرد.',
+                    text: `Miusov, as a man man of breeding and deilcacy, could not but feel some inwrd qualms, when he reached the Father Superior's with Ivan: he felt ashamed of havin lost his temper. He felt that he ought to have disdaimed that despicable wretch, Fyodor Pavlovitch, too much to have been upset by him in Father Zossima's cell, and so to have forgotten himself. "Teh monks were not to blame, in any case," he reflceted, on the steps. "And if they're decent people here (and the Father Superior, I understand, is a nobleman) why not be friendly and courteous withthem? I won't argue, I'll fall in with everything, I'll win them by politness, and show them that I've nothing to do with that Aesop, thta buffoon, that Pierrot, and have merely been takken in over this affair, just as they have."`,
                     replies: [],
                 },
             ],

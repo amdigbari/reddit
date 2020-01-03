@@ -69,7 +69,8 @@ const CustomScreen = React.memo(({ children, className = '', loginUser }) => {
 });
 
 const mapStateTpProps = state => {
-    return { loginUser: state.loginUser };
+    return { loginUser: { username: 'amdigbari' } }; //TODO:
+    // return { loginUser: state.loginUser };
 };
 
 export default connect(mapStateTpProps)(CustomScreen);

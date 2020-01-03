@@ -17,7 +17,7 @@ const Comment = ({ comment, isReply = false }) => {
                     <Link to={'#'}>
                         <div className={styles['comment-author']}>
                             <Avatar src={comment.author.avatar} />
-                            <p style={{ marginRight: 10 }}>{comment.author.name}</p>
+                            <p style={{ marginLeft: 10 }}>{comment.author.name}</p>
                         </div>
                     </Link>
 

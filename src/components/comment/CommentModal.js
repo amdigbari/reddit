@@ -1,5 +1,5 @@
 import React from 'react';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import TextField from '@material-ui/core/TextField';
 
 import image from '../../assets/images/test_profile.jpg';
 import styles from './styles.module.scss';
@@ -25,7 +25,7 @@ const CommentModal = ({ modalVisibility, toggleVisibility: toggleModalVisibility
                 <span className={styles['close-modal']} onClick={toggleModalVisibility}>
                     &times;
                 </span>
-                <p>افزودن کامنت</p>
+                <p>Add Comment</p>
                 <span className={styles['close-modal']} style={{ visibility: 'hidden' }}>
                     &times;
                 </span>
@@ -37,16 +37,9 @@ const CommentModal = ({ modalVisibility, toggleVisibility: toggleModalVisibility
         return (
             <form action="/" method="POST" onSubmit={event => event.preventDefault()} className={styles['comment-form']}>
                 <div className={styles['comment-input-container']}>
-                    <TextareaAutosize
-                        rowsMin={1}
-                        rowsMax={6}
-                        maxLength="500"
-                        placeholder="بنویسید..."
-                        name="comment"
-                        className={styles['comment-input']}
-                    />
-
                     <Avatar src={image} />
+
+                    <TextField className={styles['comment-input']} label="comment" multiline rowsMax={10} color="secondary" />
                 </div>
 
                 <CustomButtonWithLoading

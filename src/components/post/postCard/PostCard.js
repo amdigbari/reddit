@@ -11,7 +11,7 @@ import { useToggle } from '../../common/customHooks';
 import CommentModal from '../../comment/CommentModal';
 import PostImage from './PostImage';
 
-const PostCard = React.memo(({ post, showBorder = false, fullCaption = false, channelLink = true, authorLink=true, ...restProps }) => {
+const PostCard = React.memo(({ post, showBorder = false, fullCaption = false, channelLink = true, authorLink = true, ...restProps }) => {
     let [replyPostModalVisibility, toggleReplyPostModalVisibility] = useToggle(false);
 
     const ReadMore = () => {
@@ -19,7 +19,7 @@ const PostCard = React.memo(({ post, showBorder = false, fullCaption = false, ch
             <>
                 <span>...</span>
                 <Link to={`/posts/${post.pk}`}>
-                    <span className={styles['show-more']}>[نمایش بیشتر]</span>
+                    <span className={styles['show-more']}>[show more]</span>
                 </Link>
             </>
         );

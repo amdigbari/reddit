@@ -5,11 +5,6 @@
     padding: 10px 20px;
     background-color: $theme-light;
 
-    * {
-        text-align: right;
-        direction: rtl;
-    }
-
     .comment-list-wrapper {
         width: 100%;
         margin-top: 8px;
@@ -41,7 +36,7 @@
 
             .reply-comment {
                 cursor: pointer;
-                margin: 10px 25px 10px 0;
+                margin: 10px 0 10px 25px;
                 color: $gray;
                 transition: color 0.2s linear;
 
@@ -94,24 +89,9 @@
             width: 100%;
 
             .comment-input {
-                margin-right: 30px;
-                padding: 7px 15px;
+                margin-left: 30px;
+                margin-top: -15px;
                 flex: 1;
-                background-color: transparent;
-                border: none;
-                resize: none;
-                border-right: 1px solid $silver-gray;
-                direction: rtl;
-
-                &::-webkit-scrollbar {
-                    display: none;
-                    width: 0;
-                    height: 0;
-                }
-
-                &:focus {
-                    outline: none;
-                }
             }
         }
 
