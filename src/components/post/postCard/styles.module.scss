@@ -89,3 +89,14 @@
     max-width: 100%;
     max-height: 100%;
 }
+
+.text-link {
+    color: $link-color;
+    cursor: pointer;
+    transition: color 0.2s linear;
+    text-decoration: underline;
+
+    &:hover {
+        color: $theme-secondary;
+    }
+}

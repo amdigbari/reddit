@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiPlus } from 'react-icons/fi';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Linkify from 'linkifyjs/react';
 
 import styles from './styles.module.scss';
 import logo from '../../assets/images/reddit_logo.png';
@@ -82,4 +83,8 @@ export const FloatAddButton = ({ onClick, className, ...restProps }) => {
             <FiPlus color={LIGHT_COLOR} size={35} />
         </div>
     );
+};
+
+export const CustomLinkify = ({ children }) => {
+    return <Linkify options={{ className: styles['text-link'], target: '_blank' }}>{children}</Linkify>;
 };

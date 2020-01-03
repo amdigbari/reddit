@@ -122,3 +122,14 @@
         background-color: $theme-dark-primary;
     }
 }
+
+.text-link {
+    color: $link-color;
+    cursor: pointer;
+    transition: color 0.2s linear;
+    text-decoration: underline;
+
+    &:hover {
+        color: $theme-secondary;
+    }
+}

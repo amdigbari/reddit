@@ -1,5 +1,4 @@
 import React from 'react';
-import LinesEllipsis from 'react-lines-ellipsis';
 import { Link } from 'react-router-dom';
 import { FaRegComment } from 'react-icons/fa';
 
@@ -10,20 +9,21 @@ import PostScore from './PostScore';
 import { useToggle } from '../../common/customHooks';
 import CommentModal from '../../comment/CommentModal';
 import PostImage from './PostImage';
+import { CustomLinkify } from '../../common/CommonComponents';
 
 const PostCard = React.memo(({ post, showBorder = false, fullCaption = false, channelLink = true, authorLink = true, ...restProps }) => {
     let [replyPostModalVisibility, toggleReplyPostModalVisibility] = useToggle(false);
 
-    const ReadMore = () => {
-        return (
-            <>
-                <span>...</span>
-                <Link to={`/posts/${post.pk}`}>
-                    <span className={styles['show-more']}>[show more]</span>
-                </Link>
-            </>
-        );
-    };
+    // const ReadMore = () => {
+    //     return (
+    //         <>
+    //             <span>...</span>
+    //             <Link to={`/posts/${post.pk}`}>
+    //                 <span className={styles['show-more']}>[show more]</span>
+    //             </Link>
+    //         </>
+    //     );
+    // };
 
     return (
         <>
@@ -40,18 +40,9 @@ const PostCard = React.memo(({ post, showBorder = false, fullCaption = false, ch
                     </Link>
                 )}
 
-                {fullCaption ? (
+                <CustomLinkify>
                     <p className={styles['caption-container']}>{post.caption}</p>
-                ) : (
-                    <LinesEllipsis
-                        component={'p'}
-                        text={post.caption}
-                        className={styles['caption-container']}
-                        maxLine={3}
-                        ellipsis={<ReadMore />}
-                        trimRight={false}
-                    />
-                )}
+                </CustomLinkify>
 
                 <div className={styles.footer}>
                     <PostAuthor author={post.author} link={authorLink} />
