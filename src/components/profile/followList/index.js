@@ -1,26 +1,33 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-import { sampleUser } from '../../../utils/hardcodedData';
 import ProfileCard from '../profileCard';
 import styles from './styles.module.scss';
 import Avatar from '../../common/Avatar';
+import { getFollowList, getUserProfileById } from '../../../actions/ProfileActions';
 
-const FollowList = React.memo(({ match, history }) => {
+const FollowList = React.memo(({ match, getUsersList, getUser }) => {
     const isFollowers = React.useMemo(() => !!match.url.match(/followers/), [match]);
     const userPk = React.useMemo(() => match.params.pk, [match]);
 
-    const user = React.useMemo(() => sampleUser, [userPk]);
+    const [user, setUser] = React.useState({});
 
-    const usersList = React.useMemo(() => {
-        return [sampleUser, { ...sampleUser, pk: 2 }, { ...sampleUser, pk: 3 }, { ...sampleUser, pk: 4 }];
-    }, [userPk]);
+    const [usersList, setUsersList] = React.useState([]);
+
+    React.useEffect(() => {
+        setUser(getUser(userPk));
+    }, [userPk, getUser]);
+
+    React.useEffect(() => {
+        setUsersList(getUsersList(userPk, isFollowers ? 'followers' : 'followings'));
+    }, [userPk, getUsersList, isFollowers]);
 
     const RenderTitle = () => {
         return (
             <header className={styles['header-container']}>
                 <Avatar src={user.avatar} />
                 <p className={styles['title']}>{`${user.name}'s ${isFollowers ? 'Followers List' : 'Followings List'}`}</p>
-                <Avatar src={sampleUser.avatar} style={{ opacity: 0 }} />
+                <Avatar src={user.avatar} style={{ opacity: 0 }} />
             </header>
         );
     };
@@ -42,4 +49,9 @@ const FollowList = React.memo(({ match, history }) => {
         </div>
     );
 });
-export default FollowList;
+
+const mapDispatchToProps = {
+    getUsersList: getFollowList,
+    getUser: getUserProfileById,
+};
+export default connect(undefined, mapDispatchToProps)(FollowList);

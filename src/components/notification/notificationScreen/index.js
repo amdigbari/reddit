@@ -1,14 +1,15 @@
 import React from 'react';
-import NotificationCard from '../notificationCard';
-import { samplePostNotification, sampleFollowNotification } from '../../../utils/hardcodedData';
+import { connect } from 'react-redux';
 
-const NotificationScreen = React.memo(() => {
-    const notifications = [
-        samplePostNotification,
-        { ...samplePostNotification, pk: 2, like: true },
-        sampleFollowNotification,
-        { ...sampleFollowNotification, pk: 11, accept: true },
-    ];
+import NotificationCard from '../notificationCard';
+import { getNotifications } from '../../../actions/ProfileActions';
+
+const NotificationScreen = React.memo(({ getNotifications }) => {
+    const [notifications, setNotifications] = React.useState([]);
+
+    React.useEffect(() => {
+        setNotifications(getNotifications());
+    }, [getNotifications]);
 
     return (
         <>
@@ -23,4 +24,8 @@ const NotificationScreen = React.memo(() => {
         </>
     );
 });
-export default NotificationScreen;
+
+const mapDispatchToProps = {
+    getNotifications,
+};
+export default connect(undefined, mapDispatchToProps)(NotificationScreen);

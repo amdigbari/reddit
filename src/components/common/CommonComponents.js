@@ -16,7 +16,7 @@ export const RedditLogo = () => {
     );
 };
 
-export const Loading = ({ size = 45 }) => <CircularProgress color="secondary" size={size} />;
+export const Loading = ({ size = 45, ...restProps }) => <CircularProgress color="secondary" size={size} {...restProps} />;
 
 export const ButtonLoading = ({ color, visible }) => {
     return (
