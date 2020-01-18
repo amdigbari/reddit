@@ -26,7 +26,7 @@ const CustomScreen = React.memo(({ children, className = '', loginUser }) => {
         });
     }, [history]);
 
-    const SidebarComponent = () => <SidebarContent />;
+    const SidebarComponent = () => <SidebarContent user={loginUser} />;
 
     const MaterialSidebar = React.useCallback(
         ({ children }) => {
@@ -50,11 +50,11 @@ const CustomScreen = React.memo(({ children, className = '', loginUser }) => {
     return loginUser.username ? (
         <>
             <article className={styles['page-wrapper']}>
-                <Header toggleMenuVisibility={toggleDrawerOpen} />
+                <Header toggleMenuVisibility={toggleDrawerOpen} user={loginUser} />
 
                 <main className={styles['main-content']}>
                     <section className={styles['menubar']} desc={SHOW_ON_DESKTOP}>
-                        <AsideMenubar />
+                        <AsideMenubar user={loginUser} />
                     </section>
                     <article className={[styles['page-content'], className].join(' ')}>{children}</article>
                 </main>
@@ -69,6 +69,7 @@ const CustomScreen = React.memo(({ children, className = '', loginUser }) => {
 });
 
 const mapStateTpProps = state => {
+    return { loginUser: { username: 'amdigbari', pk: 110 } }; //TODO: remove this
     return { loginUser: state.loginUser };
 };
 

@@ -10,6 +10,7 @@ import { useToggle } from '../../common/customHooks';
 import CommentModal from '../../comment/CommentModal';
 import PostImage from './PostImage';
 import { CustomLinkify } from '../../common/CommonComponents';
+import { postPath } from '../../../utils/pathUtils';
 
 const PostCard = React.memo(({ post, showBorder = false, fullCaption = false, channelLink = true, authorLink = true, ...restProps }) => {
     let [replyPostModalVisibility, toggleReplyPostModalVisibility] = useToggle(false);
@@ -35,7 +36,7 @@ const PostCard = React.memo(({ post, showBorder = false, fullCaption = false, ch
                 </div>
 
                 {post.image && (
-                    <Link to={`/posts/${post.pk}`}>
+                    <Link to={postPath(post.pk)}>
                         <PostImage src={post.image} />
                     </Link>
                 )}

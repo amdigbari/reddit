@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { Loading } from './common/CommonComponents';
 import CustomScreen from './common/customScreen/CustomScreen';
+import { basePath, userPath, postPath, channelPath, notificationPath } from '../utils/pathUtils';
 
 const Homepage = lazy(() => import('./homepage'));
 
@@ -36,24 +37,32 @@ const SuspenseFallback = () => {
 };
 
 const RootRouter = React.memo(() => {
+    const renderUserRoute = React.useCallback(({ match }) => {
+        return (
+            <Switch>
+                <Route exact path={match.path} component={ProfileScreen} />
+                <Route exact path={`${match.path}posts/`} component={PostsScreen} />
+                <Route exact path={`${match.path}channels/`} component={ChannelsScreen} />
+                <Route exact path={[`${match.path}followers/`, `${match.path}followings/`]} component={FollowList} />
+                <Route component={NotFound} />
+            </Switch>
+        );
+    }, []);
+
     return (
         <BrowserRouter>
             <CustomScreen>
                 <Suspense fallback={<SuspenseFallback />}>
                     <Switch>
-                        <Route exact path="/" component={Homepage} />
+                        <Route exact path={basePath} component={Homepage} />
 
-                        <Route exact path="/posts/" component={PostsScreen} />
-                        <Route exact path="/posts/:pk/" component={PostScreen} />
+                        <Route path={userPath()} render={renderUserRoute} />
 
-                        <Route exact path="/channels/" component={ChannelsScreen} />
-                        <Route exact path="/channels/:pk/" component={ChannelScreen} />
+                        <Route exact path={postPath()} component={PostScreen} />
 
-                        <Route exact path={['/profile/', '/profile/:pk/']} component={ProfileScreen} />
+                        <Route exact path={channelPath()} component={ChannelScreen} />
 
-                        <Route exact path={['/followers/', '/followings/', '/followers/:pk', '/followings/:pk']} component={FollowList} />
-
-                        <Route exact path="/notifications/" component={NotificationScreen} />
+                        <Route exact path={notificationPath} component={NotificationScreen} />
 
                         <Route component={NotFound} />
                     </Switch>

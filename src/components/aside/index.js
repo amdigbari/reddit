@@ -3,28 +3,29 @@ import { Link } from 'react-router-dom';
 
 import { CustomButton } from '../common/CommonComponents';
 import styles from './styles.module.scss';
+import { userPostsPath, userChannelsPath, userPath, notificationPath } from '../../utils/pathUtils';
 
-const AsideMenubar = React.memo(() => {
+const AsideMenubar = React.memo(({ user }) => {
     const RenderButtons = () => {
         return (
             <>
                 <CustomButton className={styles.button}>
-                    <Link to="/posts/" className={styles['link-wrapper']}>
+                    <Link to={userPostsPath(user.pk)} className={styles['link-wrapper']}>
                         <p className={styles.link}>Posts</p>
                     </Link>
                 </CustomButton>
                 <CustomButton className={styles.button}>
-                    <Link to="/channels/" className={styles['link-wrapper']}>
+                    <Link to={userChannelsPath(user.pk)} className={styles['link-wrapper']}>
                         <p className={styles.link}>Channels</p>
                     </Link>
                 </CustomButton>
                 <CustomButton className={styles.button}>
-                    <Link to="/profile/" className={styles['link-wrapper']}>
+                    <Link to={userPath(user.pk)} className={styles['link-wrapper']}>
                         <p className={styles.link}>Profile</p>
                     </Link>
                 </CustomButton>
                 <CustomButton className={styles.button}>
-                    <Link to="/notifications/" className={styles['link-wrapper']}>
+                    <Link to={notificationPath} className={styles['link-wrapper']}>
                         <p className={styles.link}>Notifications</p>
                     </Link>
                 </CustomButton>
