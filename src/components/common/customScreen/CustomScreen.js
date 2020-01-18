@@ -26,27 +26,6 @@ const CustomScreen = React.memo(({ children, className = '', loginUser }) => {
         });
     }, [history]);
 
-    const SidebarComponent = () => <SidebarContent user={loginUser} />;
-
-    const MaterialSidebar = React.useCallback(
-        ({ children }) => {
-            return (
-                <SwipeableDrawer
-                    disableBackdropTransition={!IS_IOS}
-                    disableDiscovery={IS_IOS}
-                    hysteresis={0.35}
-                    swipeAreaWidth={40}
-                    transitionDuration={200}
-                    open={drawerOpen}
-                    onOpen={toggleDrawerOpen}
-                    onClose={toggleDrawerOpen}>
-                    {children}
-                </SwipeableDrawer>
-            );
-        },
-        [drawerOpen, toggleDrawerOpen],
-    );
-
     return loginUser.username ? (
         <>
             <article className={styles['page-wrapper']}>
@@ -59,9 +38,10 @@ const CustomScreen = React.memo(({ children, className = '', loginUser }) => {
                     <article className={[styles['page-content'], className].join(' ')}>{children}</article>
                 </main>
             </article>
-            <MaterialSidebar>
-                <SidebarComponent />
-            </MaterialSidebar>
+
+            <SwipeableDrawer open={drawerOpen} onOpen={toggleDrawerOpen} onClose={toggleDrawerOpen}>
+                <SidebarContent user={loginUser} />
+            </SwipeableDrawer>
         </>
     ) : (
         <Auth />
@@ -69,7 +49,6 @@ const CustomScreen = React.memo(({ children, className = '', loginUser }) => {
 });
 
 const mapStateTpProps = state => {
-    return { loginUser: { username: 'amdigbari', pk: 110 } }; //TODO: remove this
     return { loginUser: state.loginUser };
 };
 
