@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { registerUser } from '../../actions/AuthActions';
 import styles from './styles.module.scss';
-import logo from '../../assets/images/reddit_logo.png';
-import { CustomButton } from '../common/CommonComponents';
+import logo from 'assets/images/reddit_logo.png';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import ResetPassword from './ResetPassword';
-import { sampleUser } from '../../utils/hardcodedData';
+import { sampleUser } from 'utils/hardcodedData';
+import { registerUser } from 'actions/AuthActions';
+import { CustomButton } from 'components/common/CommonComponents';
 
 const PAGE_TYPES = {
     auth: 'auth',
