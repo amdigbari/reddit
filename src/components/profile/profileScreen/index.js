@@ -1,17 +1,21 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { sampleUser } from '../../../utils/hardcodedData';
 import ProfileCard from '../profileCard';
 import PostsScreen from '../../post/postsScreen';
 import './styles.scss';
+import { getUserProfileById } from '../../../actions/ProfileActions';
+import { userFollowingsPath, userFollowersPath } from '../../../utils/pathUtils';
 
-const ProfileScreen = React.memo(({ match }) => {
+const ProfileScreen = React.memo(({ match, getUserProfile }) => {
     const userPk = React.useMemo(() => match.params.pk, [match]);
 
-    const user = React.useMemo(() => {
-        return sampleUser;
-    }, [userPk]);
+    let [user, setUser] = React.useState({});
+
+    React.useEffect(() => {
+        setUser(getUserProfile());
+    }, [userPk, getUserProfile]);
 
     const Bio = () => {
         return (
@@ -28,13 +32,13 @@ const ProfileScreen = React.memo(({ match }) => {
                             <h4 className="danger">{user.postsCount}</h4>
                             <p>Posts</p>
                         </div>
-                        <Link to={`/followers/${userPk ? `${userPk}/` : ''}`}>
+                        <Link to={userFollowersPath(userPk)}>
                             <div>
                                 <h4 className="danger">{user.followersCount}</h4>
                                 <p>Followers</p>
                             </div>
                         </Link>
-                        <Link to={`/followings/${userPk ? `${userPk}/` : ''}`}>
+                        <Link to={userFollowingsPath(userPk)}>
                             <div>
                                 <h4 className="danger">{user.followingsCount}</h4>
                                 <p>Followings</p>
@@ -55,11 +59,17 @@ const ProfileScreen = React.memo(({ match }) => {
     };
 
     return (
-        <>
-            <ProfileCard user={user} showBorder className="profile-card" showEdit />
-            <Bio />
-            <UserPosts />
-        </>
+        user.pk && (
+            <>
+                <ProfileCard user={user} showBorder className="profile-card" showEdit />
+                <Bio />
+                <UserPosts />
+            </>
+        )
     );
 });
-export default ProfileScreen;
+
+const mapDispatchToProps = {
+    getUserProfile: getUserProfileById,
+};
+export default connect(undefined, mapDispatchToProps)(ProfileScreen);

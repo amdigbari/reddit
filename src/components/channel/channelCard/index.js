@@ -6,6 +6,7 @@ import { CustomButton } from '../../common/CommonComponents';
 import './styles.scss';
 import { useToggle } from '../../common/customHooks';
 import { LIGHT_PRIMARY_COLOR } from '../../../utils/staticUtils';
+import { channelPath } from '../../../utils/pathUtils';
 
 const ChannelCard = ({ channel, showBorder = false, link = true, ...restProps }) => {
     let [loading, toggleLoading] = useToggle(false);
@@ -42,7 +43,7 @@ const ChannelCard = ({ channel, showBorder = false, link = true, ...restProps })
     return (
         <div className={`card ${showBorder ? ' border-bottom' : ''}`} {...restProps}>
             {link ? (
-                <Link to={`/channels/${channel.pk}`} className={`link`}>
+                <Link to={channelPath(channel.pk)} className={`link`}>
                     <Avatar src={channel.logo} />
                     <Description />
                 </Link>

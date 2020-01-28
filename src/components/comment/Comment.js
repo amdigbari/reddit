@@ -7,6 +7,7 @@ import Avatar from '../common/Avatar';
 import { useToggle } from '../common/customHooks';
 import CommentModal from './CommentModal';
 import { CustomLinkify } from '../common/CommonComponents';
+import { userPath } from '../../utils/pathUtils';
 
 const Comment = ({ comment, isReply = false }) => {
     let [replyPostModalVisibility, toggleReplyPostModalVisibility] = useToggle(false);
@@ -15,7 +16,7 @@ const Comment = ({ comment, isReply = false }) => {
         <>
             <div className={[styles['comment-container'], isReply ? styles.reply : ''].join(' ')}>
                 <div className={styles['comment-header']}>
-                    <Link to={`/profile/${comment.author.pk}`}>
+                    <Link to={userPath(comment.author.pk)}>
                         <div className={styles['comment-author']}>
                             <Avatar src={comment.author.avatar} />
                             <p style={{ marginLeft: 10 }}>{comment.author.name}</p>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import styles from './styles.module.scss';
 import Avatar from '../../common/Avatar';
+import { userPath } from '../../../utils/pathUtils';
 
 const PostAuthor = ({ author, link = true }) => {
     const RenderAuthor = () => (
@@ -14,7 +15,7 @@ const PostAuthor = ({ author, link = true }) => {
     );
 
     return link ? (
-        <Link to={`/profile/${author.pk}`}>
+        <Link to={userPath(author.pk)}>
             <RenderAuthor />
         </Link>
     ) : (

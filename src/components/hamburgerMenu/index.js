@@ -6,11 +6,12 @@ import testProfile from '../../assets/images/test_profile.jpg';
 import styles from './styles.module.scss';
 import Avatar from '../common/Avatar';
 import { unRegisterUser } from '../../actions/AuthActions';
+import { userPath, userPostsPath, userChannelsPath, notificationPath } from '../../utils/pathUtils';
 
-const SidebarContent = React.memo(({ unRegisterUser: logOut }) => {
+const SidebarContent = React.memo(({ unRegisterUser: logOut, user }) => {
     const ProfileSection = () => {
         return (
-            <Link to="/profile/">
+            <Link to={userPath(user.pk)}>
                 <div className={[styles['profile-container'], styles['bottom-border']].join(' ')}>
                     <Avatar src={testProfile} size={125} />
                     <p className={styles['profile-name']}>Dier Cohen</p>
@@ -22,17 +23,17 @@ const SidebarContent = React.memo(({ unRegisterUser: logOut }) => {
     const LinksSection = () => {
         return (
             <>
-                <Link to="/posts/">
+                <Link to={userPostsPath(user.pk)}>
                     <div className={[styles['link-container'], styles['bottom-border']].join(' ')}>
                         <p>Posts</p>
                     </div>
                 </Link>
-                <Link to="/channels/">
+                <Link to={userChannelsPath(user.pk)}>
                     <div className={[styles['link-container'], styles['bottom-border']].join(' ')}>
                         <p>Channels</p>
                     </div>
                 </Link>
-                <Link to="/notifications/">
+                <Link to={notificationPath}>
                     <div className={[styles['link-container'], styles['bottom-border']].join(' ')}>
                         <p>Notifications</p>
                     </div>

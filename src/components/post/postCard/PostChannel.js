@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import styles from './styles.module.scss';
 import Avatar from '../../common/Avatar';
+import { channelPath } from '../../../utils/pathUtils';
 
 const PostChannel = ({ channel, link = true }) => {
     const RenderChannel = () => (
@@ -13,7 +14,7 @@ const PostChannel = ({ channel, link = true }) => {
     );
 
     return link ? (
-        <Link to={`/channels/${channel.pk}`}>
+        <Link to={channelPath(channel.pk)}>
             <RenderChannel />
         </Link>
     ) : (

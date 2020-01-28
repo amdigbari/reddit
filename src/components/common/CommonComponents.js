@@ -7,16 +7,17 @@ import Linkify from 'linkifyjs/react';
 import styles from './styles.module.scss';
 import logo from '../../assets/images/reddit_logo.png';
 import { PRIMARY_COLOR, DARK_PRIMARY_COLOR, LIGHT_COLOR } from '../../utils/staticUtils';
+import { basePath } from '../../utils/pathUtils';
 
 export const RedditLogo = () => {
     return (
-        <Link to="/" id={styles['reddit-logo']}>
+        <Link to={basePath} id={styles['reddit-logo']}>
             <img alt="Reddit" src={logo} className={styles['reddit-avatar']} />
         </Link>
     );
 };
 
-export const Loading = ({ size = 45 }) => <CircularProgress color="secondary" size={size} />;
+export const Loading = ({ size = 45, ...restProps }) => <CircularProgress color="secondary" size={size} {...restProps} />;
 
 export const ButtonLoading = ({ color, visible }) => {
     return (

@@ -1,14 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import ChannelCard from '../channelCard';
-import { sampleChannel } from '../../../utils/hardcodedData';
 import styles from './styles.module.scss';
 import PostsScreen from '../../post/postsScreen';
+import { getChannelById } from '../../../actions/ChannelActions';
 
-const ChannelScreen = React.memo(({ match }) => {
+const ChannelScreen = React.memo(({ match, getChannel }) => {
     const channelPk = React.useMemo(() => match.params.pk, [match]);
 
-    const channel = sampleChannel;
+    let [channel, setChannel] = React.useState({});
+
+    React.useEffect(() => {
+        channelPk && setChannel(getChannel(channelPk));
+    }, [channelPk, getChannel]);
 
     const ChannelDescription = () => {
         return (
@@ -44,11 +49,17 @@ const ChannelScreen = React.memo(({ match }) => {
     };
 
     return (
-        <div className={styles.container}>
-            <ChannelCard channel={channel} showBorder link={false} style={{ paddingTop: 30 }} />
-            <ChannelDescription />
-            <ChannelPosts />
-        </div>
+        channel.pk && (
+            <div className={styles.container}>
+                <ChannelCard channel={channel} showBorder link={false} style={{ paddingTop: 30 }} />
+                <ChannelDescription />
+                <ChannelPosts />
+            </div>
+        )
     );
 });
-export default ChannelScreen;
+
+const mapDispatchToProps = {
+    getChannel: getChannelById,
+};
+export default connect(undefined, mapDispatchToProps)(ChannelScreen);

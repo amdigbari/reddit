@@ -1,15 +1,20 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import ChannelCard from '../channelCard';
-import { sampleChannel } from '../../../utils/hardcodedData';
 import { FloatAddButton } from '../../common/CommonComponents';
 import CreateChannelModal from '../createChannel';
 import { useToggle } from '../../common/customHooks';
+import { getUserChannels } from '../../../actions/ChannelActions';
 
-const ChannelsScreen = React.memo(() => {
+const ChannelsScreen = React.memo(({ getChannels }) => {
     let [modalVisibility, toggleModalVisibility] = useToggle(false);
 
-    const channels = React.useMemo(() => [sampleChannel, { ...sampleChannel, pk: 2 }], []);
+    let [channels, setChannels] = React.useState([]);
+
+    React.useEffect(() => {
+        setChannels(getChannels());
+    }, [getChannels]);
 
     return (
         <>
@@ -27,4 +32,8 @@ const ChannelsScreen = React.memo(() => {
         </>
     );
 });
-export default ChannelsScreen;
+
+const mapDispatchToProps = {
+    getChannels: getUserChannels,
+};
+export default connect(undefined, mapDispatchToProps)(ChannelsScreen);

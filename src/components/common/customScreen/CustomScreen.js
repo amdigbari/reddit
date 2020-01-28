@@ -26,42 +26,22 @@ const CustomScreen = React.memo(({ children, className = '', loginUser }) => {
         });
     }, [history]);
 
-    const SidebarComponent = () => <SidebarContent />;
-
-    const MaterialSidebar = React.useCallback(
-        ({ children }) => {
-            return (
-                <SwipeableDrawer
-                    disableBackdropTransition={!IS_IOS}
-                    disableDiscovery={IS_IOS}
-                    hysteresis={0.35}
-                    swipeAreaWidth={40}
-                    transitionDuration={200}
-                    open={drawerOpen}
-                    onOpen={toggleDrawerOpen}
-                    onClose={toggleDrawerOpen}>
-                    {children}
-                </SwipeableDrawer>
-            );
-        },
-        [drawerOpen, toggleDrawerOpen],
-    );
-
     return loginUser.username ? (
         <>
             <article className={styles['page-wrapper']}>
-                <Header toggleMenuVisibility={toggleDrawerOpen} />
+                <Header toggleMenuVisibility={toggleDrawerOpen} user={loginUser} />
 
                 <main className={styles['main-content']}>
                     <section className={styles['menubar']} desc={SHOW_ON_DESKTOP}>
-                        <AsideMenubar />
+                        <AsideMenubar user={loginUser} />
                     </section>
                     <article className={[styles['page-content'], className].join(' ')}>{children}</article>
                 </main>
             </article>
-            <MaterialSidebar>
-                <SidebarComponent />
-            </MaterialSidebar>
+
+            <SwipeableDrawer open={drawerOpen} onOpen={toggleDrawerOpen} onClose={toggleDrawerOpen}>
+                <SidebarContent user={loginUser} />
+            </SwipeableDrawer>
         </>
     ) : (
         <Auth />

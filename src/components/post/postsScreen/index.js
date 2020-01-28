@@ -1,15 +1,20 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import PostCard from '../postCard/PostCard';
-import { samplePost } from '../../../utils/hardcodedData';
 import { FloatAddButton } from '../../common/CommonComponents';
 import CreatePostModal from '../createPost';
 import { useToggle } from '../../common/customHooks';
+import { getUserPosts } from '../../../actions/PostActions';
 
-const PostsScreen = React.memo(({ showFloatButton = true, channelsLink = true, authorsLink = true }) => {
+const PostsScreen = React.memo(({ showFloatButton = true, channelsLink = true, authorsLink = true, getPosts }) => {
     let [modalVisibility, toggleModalVisibility] = useToggle(false);
 
-    const posts = React.useMemo(() => [samplePost, { ...samplePost, pk: 2 }], []);
+    let [posts, setPosts] = React.useState([]);
+
+    React.useEffect(() => {
+        setPosts(getPosts());
+    }, []);
 
     return (
         <>
@@ -29,4 +34,8 @@ const PostsScreen = React.memo(({ showFloatButton = true, channelsLink = true, a
         </>
     );
 });
-export default PostsScreen;
+
+const mapDispatchToProps = {
+    getPosts: getUserPosts,
+};
+export default connect(undefined, mapDispatchToProps)(PostsScreen);

@@ -8,8 +8,9 @@ import { SHOW_ON_DESKTOP, SHOW_ON_DEVICE } from '../../utils/staticUtils';
 import SearchbarIcon from '../common/searchbar/SearchbarIcon';
 import HamburgerIcon from '../hamburgerMenu/HamburgerIcon';
 import Avatar from '../common/Avatar';
+import { userPath } from '../../utils/pathUtils';
 
-const Header = React.memo(({ toggleMenuVisibility: openBurgerMenu }) => {
+const Header = React.memo(({ toggleMenuVisibility: openBurgerMenu, user }) => {
     let [searchQuery, setSearchQuery] = React.useState('');
     const search = React.useCallback(_searchQuery => {
         setSearchQuery(_searchQuery);
@@ -32,7 +33,7 @@ const Header = React.memo(({ toggleMenuVisibility: openBurgerMenu }) => {
 
             <>
                 <div className={styles['avatar-container']} desc={SHOW_ON_DESKTOP}>
-                    <Avatar src={testProfile} url="/profile/" size={55} />
+                    <Avatar src={testProfile} url={userPath(user.pk)} size={55} />
                 </div>
             </>
         </header>
