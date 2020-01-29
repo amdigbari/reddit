@@ -92,7 +92,8 @@ const SignUp = React.memo(({ goBack, registerUser }) => {
 
     const submitForm = event => {
         event.preventDefault();
-        registerUser();
+        // registerUser({ username, password });
+        toggleEditProfileModalVisibility();
     };
 
     const submitButtonHandler = event => {
@@ -121,7 +122,12 @@ const SignUp = React.memo(({ goBack, registerUser }) => {
                 />
             </CustomScreenWithBackButton>
 
-            <EditProfileModal modalVisibility={editProfileModalVisibility} toggleModalVisibility={toggleEditProfileModalVisibility} />
+            <EditProfileModal
+                modalVisibility={editProfileModalVisibility}
+                toggleModalVisibility={toggleEditProfileModalVisibility}
+                setup={true}
+                registerUser={user => registerUser({ ...user, username, password })}
+            />
         </>
     );
 });

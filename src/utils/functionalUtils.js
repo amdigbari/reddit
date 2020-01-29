@@ -1,4 +1,5 @@
 import { URL_PATTERN } from './staticUtils';
+import { decode } from 'base-64';
 
 export const parseLinks = (text, linkClass) => {
     let parsedText = text.replace(URL_PATTERN, function(matchedUrl) {
@@ -8,4 +9,19 @@ export const parseLinks = (text, linkClass) => {
     console.log(parsedText);
 
     return parsedText;
+};
+
+export const customFetch = (url, options) => {
+    let token = localStorage.getItem('token');
+
+    let headers = { 'Content-Type': 'application/json' };
+
+    if (token) {
+        headers = { ...headers, Authorization: `Basic ${token}` };
+    }
+
+    return fetch(url, {
+        headers,
+        ...(options || {}),
+    });
 };

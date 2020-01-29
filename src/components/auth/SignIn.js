@@ -79,7 +79,7 @@ const SignIn = React.memo(({ showForgotPasswordPage, goBack, registerUser }) => 
 
     const submitForm = event => {
         event.preventDefault();
-        registerUser();
+        registerUser({ username, password }).finally(() => toggleIsSubmitting());
     };
 
     const submitButtonHandler = event => {

@@ -9,7 +9,8 @@ import Avatar from '../../common/Avatar';
 import { SHOW_ON_DESKTOP } from '../../../utils/staticUtils';
 
 const RenderInputs = ({
-    name: { name, change: changeName, error: nameError },
+    firstName: { firstName, change: changeFirstName, error: firstNameError },
+    lastName: { lastName, change: changeLastName, error: lastNameError },
     email: { email, error: emailError, change: changeEmail },
     phone: { phone, change: changePhone, error: phoneError },
     image: { image, change: changeImage },
@@ -19,6 +20,7 @@ const RenderInputs = ({
     handleSubmit,
     showChangePasswordModal,
     logOut,
+    setup = false,
 }) => {
     const clearImage = () => changeImage(null);
 
@@ -56,15 +58,26 @@ const RenderInputs = ({
             <RenderImage />
 
             <TextField
-                name="name"
+                name="first_name"
                 className="input-container animation-error"
                 type="text"
-                label="name *"
+                label="first_name *"
                 color="secondary"
-                value={name}
-                onChange={changeName}
-                error={nameError}
-                helperText="name can't be empty"
+                value={firstName}
+                onChange={changeFirstName}
+                error={firstNameError}
+                helperText="first name can't be empty"
+            />
+            <TextField
+                name="last_name"
+                className="input-container animation-error"
+                type="text"
+                label="last_name *"
+                color="secondary"
+                value={lastName}
+                onChange={changeLastName}
+                error={lastNameError}
+                helperText="last name can't be empty"
             />
             <TextField
                 name="email"
@@ -98,9 +111,11 @@ const RenderInputs = ({
                 onChange={changeCity}
             />
 
-            <p className={[styles['change-password'], 'danger'].join(' ')} onClick={showChangePasswordModal}>
-                change password
-            </p>
+            {!setup && (
+                <p className={[styles['change-password'], 'danger'].join(' ')} onClick={showChangePasswordModal}>
+                    change password
+                </p>
+            )}
 
             <CustomButtonWithLoading className="button-container" type="submit" loading={isSubmitting} clickHandler={handleSubmit}>
                 Save
