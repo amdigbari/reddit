@@ -6,6 +6,7 @@ import { FloatAddButton } from '../../common/CommonComponents';
 import CreateChannelModal from '../createChannel';
 import { useToggle } from '../../common/customHooks';
 import { getUserChannels } from '../../../actions/ChannelActions';
+import ScreenWithError from 'components/common/screenWithError';
 
 const ChannelsScreen = React.memo(({ getChannels }) => {
     let [modalVisibility, toggleModalVisibility] = useToggle(false);
@@ -36,4 +37,4 @@ const ChannelsScreen = React.memo(({ getChannels }) => {
 const mapDispatchToProps = {
     getChannels: getUserChannels,
 };
-export default connect(undefined, mapDispatchToProps)(ChannelsScreen);
+export default connect(undefined, mapDispatchToProps)(ScreenWithError(ChannelsScreen));
