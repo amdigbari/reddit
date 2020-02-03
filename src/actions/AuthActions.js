@@ -14,7 +14,6 @@ export const registerUser = user => dispatch => {
         .then(res => res.json())
         .then(response => {
             localStorage.setItem('token', encode(`${user.username}:${user.password}`));
-            dispatch(registerUserSuccess(response));
             return response;
         })
         .catch(console.log);

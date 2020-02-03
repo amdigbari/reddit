@@ -10,9 +10,10 @@ import RenderInputs from './Inputs';
 import { EMAIL_VALIDATOR, PHONE_VALIDATOR } from '../../../utils/staticUtils';
 import ChangePasswordModal from './changePassword';
 import { unRegisterUser } from '../../../actions/AuthActions';
+import { updateProfile } from 'actions/ProfileActions';
 
 const EditProfileModal = React.memo(
-    ({ modalVisibility, toggleModalVisibility, user = {}, unregisterUser: logOut, setup = false, registerUser }) => {
+    ({ modalVisibility, toggleModalVisibility, user = {}, unregisterUser: logOut, setup = false, updateProfile }) => {
         // Required
         let [firstName, setFirstName] = React.useState(user.name || '');
         let [lastName, setLastName] = React.useState(user.name || '');
@@ -64,11 +65,7 @@ const EditProfileModal = React.memo(
 
         const submitForm = event => {
             event.preventDefault();
-            if (setup) {
-                registerUser({ first_name: firstName, last_name: lastName, phone, city }).finally(() => toggleIsSubmitting());
-            } else {
-                console.log('Submit');
-            }
+            updateProfile({ first_name: firstName, last_name: lastName, phone, city, email }).finally(() => toggleIsSubmitting());
         };
 
         const submitButtonHandler = event => {
@@ -120,6 +117,7 @@ const EditProfileModal = React.memo(
 
 const mapDispatchToProps = {
     unregisterUser: unRegisterUser,
+    updateProfile,
 };
 
 export default connect(undefined, mapDispatchToProps)(EditProfileModal);

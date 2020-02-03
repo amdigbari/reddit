@@ -92,8 +92,9 @@ const SignUp = React.memo(({ goBack, registerUser }) => {
 
     const submitForm = event => {
         event.preventDefault();
-        // registerUser({ username, password });
-        toggleEditProfileModalVisibility();
+        registerUser({ username, password })
+            .then(() => toggleEditProfileModalVisibility())
+            .finally(() => toggleIsSubmitting());
     };
 
     const submitButtonHandler = event => {
