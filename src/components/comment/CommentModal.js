@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 
-import image from '../../assets/images/test_profile.jpg';
+import image from '../../assets/images/default_profile.png';
 import styles from './styles.module.scss';
 import Modal from '../common/Modal';
 import Avatar from '../common/Avatar';

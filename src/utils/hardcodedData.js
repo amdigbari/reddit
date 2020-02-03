@@ -1,4 +1,4 @@
-import image from '../assets/images/test_profile.jpg';
+import image from '../assets/images/default_profile.png';
 
 export const navigationTabs = [
     { id: 1, title: 'Following' },

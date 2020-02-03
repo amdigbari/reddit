@@ -1,10 +1,10 @@
 import { sampleUser, samplePostNotification, sampleFollowNotification } from '../utils/hardcodedData';
 import { customFetch } from 'utils/functionalUtils';
-import { UPDATE_PROFILE_API, GET_NOTIFICATIONS_API, getFollowListApi } from 'api/profileApi';
+import { UPDATE_PROFILE_API, GET_NOTIFICATIONS_API, getFollowListApi, getProfileApi } from 'api/profileApi';
 import { registerUserSuccess } from './AuthActions';
 
 export const getUserProfileById = pk => dispatch => {
-    return sampleUser;
+    return customFetch(getProfileApi(pk));
 };
 
 export const getNotifications = () => dispatch => {

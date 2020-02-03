@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './styles.module.scss';
 import { RedditLogo } from '../common/CommonComponents';
 import SearchBar from '../common/searchbar/SearchBar';
-import testProfile from '../../assets/images/test_profile.jpg';
+import testProfile from '../../assets/images/default_profile.png';
 import { SHOW_ON_DESKTOP, SHOW_ON_DEVICE } from '../../utils/staticUtils';
 import SearchbarIcon from '../common/searchbar/SearchbarIcon';
 import HamburgerIcon from '../hamburgerMenu/HamburgerIcon';

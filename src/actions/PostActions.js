@@ -1,9 +1,10 @@
 import { samplePost } from '../utils/hardcodedData';
 import { customFetch } from 'utils/functionalUtils';
-import { CREATE_POST_API } from 'api/postApi';
+import { CREATE_POST_API, getPostApi } from 'api/postApi';
 
 export const getPostById = pk => dispatch => {
-    return samplePost;
+    return Promise.resolve(samplePost);
+    // return customFetch(getPostApi);
 };
 
 export const getUserPosts = pk => dispatch => {

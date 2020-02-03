@@ -12,7 +12,7 @@ import { userPath } from '../../../utils/pathUtils';
 const ProfileCard = ({ user, showBorder = false, showEdit = false, link = false, className = '', ...restProps }) => {
     let [loading, toggleLoading] = useToggle(false);
     let [editModalVisibility, toggleEditModalVisibility] = useToggle(false);
-    let [isFollow, toggleIsFollow] = useToggle(user.follow);
+    let [isFollow, toggleIsFollow] = useToggle(user.follow || false);
 
     const followButtonClicked = () => {
         // toggleLoading();
@@ -68,7 +68,7 @@ const ProfileCard = ({ user, showBorder = false, showEdit = false, link = false,
         <div style={{ display: 'flex', alignItems: 'center' }}>
             <Avatar src={user.avatar} />
             <div className="name-container">
-                <p className="text-truncate">{user.name}</p>
+                <p className="text-truncate">{user.username}</p>
             </div>
         </div>
     );

@@ -7,13 +7,13 @@ import { getPostById } from '../../../actions/PostActions';
 
 const PostScreen = React.memo(({ match, getPost }) => {
     //use post pk to get full post from server
-    const postPk = React.useMemo(() => match.params.id, [match]);
+    const postPk = React.useMemo(() => match.params.pk, [match]);
 
     let [post, setPost] = React.useState({});
 
     React.useEffect(() => {
         if (postPk) {
-            setPost(getPost(postPk));
+            getPost(postPk).then(setPost);
         }
     }, [postPk, getPost]);
 

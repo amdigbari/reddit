@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import testProfile from '../../assets/images/test_profile.jpg';
+import testProfile from '../../assets/images/default_profile.png';
 import styles from './styles.module.scss';
 import Avatar from '../common/Avatar';
 import { unRegisterUser } from '../../actions/AuthActions';
