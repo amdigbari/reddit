@@ -23,7 +23,7 @@ const SearchBar = React.memo(({ search, autoFocus = false, renderResults, setLoa
     };
 
     const changeHandler = ({ target }) => {
-        setSearchQuery(target.value.trim());
+        setSearchQuery(target.value);
         resetTimeout();
 
         interval.current = setTimeout(() => {
@@ -33,7 +33,7 @@ const SearchBar = React.memo(({ search, autoFocus = false, renderResults, setLoa
 
     let isTypingChangedHandler = React.useCallback(() => {
         setLoading && setLoading(isTyping);
-        !isTyping && searchQuery.length && search(searchQuery);
+        !isTyping && searchQuery.trim().length && search(searchQuery.trim());
     }, [isTyping, searchQuery, search, setLoading]);
 
     useDepsChanged(isTypingChangedHandler, [isTyping]);
@@ -52,7 +52,7 @@ const SearchBar = React.memo(({ search, autoFocus = false, renderResults, setLoa
                     autoFocus={autoFocus}
                 />
 
-                {renderResults && searchQuery.length ? <SearchResultPopup renderResults={renderResults} loading={isTyping} /> : ''}
+                {renderResults && searchQuery.trim().length ? <SearchResultPopup renderResults={renderResults} loading={isTyping} /> : ''}
             </div>
         </div>
     );

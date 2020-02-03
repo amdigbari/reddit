@@ -36,19 +36,19 @@ const EditProfileModal = React.memo(
         let [changePasswordModalVisibility, toggleChangePasswordModalVisibility] = useToggle(false);
 
         const changeFirstName = ({ target }) => {
-            setFirstName(target.value.trim());
+            setFirstName(target.value);
         };
         const changeLastName = ({ target }) => {
-            setLastName(target.value.trim());
+            setLastName(target.value);
         };
         const changeEmail = ({ target }) => {
-            setEmail(target.value.trim());
+            setEmail(target.value);
         };
         const changePhone = ({ target }) => {
-            setPhone(target.value.trim());
+            setPhone(target.value);
         };
         const changeCity = ({ target }) => {
-            setCity(target.value.trim());
+            setCity(target.value);
         };
 
         const changeImage = imageInput => {
@@ -62,18 +62,27 @@ const EditProfileModal = React.memo(
 
         const submitForm = event => {
             event.preventDefault();
-            updateProfile({ first_name: firstName, last_name: lastName, phone, city, email, picture: imageFile }).finally(() =>
-                toggleIsSubmitting(),
-            );
+            updateProfile({
+                first_name: firstName.trim(),
+                last_name: lastName.trim(),
+                phone: phone.trim(),
+                city: city.trim(),
+                email: email.trim(),
+                picture: imageFile,
+            }).finally(() => toggleIsSubmitting());
         };
 
         const submitButtonHandler = event => {
-            setFirstNameValidate(firstName.length);
-            setLastNameValidate(lastName.length);
-            setEmailValidate(!!email.match(EMAIL_VALIDATOR));
-            setPhoneValidate(!phone.length || !!phone.match(PHONE_VALIDATOR));
+            setFirstNameValidate(firstName.trim().length);
+            setLastNameValidate(lastName.trim().length);
+            setEmailValidate(!!email.trim().match(EMAIL_VALIDATOR));
+            setPhoneValidate(!phone.trim().length || !!phone.trim().match(PHONE_VALIDATOR));
 
-            if (firstName.length && !!email.match(EMAIL_VALIDATOR) && (!phone.length || !!phone.match(PHONE_VALIDATOR))) {
+            if (
+                firstName.trim().length &&
+                !!email.trim().match(EMAIL_VALIDATOR) &&
+                (!phone.trim().length || !!phone.trim().match(PHONE_VALIDATOR))
+            ) {
                 toggleIsSubmitting();
             } else {
                 event.preventDefault();

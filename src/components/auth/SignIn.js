@@ -58,11 +58,11 @@ const SignIn = React.memo(({ showForgotPasswordPage, goBack, registerUser }) => 
     let [isSubmitting, toggleIsSubmitting] = useToggle(false);
 
     const changeUsername = ({ target }) => {
-        setUsername(target.value.trim());
+        setUsername(target.value);
     };
 
     const changePassword = ({ target }) => {
-        setPassword(target.value.trim());
+        setPassword(target.value);
     };
 
     const Description = () => {
@@ -79,12 +79,12 @@ const SignIn = React.memo(({ showForgotPasswordPage, goBack, registerUser }) => 
 
     const submitForm = event => {
         event.preventDefault();
-        registerUser({ username, password }).finally(() => toggleIsSubmitting());
+        registerUser({ username: username.trim(), password: password.trim() }).finally(() => toggleIsSubmitting());
     };
 
     const submitButtonHandler = event => {
-        setUsernameValidate(username.length);
-        setPasswordValidate(password.length);
+        setUsernameValidate(username.trim().length);
+        setPasswordValidate(password.trim().length);
 
         if (username.length && password.length) {
             toggleIsSubmitting();

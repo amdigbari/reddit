@@ -6,22 +6,12 @@ import './material_style.scss';
 import Modal from '../../common/Modal';
 import CustomScreenWithBackButton from '../../common/screenWithBackButton/CustomScreenWithBackButton';
 import { useToggle } from '../../common/customHooks';
-import { sampleChannel } from '../../../utils/hardcodedData';
 import RenderInputs from './Inputs';
-import { createPost } from 'actions/PostActions';
+import { createPost, getAvailableChannels } from 'actions/PostActions';
 
-const potentialChannels = [
-    sampleChannel,
-    { ...sampleChannel, pk: 2, name: 'amdigbari1' },
-    { ...sampleChannel, pk: 3, name: 'amdigbari2' },
-    { ...sampleChannel, pk: 4, name: 'amdigbari3' },
-    { ...sampleChannel, pk: 5, name: 'amdigbari4' },
-    { ...sampleChannel, pk: 6, name: 'amdigbari5' },
-    { ...sampleChannel, pk: 7, name: 'amdigbari6' },
-];
-
-const CreatePostModal = React.memo(({ modalVisibility, toggleModalVisibility, createPost }) => {
-    let [channel, setChannel] = React.useState(potentialChannels[0]);
+const CreatePostModal = React.memo(({ modalVisibility, toggleModalVisibility, createPost, getAvailableChannels }) => {
+    let [availableChannels, setAvailableChannels] = React.useState([]);
+    let [channel, setChannel] = React.useState(null);
     let [caption, setCaption] = React.useState('');
     let [image, setImage] = React.useState(null);
 
@@ -29,8 +19,16 @@ const CreatePostModal = React.memo(({ modalVisibility, toggleModalVisibility, cr
 
     let [isSubmitting, toggleIsSubmitting] = useToggle(false);
 
+    React.useEffect(() => {
+        getAvailableChannels().then(response => {
+            console.log(response);
+            setAvailableChannels(response);
+            setChannel(response[0]);
+        });
+    }, [getAvailableChannels]);
+
     const changeCaption = ({ target }) => {
-        setCaption(target.value.trim());
+        setCaption(target.value);
     };
 
     const changeChannel = value => {
@@ -53,14 +51,14 @@ const CreatePostModal = React.memo(({ modalVisibility, toggleModalVisibility, cr
 
     const submitForm = event => {
         event.preventDefault();
-        createPost({ caption, channel_id: 1 })
+        createPost({ caption: caption.trim(), channel_id: channel.id })
             .then(() => toggleModalVisibility())
             .catch(console.log)
             .finally(() => toggleIsSubmitting());
     };
 
     const submitButtonHandler = event => {
-        setCaptionValidate(caption.length);
+        setCaptionValidate(caption.trim().length);
 
         if (caption.length) {
             toggleIsSubmitting();
@@ -80,7 +78,7 @@ const CreatePostModal = React.memo(({ modalVisibility, toggleModalVisibility, cr
                         isSubmitting={isSubmitting}
                         handleSubmit={submitButtonHandler}
                         submitForm={submitForm}
-                        possibleChannels={potentialChannels}
+                        possibleChannels={availableChannels}
                     />
                 </div>
             </CustomScreenWithBackButton>
@@ -90,5 +88,6 @@ const CreatePostModal = React.memo(({ modalVisibility, toggleModalVisibility, cr
 
 const mapDispatchToProps = {
     createPost,
+    getAvailableChannels,
 };
 export default connect(undefined, mapDispatchToProps)(CreatePostModal);

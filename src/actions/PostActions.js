@@ -1,6 +1,6 @@
 import { samplePost } from '../utils/hardcodedData';
 import { customFetch } from 'utils/functionalUtils';
-import { CREATE_POST_API, getPostApi } from 'api/postApi';
+import { CREATE_POST_API, getPostApi, GET_AVAILABLE_CHANNELS_API } from 'api/postApi';
 
 export const getPostById = pk => dispatch => {
     return Promise.resolve(samplePost);
@@ -18,4 +18,8 @@ export const createPost = post => dispatch => {
     }).then(response => {
         console.log(response);
     });
+};
+
+export const getAvailableChannels = () => dispatch => {
+    return customFetch(GET_AVAILABLE_CHANNELS_API).then(response => response.channels);
 };

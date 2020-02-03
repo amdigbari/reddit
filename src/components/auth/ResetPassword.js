@@ -39,7 +39,7 @@ const ResetPassword = React.memo(({ goBack }) => {
     let [isSubmitting, toggleIsSubmitting] = useToggle(false);
 
     const changeUsername = ({ target }) => {
-        setUsername(target.value.trim());
+        setUsername(target.value);
     };
 
     const Description = () => {
@@ -53,6 +53,8 @@ const ResetPassword = React.memo(({ goBack }) => {
 
     const submitForm = event => {
         event.preventDefault();
+
+        // TODO: .trim()
         console.log('Submit');
     };
 

@@ -2,6 +2,7 @@ import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { Autocomplete } from '@material-ui/lab/';
 import { connect } from 'react-redux';
+import { MdDelete, MdModeEdit, MdPhotoCamera } from 'react-icons/md';
 
 import styles from './styles.module.scss';
 import './material_style.scss';
@@ -9,45 +10,53 @@ import Modal from '../../common/Modal';
 import CustomScreenWithBackButton from '../../common/screenWithBackButton/CustomScreenWithBackButton';
 import { CustomButtonWithLoading } from '../../common/CommonComponents';
 import { useToggle } from '../../common/customHooks';
-import { sampleUser } from '../../../utils/hardcodedData';
 import Avatar from '../../common/Avatar';
 import { createChannel } from 'actions/ChannelActions';
+import { imageToBase64 } from 'utils/functionalUtils';
 
 const RenderInputs = ({
     name: { name, error: nameError, change: changeName },
     description: { description, change: changeDescription },
-    admins: { admins, change: changeAdmins },
+    image: { image, change: changeImage },
     isSubmitting,
     submitForm,
     handleSubmit,
 }) => {
-    const potentialAdmins = [
-        sampleUser,
-        { ...sampleUser, pk: 2, name: 'amdigbari1' },
-        { ...sampleUser, pk: 3, name: 'amdigbari2' },
-        { ...sampleUser, pk: 4, name: 'amdigbari3' },
-        { ...sampleUser, pk: 5, name: 'amdigbari4' },
-        { ...sampleUser, pk: 6, name: 'amdigbari5' },
-        { ...sampleUser, pk: 7, name: 'amdigbari6' },
-    ];
-
-    const RenderOption = ({ user, listBox = false }) => {
-        return !listBox ? (
-            <div className={styles['option-container']}>
-                <Avatar src={user.avatar} size={25} />
-                <p className={styles['option-text']}>{user.name}</p>
-            </div>
-        ) : (
-            user.name
-        );
+    const RenderImageInput = () => {
+        return <input type="file" accept="image/*" className={styles['add-image-input']} onChange={changeImage} />;
     };
 
-    const handleChange = (event, value) => {
-        changeAdmins(value);
+    const clearImage = () => changeImage(null);
+
+    const RenderImage = () => {
+        return (
+            <div className={styles['add-image-container']}>
+                {image ? (
+                    <div className={styles['image-preview-container']}>
+                        <Avatar src={image} size={100} />
+
+                        <div className={styles['edit-image-container']}>
+                            <div className={[styles['add-image-wrapper'], styles['icon']].join(' ')} style={{ marginRight: 15 }}>
+                                <MdModeEdit size={30} />
+                                <RenderImageInput />
+                            </div>
+                            <MdDelete size={30} className={styles['icon']} onClick={clearImage} />
+                        </div>
+                    </div>
+                ) : (
+                    <div className={[styles['add-image-wrapper'], styles['add-image-background']].join(' ')}>
+                        <MdPhotoCamera className={styles.icon} size={40} />
+                        <RenderImageInput />
+                    </div>
+                )}
+            </div>
+        );
     };
 
     return (
         <form method="POST" action="/" onSubmit={submitForm}>
+            <RenderImage />
+
             <TextField
                 name="name"
                 className="input-container animation-error"
@@ -69,16 +78,6 @@ const RenderInputs = ({
                 onChange={changeDescription}
             />
 
-            <Autocomplete
-                options={potentialAdmins}
-                getOptionLabel={user => <RenderOption user={user} />}
-                renderOption={user => <RenderOption user={user} listBox />}
-                multiple
-                autoComplete
-                renderInput={params => <TextField {...params} name="admins" label="admins" margin="normal" fullWidth />}
-                onChange={handleChange}
-            />
-
             <CustomButtonWithLoading className="button-container" type="submit" loading={isSubmitting} clickHandler={handleSubmit}>
                 Create
             </CustomButtonWithLoading>
@@ -89,39 +88,45 @@ const RenderInputs = ({
 const CreateChannelModal = React.memo(({ modalVisibility, toggleModalVisibility, createChannel }) => {
     let [name, setName] = React.useState('');
     let [description, setDescription] = React.useState('');
-    let [admins, setAdmins] = React.useState([]);
     let [image, setImage] = React.useState(null);
+    let [imageFile, setImageFile] = React.useState(null);
 
     let [nameValidate, setNameValidate] = React.useState(true);
 
     let [isSubmitting, toggleIsSubmitting] = useToggle(false);
 
     const changeName = ({ target }) => {
-        setName(target.value.trim());
+        setName(target.value);
     };
 
     const changeDescription = ({ target }) => {
-        setDescription(target.value.trim());
-    };
-
-    const changeAdmins = value => {
-        setAdmins(value);
+        setDescription(target.value);
     };
 
     const submitForm = event => {
         event.preventDefault();
-        createChannel({ name, rules: description })
+        createChannel({ name: name.trim(), rules: description.trim() })
             .then(response => toggleModalVisibility())
             .finally(() => toggleIsSubmitting());
     };
 
     const submitButtonHandler = event => {
-        setNameValidate(name.length);
+        setNameValidate(name.trim().length);
 
         if (name.length) {
             toggleIsSubmitting();
         } else {
             event.preventDefault();
+        }
+    };
+
+    const changeImage = imageInput => {
+        if (imageInput) {
+            console.log(imageInput);
+            setImageFile(imageInput.target.file[0]);
+            imageToBase64(imageInput.target.file[0]).then(image => setImage(image));
+        } else {
+            setImage(null);
         }
     };
 
@@ -132,7 +137,7 @@ const CreateChannelModal = React.memo(({ modalVisibility, toggleModalVisibility,
                     <RenderInputs
                         name={{ name: name, error: !nameValidate, change: changeName }}
                         description={{ description: description, change: changeDescription }}
-                        admins={{ admins, change: changeAdmins }}
+                        image={{ image, change: changeImage }}
                         isSubmitting={isSubmitting}
                         handleSubmit={submitButtonHandler}
                         submitForm={submitForm}

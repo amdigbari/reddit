@@ -29,8 +29,12 @@ const PostsScreen = React.memo(({ showFloatButton = true, channelsLink = true, a
                 />
             ))}
 
-            {showFloatButton && <FloatAddButton onClick={toggleModalVisibility} />}
-            <CreatePostModal modalVisibility={modalVisibility} toggleModalVisibility={toggleModalVisibility} />
+            {showFloatButton && (
+                <>
+                    <FloatAddButton onClick={toggleModalVisibility} />
+                    <CreatePostModal modalVisibility={modalVisibility} toggleModalVisibility={toggleModalVisibility} />
+                </>
+            )}
         </>
     );
 });

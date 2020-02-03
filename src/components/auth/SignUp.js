@@ -75,15 +75,15 @@ const SignUp = React.memo(({ goBack, registerUser }) => {
     let [editProfileModalVisibility, toggleEditProfileModalVisibility] = useToggle(false);
 
     const changeUsername = ({ target }) => {
-        setUsername(target.value.trim());
+        setUsername(target.value);
     };
 
     const changePassword = ({ target }) => {
-        setPassword(target.value.trim());
+        setPassword(target.value);
     };
 
     const changeConfirmPassword = ({ target }) => {
-        setConfirmPassword(target.value.trim());
+        setConfirmPassword(target.value);
     };
 
     const Description = () => {
@@ -92,17 +92,17 @@ const SignUp = React.memo(({ goBack, registerUser }) => {
 
     const submitForm = event => {
         event.preventDefault();
-        registerUser({ username, password })
+        registerUser({ username:username.trim(), password: password.trim() })
             .then(() => toggleEditProfileModalVisibility())
             .finally(() => toggleIsSubmitting());
     };
 
     const submitButtonHandler = event => {
-        setUsernameValidate(username.length);
-        setPasswordValidate(password.length);
-        setConfirmPasswordValidate(confirmPassword === password);
+        setUsernameValidate(username.trim().length);
+        setPasswordValidate(password.trim().length);
+        setConfirmPasswordValidate(confirmPassword.trim() === password.trim());
 
-        if (username.length && password.length && password === confirmPassword) {
+        if (username.length && password.length && password.trim() === confirmPassword.trim()) {
             toggleIsSubmitting();
         } else {
             event.preventDefault();

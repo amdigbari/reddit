@@ -18,26 +18,33 @@ const ChangePasswordModal = React.memo(({ modalVisibility, toggleModalVisibility
     let [isSubmitting, toggleIsSubmitting] = useToggle(false);
 
     const changeCurrentPassword = ({ target }) => {
-        setCurrentPassword(target.value.trim());
+        setCurrentPassword(target.value);
     };
     const changePassword = ({ target }) => {
-        setPassword(target.value.trim());
+        setPassword(target.value);
     };
     const changeConfirmPassword = ({ target }) => {
-        setConfirmPassword(target.value.trim());
+        setConfirmPassword(target.value);
     };
 
     const submitForm = event => {
         event.preventDefault();
+
+        //TODO: .trim()
         console.log('Submit');
     };
 
     const submitButtonHandler = event => {
-        setCurrentPasswordValidate(currentPassword.length);
-        setPasswordValidate(password.length && password !== currentPassword);
-        setConfirmPasswordValidate(confirmPassword === password);
+        setCurrentPasswordValidate(currentPassword.trim().length);
+        setPasswordValidate(password.trim().length && password.trim() !== currentPassword.trim());
+        setConfirmPasswordValidate(confirmPassword.trim() === password.trim());
 
-        if (currentPassword.length && password.length && password !== currentPassword && confirmPassword === password) {
+        if (
+            currentPassword.trim().length &&
+            password.trim().length &&
+            password.trim() !== currentPassword.trim() &&
+            confirmPassword.trim() === password.trim()
+        ) {
             toggleIsSubmitting();
         } else {
             event.preventDefault();

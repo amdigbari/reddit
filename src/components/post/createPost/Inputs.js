@@ -54,20 +54,32 @@ const RenderInputs = ({
         );
     };
 
+    const renderOption = channel => {
+        return (
+            <div style={{ width: '100%', display: 'flex', alignItems: 'center' }} key={channel.id}>
+                <Avatar size={25} src={channel.avatar} />
+                <p style={{ marginLeft: 15 }}>{channel.name}</p>
+            </div>
+        );
+    };
+
     return (
         <form method="POST" action="/" onSubmit={submitForm}>
-            <div className={styles['channel-container']}>
-                <Autocomplete
-                    options={possibleChannels}
-                    getOptionLabel={channel => channel.name}
-                    autoComplete
-                    disableClearable
-                    defaultValue={channel}
-                    renderInput={params => <TextField {...params} name="channel" label="channel" margin="normal" fullWidth />}
-                    onChange={handleChange}
-                />
-                <Avatar src={channel.logo} size={25} className={styles['channel-logo']} />
-            </div>
+            {channel && channel.id && (
+                <div className={styles['channel-container']}>
+                    <Autocomplete
+                        options={possibleChannels}
+                        getOptionLabel={channel => channel.name}
+                        renderOption={renderOption}
+                        autoComplete
+                        disableClearable
+                        defaultValue={channel}
+                        renderInput={params => <TextField {...params} name="channel" label="channel" margin="normal" fullWidth />}
+                        onChange={handleChange}
+                    />
+                    <Avatar src={channel.avatar} size={25} className={styles['channel-logo']} />
+                </div>
+            )}
 
             <TextField
                 name="caption"
