@@ -122,9 +122,8 @@ const CreateChannelModal = React.memo(({ modalVisibility, toggleModalVisibility,
 
     const changeImage = imageInput => {
         if (imageInput) {
-            console.log(imageInput);
-            setImageFile(imageInput.target.file[0]);
-            imageToBase64(imageInput.target.file[0]).then(image => setImage(image));
+            setImageFile(imageInput.target.files[0]);
+            imageToBase64(imageInput.target.files[0]).then(image => setImage(image));
         } else {
             setImage(null);
         }
