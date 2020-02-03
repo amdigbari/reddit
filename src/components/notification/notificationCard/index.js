@@ -11,7 +11,7 @@ const NotificationCard = ({ notification: { user, post, like }, showBorder, clas
             <>
                 {like ? 'has liked your' : 'has commented on your'}{' '}
                 {
-                    <Link className={[styles['post-link'], 'danger'].join(' ')} to={postPath(post.pk)}>
+                    <Link className={[styles['post-link'], 'danger'].join(' ')} to={postPath(post.id)}>
                         post
                     </Link>
                 }
@@ -26,7 +26,7 @@ const NotificationCard = ({ notification: { user, post, like }, showBorder, clas
 
             <div className={styles['notification-text-container']}>
                 <p>
-                    <Link className={styles['post-link']} to={userPath(user.pk)}>
+                    <Link className={styles['post-link']} to={userPath(user.id)}>
                         {user.name}
                     </Link>{' '}
                     {post ? <RenderPostNotificationText /> : 'has followed you'}

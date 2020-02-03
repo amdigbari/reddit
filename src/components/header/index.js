@@ -33,7 +33,7 @@ const Header = React.memo(({ toggleMenuVisibility: openBurgerMenu, user }) => {
 
             <>
                 <div className={styles['avatar-container']} desc={SHOW_ON_DESKTOP}>
-                    <Avatar src={testProfile} url={userPath(user.pk)} size={55} />
+                    <Avatar src={testProfile} url={userPath(user.id)} size={55} />
                 </div>
             </>
         </header>

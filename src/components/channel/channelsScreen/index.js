@@ -22,7 +22,7 @@ const ChannelsScreen = React.memo(({ getChannels }) => {
             {channels.map((channel, index, array) => (
                 <ChannelCard
                     channel={channel}
-                    key={channel.pk}
+                    key={channel.id}
                     {...(index === 0 ? { style: { paddingTop: 30 } } : {})}
                     {...(index < array.length - 1 ? { showBorder: true } : {})}
                 />

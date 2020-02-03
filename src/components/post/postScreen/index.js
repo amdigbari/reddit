@@ -7,7 +7,7 @@ import { getPostById } from '../../../actions/PostActions';
 
 const PostScreen = React.memo(({ match, getPost }) => {
     //use post pk to get full post from server
-    const postPk = React.useMemo(() => match.params.pk, [match]);
+    const postPk = React.useMemo(() => match.params.id, [match]);
 
     let [post, setPost] = React.useState({});
 
@@ -18,7 +18,7 @@ const PostScreen = React.memo(({ match, getPost }) => {
     }, [postPk, getPost]);
 
     return (
-        post.pk && (
+        post.id && (
             <>
                 <PostCard post={post} fullCaption style={{ marginTop: 30 }} />
                 <CommentsList comments={post.comments || []} allCommentsCount={21} />

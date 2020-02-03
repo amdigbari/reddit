@@ -15,7 +15,7 @@ const PostAuthor = ({ author, link = true }) => {
     );
 
     return link ? (
-        <Link to={userPath(author.pk)}>
+        <Link to={userPath(author.id)}>
             <RenderAuthor />
         </Link>
     ) : (

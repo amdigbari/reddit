@@ -8,7 +8,9 @@ const NotificationScreen = React.memo(({ getNotifications }) => {
     const [notifications, setNotifications] = React.useState([]);
 
     React.useEffect(() => {
-        setNotifications(getNotifications());
+        getNotifications()
+            .then(response => setNotifications(response))
+            .catch(console.log);
     }, [getNotifications]);
 
     return (
@@ -18,7 +20,7 @@ const NotificationScreen = React.memo(({ getNotifications }) => {
                     showBorder={index < array.length - 1}
                     notification={notification}
                     {...(index ? {} : { style: { paddingTop: 30 } })}
-                    key={notification.pk}
+                    key={notification.id}
                 />
             ))}
         </>

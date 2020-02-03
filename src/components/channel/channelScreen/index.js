@@ -49,7 +49,7 @@ const ChannelScreen = React.memo(({ match, getChannel }) => {
     };
 
     return (
-        channel.pk && (
+        channel.id && (
             <div className={styles.container}>
                 <ChannelCard channel={channel} showBorder link={false} style={{ paddingTop: 30 }} />
                 <ChannelDescription />

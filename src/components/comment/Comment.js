@@ -16,7 +16,7 @@ const Comment = ({ comment, isReply = false }) => {
         <>
             <div className={[styles['comment-container'], isReply ? styles.reply : ''].join(' ')}>
                 <div className={styles['comment-header']}>
-                    <Link to={userPath(comment.author.pk)}>
+                    <Link to={userPath(comment.author.id)}>
                         <div className={styles['comment-author']}>
                             <Avatar src={comment.author.avatar} />
                             <p style={{ marginLeft: 10 }}>{comment.author.name}</p>
@@ -32,7 +32,7 @@ const Comment = ({ comment, isReply = false }) => {
 
                 <FaRegComment className={styles['reply-comment']} onClick={toggleReplyPostModalVisibility} />
 
-                {comment.replies && comment.replies.map(comment => <Comment comment={comment} isReply key={comment.pk} />)}
+                {comment.replies && comment.replies.map(comment => <Comment comment={comment} isReply key={comment.id} />)}
             </div>
 
             <CommentModal modalVisibility={replyPostModalVisibility} toggleVisibility={toggleReplyPostModalVisibility} />

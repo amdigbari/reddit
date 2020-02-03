@@ -1,6 +1,4 @@
-import { BASE_API } from 'api';
-
-export const ACCOUNTS_API = `${BASE_API}accounts/`;
+import { BASE_API, ACCOUNTS_API } from 'api';
 
 export const REGISTER_API = `${ACCOUNTS_API}register/`;
 

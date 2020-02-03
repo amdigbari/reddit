@@ -11,7 +11,7 @@ import { userPath, userPostsPath, userChannelsPath, notificationPath } from '../
 const SidebarContent = React.memo(({ unRegisterUser: logOut, user }) => {
     const ProfileSection = () => {
         return (
-            <Link to={userPath(user.pk)}>
+            <Link to={userPath(user.id)}>
                 <div className={[styles['profile-container'], styles['bottom-border']].join(' ')}>
                     <Avatar src={testProfile} size={125} />
                     <p className={styles['profile-name']}>Dier Cohen</p>

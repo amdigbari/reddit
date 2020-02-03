@@ -10,7 +10,7 @@ import { channelPath } from '../../../utils/pathUtils';
 
 const ChannelCard = ({ channel, showBorder = false, link = true, ...restProps }) => {
     let [loading, toggleLoading] = useToggle(false);
-    let [isFollow, toggleIsFollow] = useToggle(false);
+    let [isFollow, toggleIsFollow] = useToggle(channel.follow);
 
     const Description = () => {
         return (
@@ -43,7 +43,7 @@ const ChannelCard = ({ channel, showBorder = false, link = true, ...restProps })
     return (
         <div className={`card ${showBorder ? ' border-bottom' : ''}`} {...restProps}>
             {link ? (
-                <Link to={channelPath(channel.pk)} className={`link`}>
+                <Link to={channelPath(channel.id)} className={`link`}>
                     <Avatar src={channel.logo} />
                     <Description />
                 </Link>

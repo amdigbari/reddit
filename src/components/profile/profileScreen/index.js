@@ -59,7 +59,7 @@ const ProfileScreen = React.memo(({ match, getUserProfile }) => {
     };
 
     return (
-        user.pk && (
+        user.id && (
             <>
                 <ProfileCard user={user} showBorder className="profile-card" showEdit />
                 <Bio />

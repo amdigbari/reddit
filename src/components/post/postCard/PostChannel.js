@@ -14,7 +14,7 @@ const PostChannel = ({ channel, link = true }) => {
     );
 
     return link ? (
-        <Link to={channelPath(channel.pk)}>
+        <Link to={channelPath(channel.id)}>
             <RenderChannel />
         </Link>
     ) : (

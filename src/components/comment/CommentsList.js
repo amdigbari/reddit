@@ -8,7 +8,7 @@ const CommentsList = React.memo(({ comments, allCommentsCount, className = '', .
         return (
             <>
                 {comments.map(comment => (
-                    <Comment comment={comment} key={comment.pk} />
+                    <Comment comment={comment} key={comment.id} />
                 ))}
             </>
         );

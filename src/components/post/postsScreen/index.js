@@ -23,7 +23,7 @@ const PostsScreen = React.memo(({ showFloatButton = true, channelsLink = true, a
                     channelLink={channelsLink}
                     authorLink={authorsLink}
                     post={post}
-                    key={post.pk}
+                    key={post.id}
                     {...(index === 0 ? { style: { paddingTop: 30 } } : {})}
                     {...(index < array.length - 1 ? { showBorder: true } : {})}
                 />

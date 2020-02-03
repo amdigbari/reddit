@@ -5,6 +5,7 @@ import ProfileCard from '../profileCard';
 import styles from './styles.module.scss';
 import Avatar from '../../common/Avatar';
 import { getFollowList, getUserProfileById } from '../../../actions/ProfileActions';
+import ChannelCard from 'components/channel/channelCard';
 
 const FollowList = React.memo(({ match, getUsersList, getUser }) => {
     const isFollowers = React.useMemo(() => !!match.url.match(/followers/), [match]);
@@ -19,7 +20,7 @@ const FollowList = React.memo(({ match, getUsersList, getUser }) => {
     }, [userPk, getUser]);
 
     React.useEffect(() => {
-        setUsersList(getUsersList(userPk, isFollowers ? 'followers' : 'followings'));
+        getUsersList(userPk, isFollowers ? 'followers' : 'followings').then(setUsersList);
     }, [userPk, getUsersList, isFollowers]);
 
     const RenderTitle = () => {
@@ -35,9 +36,13 @@ const FollowList = React.memo(({ match, getUsersList, getUser }) => {
     const RenderList = React.useCallback(() => {
         return (
             <div className={styles['list-container']}>
-                {usersList.map((user, index, array) => (
-                    <ProfileCard key={user.pk} user={user} showBorder={index < array.length - 1} link />
-                ))}
+                {usersList.map((item, index, array) =>
+                    !item.isChannel ? (
+                        <ProfileCard key={item.id} user={item} showBorder={index < array.length - 1} link />
+                    ) : (
+                        <ChannelCard key={item.id} channel={item} showBorder={index < array.length - 1} link />
+                    ),
+                )}
             </div>
         );
     }, [usersList]);

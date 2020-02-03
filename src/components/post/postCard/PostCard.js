@@ -19,7 +19,7 @@ const PostCard = React.memo(({ post, showBorder = false, fullCaption = false, ch
     //     return (
     //         <>
     //             <span>...</span>
-    //             <Link to={`/posts/${post.pk}`}>
+    //             <Link to={`/posts/${post.id}`}>
     //                 <span className={styles['show-more']}>[show more]</span>
     //             </Link>
     //         </>
@@ -36,7 +36,7 @@ const PostCard = React.memo(({ post, showBorder = false, fullCaption = false, ch
                 </div>
 
                 {post.image && (
-                    <Link to={postPath(post.pk)}>
+                    <Link to={postPath(post.id)}>
                         <PostImage src={post.image} />
                     </Link>
                 )}
