@@ -3,6 +3,16 @@
 .MuiAutocomplete-root {
     width: 80%;
 
+    .MuiAutocomplete-input {
+        padding-left: 0 !important;
+    }
+
+    .MuiInputLabel-root {
+        &:not(.MuiInputLabel-shrink) {
+            padding-left: 0 !important;
+        }
+    }
+
     .Mui-focused {
         &::after {
             border-bottom: 2px solid $theme-primary;

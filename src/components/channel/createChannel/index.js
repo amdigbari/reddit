@@ -1,6 +1,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { Autocomplete } from '@material-ui/lab/';
+import { connect } from 'react-redux';
 
 import styles from './styles.module.scss';
 import './material_style.scss';
@@ -10,6 +11,7 @@ import { CustomButtonWithLoading } from '../../common/CommonComponents';
 import { useToggle } from '../../common/customHooks';
 import { sampleUser } from '../../../utils/hardcodedData';
 import Avatar from '../../common/Avatar';
+import { createChannel } from 'actions/ChannelActions';
 
 const RenderInputs = ({
     name: { name, error: nameError, change: changeName },
@@ -84,10 +86,11 @@ const RenderInputs = ({
     );
 };
 
-const CreateChannelModal = React.memo(({ modalVisibility, toggleModalVisibility }) => {
+const CreateChannelModal = React.memo(({ modalVisibility, toggleModalVisibility, createChannel }) => {
     let [name, setName] = React.useState('');
     let [description, setDescription] = React.useState('');
     let [admins, setAdmins] = React.useState([]);
+    let [image, setImage] = React.useState(null);
 
     let [nameValidate, setNameValidate] = React.useState(true);
 
@@ -107,7 +110,9 @@ const CreateChannelModal = React.memo(({ modalVisibility, toggleModalVisibility 
 
     const submitForm = event => {
         event.preventDefault();
-        console.log('Submit');
+        createChannel({ name, rules: description })
+            .then(response => toggleModalVisibility())
+            .finally(() => toggleIsSubmitting());
     };
 
     const submitButtonHandler = event => {
@@ -137,4 +142,8 @@ const CreateChannelModal = React.memo(({ modalVisibility, toggleModalVisibility 
         </Modal>
     );
 });
-export default CreateChannelModal;
+
+const mapDispatchToProps = {
+    createChannel,
+};
+export default connect(undefined, mapDispatchToProps)(CreateChannelModal);

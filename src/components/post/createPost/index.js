@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import styles from './styles.module.scss';
 import './material_style.scss';
@@ -7,6 +8,7 @@ import CustomScreenWithBackButton from '../../common/screenWithBackButton/Custom
 import { useToggle } from '../../common/customHooks';
 import { sampleChannel } from '../../../utils/hardcodedData';
 import RenderInputs from './Inputs';
+import { createPost } from 'actions/PostActions';
 
 const potentialChannels = [
     sampleChannel,
@@ -18,7 +20,7 @@ const potentialChannels = [
     { ...sampleChannel, pk: 7, name: 'amdigbari6' },
 ];
 
-const CreatePostModal = React.memo(({ modalVisibility, toggleModalVisibility }) => {
+const CreatePostModal = React.memo(({ modalVisibility, toggleModalVisibility, createPost }) => {
     let [channel, setChannel] = React.useState(potentialChannels[0]);
     let [caption, setCaption] = React.useState('');
     let [image, setImage] = React.useState(null);
@@ -51,7 +53,10 @@ const CreatePostModal = React.memo(({ modalVisibility, toggleModalVisibility }) 
 
     const submitForm = event => {
         event.preventDefault();
-        console.log('Submit');
+        createPost({ caption, channel_id: 1 })
+            .then(() => toggleModalVisibility())
+            .catch(console.log)
+            .finally(() => toggleIsSubmitting());
     };
 
     const submitButtonHandler = event => {
@@ -82,4 +87,8 @@ const CreatePostModal = React.memo(({ modalVisibility, toggleModalVisibility }) 
         </Modal>
     );
 });
-export default CreatePostModal;
+
+const mapDispatchToProps = {
+    createPost,
+};
+export default connect(undefined, mapDispatchToProps)(CreatePostModal);

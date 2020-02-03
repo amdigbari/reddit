@@ -11,6 +11,7 @@ import { EMAIL_VALIDATOR, PHONE_VALIDATOR } from '../../../utils/staticUtils';
 import ChangePasswordModal from './changePassword';
 import { unRegisterUser } from '../../../actions/AuthActions';
 import { updateProfile } from 'actions/ProfileActions';
+import { imageToBase64 } from 'utils/functionalUtils';
 
 const EditProfileModal = React.memo(
     ({ modalVisibility, toggleModalVisibility, user = {}, unregisterUser: logOut, setup = false, updateProfile }) => {
@@ -21,6 +22,7 @@ const EditProfileModal = React.memo(
 
         // Not Required
         let [image, setImage] = React.useState(user.avatar);
+        let [imageFile, setImageFile] = React.useState(null);
         let [phone, setPhone] = React.useState(user.phone || '');
         let [city, setCity] = React.useState(user.city || '');
 
@@ -51,13 +53,8 @@ const EditProfileModal = React.memo(
 
         const changeImage = imageInput => {
             if (imageInput) {
-                var file = imageInput.target.files[0];
-                var reader = new FileReader();
-                reader.readAsDataURL(file);
-
-                reader.onloadend = function(e) {
-                    setImage(reader.result);
-                };
+                setImageFile(imageInput.target.file[0]);
+                imageToBase64(imageInput.target.file[0]).then(image => setImage(image));
             } else {
                 setImage(null);
             }
@@ -65,7 +62,9 @@ const EditProfileModal = React.memo(
 
         const submitForm = event => {
             event.preventDefault();
-            updateProfile({ first_name: firstName, last_name: lastName, phone, city, email }).finally(() => toggleIsSubmitting());
+            updateProfile({ first_name: firstName, last_name: lastName, phone, city, email, picture: imageFile }).finally(() =>
+                toggleIsSubmitting(),
+            );
         };
 
         const submitButtonHandler = event => {

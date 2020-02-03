@@ -23,12 +23,12 @@ const SidebarContent = React.memo(({ unRegisterUser: logOut, user }) => {
     const LinksSection = () => {
         return (
             <>
-                <Link to={userPostsPath(user.pk)}>
+                <Link to={userPostsPath(user.id)}>
                     <div className={[styles['link-container'], styles['bottom-border']].join(' ')}>
                         <p>Posts</p>
                     </div>
                 </Link>
-                <Link to={userChannelsPath(user.pk)}>
+                <Link to={userChannelsPath(user.id)}>
                     <div className={[styles['link-container'], styles['bottom-border']].join(' ')}>
                         <p>Channels</p>
                     </div>

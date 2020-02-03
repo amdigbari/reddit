@@ -23,5 +23,16 @@ export const customFetch = (url, options) => {
     return fetch(url, {
         headers,
         ...(options || {}),
+    }).then(res => res.json());
+};
+
+export const imageToBase64 = async image => {
+    return new Promise((resolve, reject) => {
+        var reader = new FileReader();
+        reader.readAsDataURL(image);
+
+        reader.onloadend = function(e) {
+            resolve(reader.result);
+        };
     });
 };

@@ -24,10 +24,8 @@ export const updateProfile = request => dispatch => {
     return customFetch(UPDATE_PROFILE_API, {
         method: 'PUT',
         body: JSON.stringify(request),
-    })
-        .then(res => res.json())
-        .then(response => {
-            dispatch(registerUserSuccess(response));
-            return response;
-        });
+    }).then(response => {
+        dispatch(registerUserSuccess(response));
+        return response;
+    });
 };

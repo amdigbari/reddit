@@ -27,6 +27,9 @@
     transition: transform 0.2s linear;
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &.link:hover {
         transform: scale(1.1);
