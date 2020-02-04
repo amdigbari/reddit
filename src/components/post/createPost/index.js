@@ -21,7 +21,6 @@ const CreatePostModal = React.memo(({ modalVisibility, toggleModalVisibility, cr
 
     React.useEffect(() => {
         getAvailableChannels().then(response => {
-            console.log(response);
             setAvailableChannels(response);
             setChannel(response[0]);
         });

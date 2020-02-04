@@ -10,7 +10,7 @@ const PostAuthor = ({ author, link = true }) => {
         <div className={styles['author-container']}>
             <Avatar src={author.avatar} />
 
-            <p className={styles.name}>{author.name}</p>
+            <p className={styles.name}>{author.username}</p>
         </div>
     );
 

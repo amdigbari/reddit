@@ -1,10 +1,9 @@
 import { samplePost } from '../utils/hardcodedData';
 import { customFetch } from 'utils/functionalUtils';
-import { CREATE_POST_API, getPostApi, GET_AVAILABLE_CHANNELS_API } from 'api/postApi';
+import { CREATE_POST_API, getPostApi, GET_AVAILABLE_CHANNELS_API, getScorePostApi } from 'api/postApi';
 
 export const getPostById = pk => dispatch => {
-    return Promise.resolve(samplePost);
-    // return customFetch(getPostApi);
+    return customFetch(getPostApi(pk));
 };
 
 export const getUserPosts = pk => dispatch => {
@@ -22,4 +21,8 @@ export const createPost = post => dispatch => {
 
 export const getAvailableChannels = () => dispatch => {
     return customFetch(GET_AVAILABLE_CHANNELS_API).then(response => response.channels);
+};
+
+export const scorePost = (postId, score) => dispatch => {
+    return customFetch(getScorePostApi(postId, score), { method: 'PUT' });
 };

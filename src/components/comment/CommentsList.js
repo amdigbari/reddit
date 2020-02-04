@@ -16,7 +16,7 @@ const CommentsList = React.memo(({ comments, allCommentsCount, className = '', .
 
     return (
         <div className={[styles['comment-list-container'], className].join(' ')} {...restProps}>
-            <p>{allCommentsCount} comments</p>
+            {allCommentsCount ? <p>{allCommentsCount} comments</p> : null}
 
             <div className={styles['comment-list-wrapper']}>
                 <RenderComments />

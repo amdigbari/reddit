@@ -13,7 +13,9 @@ const PostScreen = React.memo(({ match, getPost }) => {
 
     React.useEffect(() => {
         if (postPk) {
-            getPost(postPk).then(setPost);
+            getPost(postPk).then(response => {
+                setPost(response[0]);
+            });
         }
     }, [postPk, getPost]);
 
@@ -21,7 +23,7 @@ const PostScreen = React.memo(({ match, getPost }) => {
         post.id && (
             <>
                 <PostCard post={post} fullCaption style={{ marginTop: 30 }} />
-                <CommentsList comments={post.comments || []} allCommentsCount={21} />
+                <CommentsList comments={post.comments || []} allCommentsCount={post.comments.length} />
             </>
         )
     );

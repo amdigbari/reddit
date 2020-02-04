@@ -32,17 +32,15 @@ const PostCard = React.memo(({ post, showBorder = false, fullCaption = false, ch
                 <div className={styles.header}>
                     <PostChannel channel={post.channel} link={channelLink} />
 
-                    <p>{post.date}</p>
+                    <p>{post.create_date}</p>
                 </div>
 
-                {post.image && (
-                    <Link to={postPath(post.id)}>
-                        <PostImage src={post.image} />
-                    </Link>
-                )}
+                <Link to={postPath(post.id)}>
+                    <PostImage src={post.image} />
+                </Link>
 
                 <CustomLinkify>
-                    <p className={styles['caption-container']}>{post.caption}</p>
+                    <p className={styles['caption-container']}>{post.text}</p>
                 </CustomLinkify>
 
                 <div className={styles.footer}>
@@ -53,13 +51,13 @@ const PostCard = React.memo(({ post, showBorder = false, fullCaption = false, ch
                         <FaRegComment className={styles['reply-comment']} onClick={toggleReplyPostModalVisibility} />
                     </div>
 
-                    <PostScore
+                    {/* <PostScore
                         score={post.score}
                         userScore={post.userScore}
                         setScore={() => {
                             //TODO:
                         }}
-                    />
+                    /> */}
                 </div>
             </div>
 
