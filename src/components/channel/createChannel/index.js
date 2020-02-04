@@ -85,7 +85,7 @@ const RenderInputs = ({
     );
 };
 
-const CreateChannelModal = React.memo(({ modalVisibility, toggleModalVisibility, createChannel }) => {
+const CreateChannelModal = React.memo(({ modalVisibility, toggleModalVisibility, createChannel, callback }) => {
     let [name, setName] = React.useState('');
     let [description, setDescription] = React.useState('');
     let [image, setImage] = React.useState(null);
@@ -105,8 +105,13 @@ const CreateChannelModal = React.memo(({ modalVisibility, toggleModalVisibility,
 
     const submitForm = event => {
         event.preventDefault();
-        createChannel({ name: name.trim(), rules: description.trim() })
-            .then(response => toggleModalVisibility())
+        const channel = { name: name.trim(), rules: description.trim() };
+
+        createChannel(channel)
+            .then(response => {
+                toggleModalVisibility();
+                callback({ ...channel, response });
+            })
             .finally(() => toggleIsSubmitting());
     };
 

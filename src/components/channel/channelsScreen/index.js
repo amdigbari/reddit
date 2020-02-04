@@ -17,6 +17,10 @@ const ChannelsScreen = React.memo(({ getChannels }) => {
         setChannels(getChannels());
     }, [getChannels]);
 
+    const addCallback = channel => {
+        setChannels([...channels, channel]);
+    };
+
     return (
         <>
             {channels.map((channel, index, array) => (
@@ -29,7 +33,7 @@ const ChannelsScreen = React.memo(({ getChannels }) => {
             ))}
 
             <FloatAddButton onClick={toggleModalVisibility} />
-            <CreateChannelModal modalVisibility={modalVisibility} toggleModalVisibility={toggleModalVisibility} />
+            <CreateChannelModal modalVisibility={modalVisibility} toggleModalVisibility={toggleModalVisibility} callback={addCallback} />
         </>
     );
 });
