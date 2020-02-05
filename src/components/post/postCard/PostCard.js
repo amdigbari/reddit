@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaRegComment } from 'react-icons/fa';
 import { connect } from 'react-redux';
+import { MdDelete } from 'react-icons/md';
 
 import styles from './styles.module.scss';
 import PostChannel from './PostChannel';
@@ -21,8 +22,9 @@ const PostCard = React.memo(
         fullCaption = false,
         channelLink = true,
         authorLink = true,
-        setErrorMessage,
+        setMessage,
         scorePost,
+        showDelete,
         ...restProps
     }) => {
         let [replyPostModalVisibility, toggleReplyPostModalVisibility] = useToggle(false);
@@ -45,6 +47,16 @@ const PostCard = React.memo(
                 <div className={[styles['card-container'], showBorder ? 'border-bottom' : ''].join(' ')} {...restProps}>
                     <div className={styles.header}>
                         <PostChannel channel={post.channel} link={channelLink} />
+
+                        {showDelete && (
+                            <MdDelete
+                                className="pointer"
+                                size={23}
+                                onClick={() => {
+                                    /* TODO:  delete post */
+                                }}
+                            />
+                        )}
 
                         <p>{post.create_date}</p>
                     </div>
@@ -73,7 +85,7 @@ const PostCard = React.memo(
                     modalVisibility={replyPostModalVisibility}
                     toggleVisibility={toggleReplyPostModalVisibility}
                     post={post}
-                    setErrorMessage={setErrorMessage}
+                    setMessage={setMessage}
                 />
             </>
         );

@@ -1,7 +1,7 @@
 import image from '../assets/images/default_profile.png';
 
 export const navigationTabs = [
-    { id: 1, title: 'Following' },
+    { id: 1, title: 'Dashboard' },
     { id: 2, title: 'Hots' },
     { id: 3, title: 'News' },
     { id: 4, title: 'Activities' },

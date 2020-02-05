@@ -30,6 +30,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid $brown-gray;
 
     &.link:hover {
         transform: scale(1.1);

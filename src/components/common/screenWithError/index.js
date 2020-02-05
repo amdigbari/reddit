@@ -44,7 +44,7 @@ const ScreenWithError = Component => {
                         lower404={lower404}
                         lower500={lower500}
                         {...props}
-                        setErrorMessage={setSnack}
+                        setMessage={setSnack}
                     />
                 )}
 

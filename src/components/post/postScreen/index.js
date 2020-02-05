@@ -6,7 +6,7 @@ import CommentsList from '../../comment/CommentsList';
 import { getPostById } from '../../../actions/PostActions';
 import ScreenWithError from 'components/common/screenWithError';
 
-const PostScreen = React.memo(({ match, getPost, setErrorMessage }) => {
+const PostScreen = React.memo(({ match, getPost, setMessage }) => {
     //use post pk to get full post from server
     const postPk = React.useMemo(() => match.params.pk, [match]);
 
@@ -23,8 +23,8 @@ const PostScreen = React.memo(({ match, getPost, setErrorMessage }) => {
     return (
         post.id && (
             <>
-                <PostCard post={post} fullCaption style={{ marginTop: 30 }} setErrorMessage={setErrorMessage} />
-                <CommentsList comments={post.comments || []} allCommentsCount={post.comments.length} setErrorMessage={setErrorMessage} />
+                <PostCard post={post} fullCaption style={{ marginTop: 30 }} setMessage={setMessage} showDelete={post.can_delete || true} />
+                <CommentsList comments={post.comments || []} allCommentsCount={post.comments.length} setMessage={setMessage} />
             </>
         )
     );

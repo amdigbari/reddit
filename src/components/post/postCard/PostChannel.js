@@ -7,9 +7,11 @@ import { channelPath } from '../../../utils/pathUtils';
 
 const PostChannel = ({ channel, link = true }) => {
     const RenderChannel = () => (
-        <div className={styles['channel-name']}>
-            <Avatar src={channel.avatar} />
-            <p className={styles.name}>{channel.name}</p>
+        <div className={styles['channel-name-container']}>
+            <div className={styles['channel-name']}>
+                <Avatar src={channel.avatar} />
+                <p className={styles.name}>{channel.name}</p>
+            </div>
         </div>
     );
 

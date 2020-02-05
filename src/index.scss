@@ -27,6 +27,10 @@ a {
     }
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 .small-mobile {
     @media screen and (max-width: 991px) {
         font-size: 80%;

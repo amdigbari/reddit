@@ -40,7 +40,7 @@ const RenderForm = ({ text, submitForm, setText, buttonLoadingVisibility, button
     );
 };
 
-const CommentModal = ({ modalVisibility, toggleVisibility: toggleModalVisibility, comment, post, addComment, setErrorMessage }) => {
+const CommentModal = ({ modalVisibility, toggleVisibility: toggleModalVisibility, comment, post, addComment, setMessage }) => {
     let [buttonLoadingVisibility, toggleButtonLoadingVisibility] = useToggle(false);
 
     let [text, setText] = React.useState('');
@@ -66,7 +66,7 @@ const CommentModal = ({ modalVisibility, toggleVisibility: toggleModalVisibility
         if (text.trim().length) {
             addComment(!!post, { id: post ? post.id : comment.id, text: text.trim() })
                 .then(console.log)
-                .catch(e => setErrorMessage({ text: "can't connect to server", type: 'error' }))
+                .catch(e => setMessage({ text: "can't connect to server", type: 'error' }))
                 .finally(() => toggleButtonLoadingVisibility());
         }
     };

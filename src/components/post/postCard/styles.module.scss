@@ -11,9 +11,16 @@
         align-items: center;
         justify-content: space-between;
 
-        .channel-name {
+        .channel-name-container {
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            width: 100%;
+
+            .channel-name {
+                display: flex;
+                align-items: center;
+            }
         }
 
         .channel-admins-container {
