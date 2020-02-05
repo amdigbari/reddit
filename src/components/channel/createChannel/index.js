@@ -69,10 +69,10 @@ const RenderInputs = ({
                 helperText="name can't be empty"
             />
             <TextField
-                name="description"
+                name="rules"
                 className="input-container animation-error"
                 type="text"
-                label="description"
+                label="rules"
                 color="secondary"
                 value={description}
                 onChange={changeDescription}
