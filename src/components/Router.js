@@ -12,7 +12,7 @@ const NotFound = lazy(() => import('./notFound'));
 const PostScreen = lazy(() => import('./post/postScreen'));
 const PostsScreen = lazy(() => import('./post/postsScreen'));
 
-const CommentScreen = lazy(() => import('./post/postScreen'));
+const CommentScreen = lazy(() => import('./comment/CommentScreen'));
 
 const ChannelScreen = lazy(() => import('./channel/channelScreen'));
 const ChannelsScreen = lazy(() => import('./channel/channelsScreen'));
@@ -60,7 +60,7 @@ const RootRouter = React.memo(() => {
 
                         <Route path={userPath()} render={renderUserRoute} />
 
-                        <Route path={commentPath()} render={CommentScreen} />
+                        <Route path={commentPath()} component={CommentScreen} />
 
                         <Route exact path={postPath()} component={PostScreen} />
 

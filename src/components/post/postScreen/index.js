@@ -23,7 +23,7 @@ const PostScreen = React.memo(({ match, getPost, setMessage }) => {
     return (
         post.id && (
             <>
-                <PostCard post={post} fullCaption style={{ marginTop: 30 }} setMessage={setMessage} showDelete={post.can_delete || true} />
+                <PostCard post={post} fullCaption style={{ marginTop: 30 }} setMessage={setMessage} showDelete={post.can_edit} />
                 <CommentsList comments={post.comments || []} allCommentsCount={post.comments.length} setMessage={setMessage} />
             </>
         )

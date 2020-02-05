@@ -14,6 +14,7 @@ import PostImage from './PostImage';
 import { CustomLinkify } from '../../common/CommonComponents';
 import { postPath } from '../../../utils/pathUtils';
 import { scorePost } from 'actions/PostActions';
+import { SILVER_GRAY } from 'utils/staticUtils';
 
 const PostCard = React.memo(
     ({
@@ -28,8 +29,10 @@ const PostCard = React.memo(
         ...restProps
     }) => {
         let [replyPostModalVisibility, toggleReplyPostModalVisibility] = useToggle(false);
+        let [changeScore, setChangedScore] = React.useState(0);
+        let [userScore, setUserScore] = React.useState(post.like);
 
-        let score = React.useMemo(() => post.no_feedbacks.likes - post.no_feedbacks.dislikes, [post]);
+        let score = React.useMemo(() => post.no_feedbacks.likes - post.no_feedbacks.dislikes + changeScore, [post]);
 
         // const ReadMore = () => {
         //     return (
@@ -50,6 +53,7 @@ const PostCard = React.memo(
 
                         {showDelete && (
                             <MdDelete
+                                color={SILVER_GRAY}
                                 className="pointer"
                                 size={23}
                                 onClick={() => {
@@ -58,7 +62,7 @@ const PostCard = React.memo(
                             />
                         )}
 
-                        <p>{post.create_date}</p>
+                        <p>{post.create_time}</p>
                     </div>
 
                     <Link to={postPath(post.id)}>
@@ -73,11 +77,17 @@ const PostCard = React.memo(
                         <PostAuthor author={post.author} link={authorLink} />
 
                         <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <span style={{ marginRight: 6 }}>21</span>
+                            <span style={{ marginRight: 6 }}>{post.comments.length}</span>
                             <FaRegComment className={styles['reply-comment']} onClick={toggleReplyPostModalVisibility} />
                         </div>
 
-                        <PostScore score={score} userScore={post.like} setScore={like => scorePost(post.id, like)} />
+                        <PostScore
+                            score={score}
+                            userScore={userScore}
+                            setScore={like => scorePost(post.id, like)}
+                            setChangedScore={setChangedScore}
+                            setUserScore={setUserScore}
+                        />
                     </div>
                 </div>
 

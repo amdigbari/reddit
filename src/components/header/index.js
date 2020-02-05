@@ -1,16 +1,22 @@
 import React from 'react';
+import { MdNotifications } from 'react-icons/md';
+import { connect } from 'react-redux';
+import Badge from '@material-ui/core/Badge';
 
 import styles from './styles.module.scss';
 import { RedditLogo } from '../common/CommonComponents';
 import SearchBar from '../common/searchbar/SearchBar';
-import { SHOW_ON_DESKTOP, SHOW_ON_DEVICE } from '../../utils/staticUtils';
+import { SHOW_ON_DESKTOP, SHOW_ON_DEVICE, SILVER_GRAY } from '../../utils/staticUtils';
 import SearchbarIcon from '../common/searchbar/SearchbarIcon';
 import HamburgerIcon from '../hamburgerMenu/HamburgerIcon';
 import Avatar from '../common/Avatar';
 import { userPath } from '../../utils/pathUtils';
+import { getNotifications } from 'actions/ProfileActions';
+import './styles.scss';
 
-const Header = React.memo(({ toggleMenuVisibility: openBurgerMenu, user }) => {
+const Header = React.memo(({ toggleMenuVisibility: openBurgerMenu, user, notificationsCount }) => {
     let [searchQuery, setSearchQuery] = React.useState('');
+
     const search = React.useCallback(_searchQuery => {
         setSearchQuery(_searchQuery);
     }, []);
@@ -32,6 +38,16 @@ const Header = React.memo(({ toggleMenuVisibility: openBurgerMenu, user }) => {
 
             <>
                 <div className={styles['avatar-container']} desc={SHOW_ON_DESKTOP}>
+                    <div className={styles['notification-container']}>
+                        {notificationsCount ? (
+                            <Badge badgeContent={notificationsCount} color="secondary">
+                                <MdNotifications color={SILVER_GRAY} size={23} />
+                            </Badge>
+                        ) : (
+                            <MdNotifications color={SILVER_GRAY} size={23} />
+                        )}
+                    </div>
+
                     <Avatar src={user.picture} url={userPath(user.id)} size={55} />
                 </div>
             </>
@@ -39,4 +55,8 @@ const Header = React.memo(({ toggleMenuVisibility: openBurgerMenu, user }) => {
     );
 });
 
-export default Header;
+const mapStateToProps = state => {
+    return { notificationsCount: state.notificationsCount };
+};
+
+export default connect(mapStateToProps)(Header);

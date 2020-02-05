@@ -1,7 +1,7 @@
-import { sampleUser, samplePostNotification, sampleFollowNotification } from '../utils/hardcodedData';
 import { customFetch } from 'utils/functionalUtils';
 import { UPDATE_PROFILE_API, GET_NOTIFICATIONS_API, getFollowListApi, getProfileApi, getFollowProfileApi } from 'api/profileApi';
 import { registerUserSuccess } from './AuthActions';
+import { SET_NOTIFICATIONS_COUNT } from './ActionTypes';
 
 export const getUserProfileById = pk => dispatch => {
     return customFetch(getProfileApi(pk)).then(response => {
@@ -10,15 +10,12 @@ export const getUserProfileById = pk => dispatch => {
     });
 };
 
-export const getNotifications = () => dispatch => {
-    // return customFetch(GET_NOTIFICATIONS_API);
-
-    return [
-        samplePostNotification,
-        { ...samplePostNotification, pk: 2, like: true },
-        sampleFollowNotification,
-        { ...sampleFollowNotification, pk: 11, accept: true },
-    ];
+export const getNotifications = (see = false) => dispatch => {
+    return customFetch(GET_NOTIFICATIONS_API).then(response => {
+        dispatch({ type: SET_NOTIFICATIONS_COUNT, payload: see ? 0 : response.length });
+        customFetch(GET_NOTIFICATIONS_API, { method: 'PUT' });
+        return response;
+    });
 };
 
 export const getFollowList = (pk, type) => dispatch => {
@@ -33,10 +30,14 @@ export const getFollowList = (pk, type) => dispatch => {
 };
 
 export const updateProfile = formData => dispatch => {
-    return customFetch(UPDATE_PROFILE_API, {
-        method: 'PUT',
-        body: formData,
-    }, false).then(response => {
+    return customFetch(
+        UPDATE_PROFILE_API,
+        {
+            method: 'PUT',
+            body: formData,
+        },
+        false,
+    ).then(response => {
         dispatch(registerUserSuccess(response));
         return response;
     });

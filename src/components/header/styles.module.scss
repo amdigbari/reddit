@@ -19,4 +19,27 @@
 .avatar-container {
     cursor: pointer;
     position: relative;
+    display: flex;
+    align-items: center;
+
+    .notification-container {
+        position: relative;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 20px;
+        transition: background-color 0.2s linear;
+
+        &:hover {
+            background-color: $background-color;
+        }
+    }
+}
+
+.badge-container {
+    color: $gray;
 }

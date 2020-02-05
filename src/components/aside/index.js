@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { CustomButton } from '../common/CommonComponents';
 import styles from './styles.module.scss';
-import { userPostsPath, userChannelsPath, userPath, notificationPath } from '../../utils/pathUtils';
+import { userPath, notificationPath } from '../../utils/pathUtils';
 
 const AsideMenubar = React.memo(({ user }) => {
     const RenderButtons = () => {

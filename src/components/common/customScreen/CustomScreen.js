@@ -10,8 +10,9 @@ import SidebarContent from '../../hamburgerMenu';
 import { SHOW_ON_DESKTOP, IS_IOS } from '../../../utils/staticUtils';
 import Auth from '../../auth/Auth';
 import AsideMenubar from '../../aside';
+import { getNotifications } from 'actions/ProfileActions';
 
-const CustomScreen = React.memo(({ children, className = '', loginUser }) => {
+const CustomScreen = React.memo(({ children, className = '', loginUser, getNotifications }) => {
     let [drawerOpen, setDrawerOpen] = React.useState(false);
 
     const toggleDrawerOpen = React.useCallback(() => {
@@ -23,6 +24,7 @@ const CustomScreen = React.memo(({ children, className = '', loginUser }) => {
     React.useEffect(() => {
         history.listen(() => {
             setDrawerOpen(false);
+            getNotifications().catch(console.log);
         });
     }, [history]);
 
@@ -52,4 +54,7 @@ const mapStateTpProps = state => {
     return { loginUser: state.loginUser };
 };
 
-export default connect(mapStateTpProps)(CustomScreen);
+const mapDispatchToProps = {
+    getNotifications,
+};
+export default connect(mapStateTpProps, mapDispatchToProps)(CustomScreen);
