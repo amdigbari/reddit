@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import { Loading } from './common/CommonComponents';
 import CustomScreen from './common/customScreen/CustomScreen';
-import { basePath, userPath, postPath, channelPath, notificationPath } from '../utils/pathUtils';
+import { basePath, userPath, postPath, channelPath, notificationPath, commentPath } from '../utils/pathUtils';
 
 const Homepage = lazy(() => import('./homepage'));
 
@@ -11,6 +11,8 @@ const NotFound = lazy(() => import('./notFound'));
 
 const PostScreen = lazy(() => import('./post/postScreen'));
 const PostsScreen = lazy(() => import('./post/postsScreen'));
+
+const CommentScreen = lazy(() => import('./post/postScreen'));
 
 const ChannelScreen = lazy(() => import('./channel/channelScreen'));
 const ChannelsScreen = lazy(() => import('./channel/channelsScreen'));
@@ -57,6 +59,8 @@ const RootRouter = React.memo(() => {
                         <Route exact path={basePath} component={Homepage} />
 
                         <Route path={userPath()} render={renderUserRoute} />
+
+                        <Route path={commentPath()} render={CommentScreen} />
 
                         <Route exact path={postPath()} component={PostScreen} />
 

@@ -2,34 +2,61 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import styles from './styles.module.scss';
-import Avatar from '../../common/Avatar';
-import { postPath, userPath } from '../../../utils/pathUtils';
+import { postPath, userPath, commentPath } from '../../../utils/pathUtils';
+import { NOTIFICATION_TYPES } from 'utils/staticUtils';
 
-const NotificationCard = ({ notification: { user, post, like }, showBorder, className, ...restProps }) => {
+const NotificationCard = ({ notification: { situation, For, who_name, who_id }, showBorder, className, ...restProps }) => {
     const RenderPostNotificationText = () => {
-        return (
-            <>
-                {like ? 'has liked your' : 'has commented on your'}{' '}
-                {
-                    <Link className={[styles['post-link'], 'danger'].join(' ')} to={postPath(post.id)}>
-                        post
-                    </Link>
-                }
-                !
-            </>
-        );
+        switch (situation) {
+            case NOTIFICATION_TYPES.FOLLOWED:
+                return 'has followed you';
+            case NOTIFICATION_TYPES.LIKE_ON_POST:
+                return (
+                    <>
+                        has liked your
+                        <Link className={[styles['post-link'], 'danger'].join(' ')} to={postPath(For.id)}>
+                            post
+                        </Link>
+                    </>
+                );
+            case NOTIFICATION_TYPES.LIKE_ON_COMMENT:
+                return (
+                    <>
+                        has liked your
+                        <Link className={[styles['post-link'], 'danger'].join(' ')} to={commentPath(For.id)}>
+                            comment
+                        </Link>
+                    </>
+                );
+            case NOTIFICATION_TYPES.COMMENT_ON_COMMENT:
+                return (
+                    <>
+                        has commented your
+                        <Link className={[styles['post-link'], 'danger'].join(' ')} to={commentPath(For.id)}>
+                            comment
+                        </Link>
+                    </>
+                );
+            default:
+                return (
+                    <>
+                        has commented your
+                        <Link className={[styles['post-link'], 'danger'].join(' ')} to={postPath(For.id)}>
+                            post
+                        </Link>
+                    </>
+                );
+        }
     };
 
     return (
         <div className={[styles['card-container'], showBorder ? 'border-bottom' : '', className].join(' ')} {...restProps}>
-            <Avatar src={user.avatar} />
-
             <div className={styles['notification-text-container']}>
                 <p>
-                    <Link className={styles['post-link']} to={userPath(user.id)}>
-                        {user.name}
+                    <Link className={styles['post-link']} to={userPath(who_id)}>
+                        {who_name}
                     </Link>{' '}
-                    {post ? <RenderPostNotificationText /> : 'has followed you'}
+                    <RenderPostNotificationText />
                 </p>
             </div>
         </div>

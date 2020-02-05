@@ -2,6 +2,8 @@ export const basePath = '/';
 
 export const postPath = pk => `${basePath}posts/${pk || ':pk'}/`;
 
+export const commentPath = pk => `${basePath}comments/${pk || ':pk'}/`;
+
 export const channelPath = pk => `${basePath}channels/${pk || ':pk'}/`;
 
 export const notificationPath = `${basePath}notifications/`;
