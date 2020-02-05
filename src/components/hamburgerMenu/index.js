@@ -10,7 +10,7 @@ import { unRegisterUser } from '../../actions/AuthActions';
 import { userPath, notificationPath } from '../../utils/pathUtils';
 import { SILVER_GRAY } from 'utils/staticUtils';
 
-const SidebarContent = React.memo(({ unRegisterUser: logOut, user, notificationsCount }) => {
+const SidebarContent = React.memo(({ unRegisterUser: logOut, user, notificationsCount, showCreateChannel, showCreatePost }) => {
     const ProfileSection = () => {
         return (
             <Link to={userPath(user.id)}>
@@ -25,6 +25,12 @@ const SidebarContent = React.memo(({ unRegisterUser: logOut, user, notifications
     const LinksSection = () => {
         return (
             <>
+                <div className={[styles['link-container'], styles['bottom-border']].join(' ')} onClick={showCreatePost}>
+                    <p>Create Post</p>
+                </div>
+                <div className={[styles['link-container'], styles['bottom-border']].join(' ')} onClick={showCreateChannel}>
+                    <p>Create Channel</p>
+                </div>
                 <Link to={notificationPath}>
                     <div className={[styles['link-container'], styles['bottom-border']].join(' ')}>
                         {notificationsCount ? (

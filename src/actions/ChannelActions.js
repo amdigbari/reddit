@@ -11,10 +11,14 @@ export const getUserChannels = pk => dispatch => {
 };
 
 export const createChannel = channel => dispatch => {
-    return customFetch(CREATE_CHANNEL_API, {
-        method: 'POST',
-        body: JSON.stringify(channel),
-    });
+    return customFetch(
+        CREATE_CHANNEL_API,
+        {
+            method: 'POST',
+            body: channel,
+        },
+        false,
+    );
 };
 
 export const followChannel = (id, action) => dispatch => {

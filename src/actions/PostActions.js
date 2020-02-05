@@ -14,8 +14,6 @@ export const createPost = post => dispatch => {
     return customFetch(CREATE_POST_API, {
         method: 'POST',
         body: JSON.stringify(post),
-    }).then(response => {
-        console.log(response);
     });
 };
 

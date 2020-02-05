@@ -105,12 +105,15 @@ const CreateChannelModal = React.memo(({ modalVisibility, toggleModalVisibility,
 
     const submitForm = event => {
         event.preventDefault();
-        const channel = { name: name.trim(), rules: description.trim() };
+        const formData = new FormData();
+        formData.append('name', name.trim());
+        formData.append('rules', description.trim());
+        formData.append('avatar', imageFile);
 
-        createChannel(channel)
+        createChannel(formData)
             .then(response => {
                 toggleModalVisibility();
-                callback({ ...channel, response });
+                callback({ ...{ name: name.trim(), rules: description.trim() }, response });
             })
             .finally(() => toggleIsSubmitting());
     };

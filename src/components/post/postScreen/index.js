@@ -7,7 +7,6 @@ import { getPostById } from '../../../actions/PostActions';
 import ScreenWithError from 'components/common/screenWithError';
 
 const PostScreen = React.memo(({ match, getPost, setMessage }) => {
-    //use post pk to get full post from server
     const postPk = React.useMemo(() => match.params.pk, [match]);
 
     let [post, setPost] = React.useState({});

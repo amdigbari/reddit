@@ -8,12 +8,14 @@ import CustomScreenWithBackButton from '../../common/screenWithBackButton/Custom
 import { useToggle } from '../../common/customHooks';
 import RenderInputs from './Inputs';
 import { createPost, getAvailableChannels } from 'actions/PostActions';
+import { imageToBase64 } from 'utils/functionalUtils';
 
-const CreatePostModal = React.memo(({ modalVisibility, toggleModalVisibility, createPost, getAvailableChannels }) => {
+const CreatePostModal = React.memo(({ modalVisibility, toggleModalVisibility, createPost, getAvailableChannels, callback }) => {
     let [availableChannels, setAvailableChannels] = React.useState([]);
     let [channel, setChannel] = React.useState(null);
     let [caption, setCaption] = React.useState('');
     let [image, setImage] = React.useState(null);
+    let [imageFile, setImageFile] = React.useState(null);
 
     let [captionValidate, setCaptionValidate] = React.useState(true);
 
@@ -36,13 +38,8 @@ const CreatePostModal = React.memo(({ modalVisibility, toggleModalVisibility, cr
 
     const changeImage = imageInput => {
         if (imageInput) {
-            var file = imageInput.target.files[0];
-            var reader = new FileReader();
-            reader.readAsDataURL(file);
-
-            reader.onloadend = function(e) {
-                setImage(reader.result);
-            };
+            setImageFile(imageInput.target.files[0]);
+            imageToBase64(imageInput.target.files[0]).then(setImage);
         } else {
             setImage(null);
         }
@@ -50,8 +47,16 @@ const CreatePostModal = React.memo(({ modalVisibility, toggleModalVisibility, cr
 
     const submitForm = event => {
         event.preventDefault();
-        createPost({ caption: caption.trim(), channel_id: channel.id })
-            .then(() => toggleModalVisibility())
+        const formData = new FormData();
+        formData.append('caption', caption.trim());
+        formData.append('channel_id', channel.id);
+        // formData.append('image', imageFile);
+
+        createPost(formData)
+            .then(response => {
+                toggleModalVisibility();
+                callback({ ...{ caption: caption.trim(), channel_id: channel.id }, ...response });
+            })
             .finally(() => toggleIsSubmitting());
     };
 

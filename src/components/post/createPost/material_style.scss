@@ -3,7 +3,7 @@
 .MuiAutocomplete-root {
     width: 100%;
 
-    .MuiAutocomplete-input {
+    .MuiAutocomplete-input[name='channel'] {
         padding-left: 40px !important;
     }
 
