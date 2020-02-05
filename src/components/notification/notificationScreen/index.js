@@ -8,9 +8,7 @@ const NotificationScreen = React.memo(({ getNotifications }) => {
     const [notifications, setNotifications] = React.useState([]);
 
     React.useEffect(() => {
-        getNotifications()
-            .then(response => setNotifications(response))
-            .catch(console.log);
+        getNotifications().then(response => setNotifications(response));
     }, [getNotifications]);
 
     return (

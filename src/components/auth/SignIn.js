@@ -5,6 +5,7 @@ import './styles.scss';
 import { CustomButtonWithLoading } from '../common/CommonComponents';
 import { useToggle } from '../common/customHooks';
 import CustomScreenWithBackButton from '../common/screenWithBackButton/CustomScreenWithBackButton';
+import ScreenWithError from 'components/common/screenWithError';
 
 const textStyle = { width: '80%', textAlign: 'center', margin: '50px auto 0 auto' };
 
@@ -48,7 +49,7 @@ const RenderInputs = ({
     );
 };
 
-const SignIn = React.memo(({ showForgotPasswordPage, goBack, registerUser }) => {
+const SignIn = React.memo(({ showForgotPasswordPage, goBack, registerUser, setMessage }) => {
     let [username, setUsername] = React.useState('');
     let [password, setPassword] = React.useState('');
 
@@ -79,7 +80,16 @@ const SignIn = React.memo(({ showForgotPasswordPage, goBack, registerUser }) => 
 
     const submitForm = event => {
         event.preventDefault();
-        registerUser({ username: username.trim(), password: password.trim() }).finally(() => toggleIsSubmitting());
+        registerUser({ username: username.trim(), password: password.trim() })
+            .catch(error => {
+                if (error === 403) {
+                    setPassword('');
+                    setMessage({ type: 'error', text: 'invalid username or password' });
+                } else {
+                    setMessage({ type: 'error', text: "can't connect to server" });
+                }
+            })
+            .finally(() => toggleIsSubmitting());
     };
 
     const submitButtonHandler = event => {
@@ -107,4 +117,4 @@ const SignIn = React.memo(({ showForgotPasswordPage, goBack, registerUser }) => 
         </CustomScreenWithBackButton>
     );
 });
-export default SignIn;
+export default ScreenWithError(SignIn);

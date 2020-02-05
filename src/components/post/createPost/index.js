@@ -52,7 +52,6 @@ const CreatePostModal = React.memo(({ modalVisibility, toggleModalVisibility, cr
         event.preventDefault();
         createPost({ caption: caption.trim(), channel_id: channel.id })
             .then(() => toggleModalVisibility())
-            .catch(console.log)
             .finally(() => toggleIsSubmitting());
     };
 
