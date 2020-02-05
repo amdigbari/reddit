@@ -49,7 +49,7 @@ const FollowList = React.memo(({ match, getUsersList, getUser }) => {
 
     return (
         <div className={styles['container']}>
-            <RenderTitle />
+            {/* <RenderTitle /> */}
             <RenderList />
         </div>
     );

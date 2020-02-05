@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './styles.scss';
 import Avatar from '../../common/Avatar';
@@ -8,16 +9,16 @@ import { useToggle } from '../../common/customHooks';
 import { LIGHT_PRIMARY_COLOR } from '../../../utils/staticUtils';
 import EditProfileModal from '../editProfile';
 import { userPath } from '../../../utils/pathUtils';
+import { followUser } from 'actions/ProfileActions';
 
-const ProfileCard = ({ user, showBorder = false, showEdit = false, link = false, className = '', ...restProps }) => {
-    let [loading, toggleLoading] = useToggle(false);
+const ProfileCard = ({ user, showBorder = false, showEdit = false, link = false, className = '', followUser, ...restProps }) => {
+    // let [loading, toggleLoading] = useToggle(false);
     let [editModalVisibility, toggleEditModalVisibility] = useToggle(false);
     let [isFollow, toggleIsFollow] = useToggle(user.follow || false);
 
     const followButtonClicked = () => {
         // toggleLoading();
-        toggleIsFollow();
-        //TODO: add toggle follow functionality
+        followUser(user.id, isFollow).then(() => toggleIsFollow());
     };
 
     const editButtonClicked = () => {
@@ -66,7 +67,7 @@ const ProfileCard = ({ user, showBorder = false, showEdit = false, link = false,
 
     const RenderProfileAvatar = () => (
         <div style={{ display: 'flex', alignItems: 'center' }}>
-            <Avatar src={user.avatar} />
+            <Avatar src={user.picture} />
             <div className="name-container">
                 <p className="text-truncate">{user.username}</p>
             </div>
@@ -86,4 +87,8 @@ const ProfileCard = ({ user, showBorder = false, showEdit = false, link = false,
         </div>
     );
 };
-export default ProfileCard;
+
+const mapDispatchToProps = {
+    followUser,
+};
+export default connect(undefined, mapDispatchToProps)(ProfileCard);

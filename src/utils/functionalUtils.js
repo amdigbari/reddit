@@ -11,19 +11,26 @@ export const parseLinks = (text, linkClass) => {
     return parsedText;
 };
 
-export const customFetch = (url, options) => {
+export const customFetch = (url, options, setContent = true) => {
     let token = localStorage.getItem('token');
 
-    let headers = { 'Content-Type': 'application/json' };
+    let headers = {};
+
+    if (setContent) headers = { 'Content-Type': 'application/json' };
 
     if (token) {
         headers = { ...headers, Authorization: `Basic ${token}` };
     }
 
     return fetch(url, {
-        headers,
         ...(options || {}),
-    }).then(res => res.json());
+        headers: { ...headers, ...((options && options.headers) || {}) },
+    }).then(res => {
+        let status = Math.floor(res.status / 100);
+        if (status === 2) return res.json();
+
+        throw res.status;
+    });
 };
 
 export const imageToBase64 = async image => {

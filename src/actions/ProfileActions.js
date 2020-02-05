@@ -1,10 +1,13 @@
 import { sampleUser, samplePostNotification, sampleFollowNotification } from '../utils/hardcodedData';
 import { customFetch } from 'utils/functionalUtils';
-import { UPDATE_PROFILE_API, GET_NOTIFICATIONS_API, getFollowListApi, getProfileApi } from 'api/profileApi';
+import { UPDATE_PROFILE_API, GET_NOTIFICATIONS_API, getFollowListApi, getProfileApi, getFollowProfileApi } from 'api/profileApi';
 import { registerUserSuccess } from './AuthActions';
 
 export const getUserProfileById = pk => dispatch => {
-    return customFetch(getProfileApi(pk));
+    return customFetch(getProfileApi(pk)).then(response => {
+        if (response.length) return { ...response[0], id: response[0].user };
+        throw response;
+    });
 };
 
 export const getNotifications = () => dispatch => {
@@ -29,12 +32,16 @@ export const getFollowList = (pk, type) => dispatch => {
     });
 };
 
-export const updateProfile = request => dispatch => {
+export const updateProfile = formData => dispatch => {
     return customFetch(UPDATE_PROFILE_API, {
         method: 'PUT',
-        body: JSON.stringify(request),
-    }).then(response => {
+        body: formData,
+    }, false).then(response => {
         dispatch(registerUserSuccess(response));
         return response;
     });
+};
+
+export const followUser = (id, action) => dispatch => {
+    return customFetch(getFollowProfileApi(id, action), { method: 'PUT' });
 };

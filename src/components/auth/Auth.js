@@ -31,6 +31,7 @@ const Auth = React.memo(({ loginUser, checkLogin, registerUser }) => {
                     })
                     .catch(() => {
                         setLoading(false);
+                        localStorage.removeItem('token')
                     });
             } else {
                 setLoading(false);

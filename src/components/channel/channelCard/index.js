@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import Avatar from '../../common/Avatar';
 import { CustomButton } from '../../common/CommonComponents';
@@ -7,9 +8,10 @@ import './styles.scss';
 import { useToggle } from '../../common/customHooks';
 import { LIGHT_PRIMARY_COLOR } from '../../../utils/staticUtils';
 import { channelPath } from '../../../utils/pathUtils';
+import { followChannel } from 'actions/ChannelActions';
 
-const ChannelCard = ({ channel, showBorder = false, link = true, ...restProps }) => {
-    let [loading, toggleLoading] = useToggle(false);
+const ChannelCard = ({ channel, showBorder = false, link = true, followChannel, ...restProps }) => {
+    // let [loading, toggleLoading] = useToggle(false);
     let [isFollow, toggleIsFollow] = useToggle(channel.follow);
 
     const Description = () => {
@@ -22,8 +24,7 @@ const ChannelCard = ({ channel, showBorder = false, link = true, ...restProps })
 
     const followButtonClicked = () => {
         // toggleLoading();
-        toggleIsFollow();
-        //TODO: add toggle follow functionality
+        followChannel(channel.id, isFollow).then(() => toggleIsFollow());
     };
 
     const FollowButton = () => {
@@ -42,12 +43,12 @@ const ChannelCard = ({ channel, showBorder = false, link = true, ...restProps })
         <div className={`card ${showBorder ? ' border-bottom' : ''}`} {...restProps}>
             {link ? (
                 <Link to={channelPath(channel.id)} className={`link`}>
-                    <Avatar src={channel.logo} />
+                    <Avatar src={channel.avatar} />
                     <Description />
                 </Link>
             ) : (
                 <>
-                    <Avatar src={channel.logo} />
+                    <Avatar src={channel.avatar} />
                     <Description />
                 </>
             )}
@@ -56,4 +57,8 @@ const ChannelCard = ({ channel, showBorder = false, link = true, ...restProps })
         </div>
     );
 };
-export default ChannelCard;
+
+const mapDispatchToProps = {
+    followChannel,
+};
+export default connect(undefined, mapDispatchToProps)(ChannelCard);

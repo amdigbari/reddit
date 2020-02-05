@@ -12,28 +12,29 @@ const ChannelScreen = React.memo(({ match, getChannel }) => {
     let [channel, setChannel] = React.useState({});
 
     React.useEffect(() => {
-        channelPk && setChannel(getChannel(channelPk));
+        channelPk && getChannel(channelPk).then(setChannel);
     }, [channelPk, getChannel]);
 
     const ChannelDescription = () => {
         return (
             <>
                 <div className={styles['description-container']}>
-                    <h4>About</h4>
-                    <p className={styles['channel-description']}>{channel.description}</p>
+                    <h4>Rules</h4>
+                    <p className={styles['channel-description']}>{channel.rules}</p>
                 </div>
 
                 <div className={styles['description-container']}>
                     <h4>Stats</h4>
                     <div className={styles['stats-wrapper']}>
                         <div>
-                            <h4 className="danger">{channel.postsCount}</h4>
+                            <h4 className="danger">{channel.no_posts}</h4>
                             <p>Posts</p>
                         </div>
                         <div>
-                            <h4 className="danger">{channel.members}</h4>
+                            <h4 className="danger">{channel.no_followers}</h4>
                             <p>Followers</p>
                         </div>
+                        {/* <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}></div> */}
                     </div>
                 </div>
             </>
@@ -43,7 +44,7 @@ const ChannelScreen = React.memo(({ match, getChannel }) => {
     const ChannelPosts = () => {
         return (
             <div className={styles['posts-container']}>
-                <PostsScreen showFloatButton={false} channelsLink={false} />
+                <PostsScreen showFloatButton={false} channelsLink={false} posts={channel.posts.map(post => ({ ...post, channel }))} />
             </div>
         );
     };

@@ -10,16 +10,6 @@ const AsideMenubar = React.memo(({ user }) => {
         return (
             <>
                 <CustomButton className={styles.button}>
-                    <Link to={userPostsPath(user.id)} className={styles['link-wrapper']}>
-                        <p className={styles.link}>Posts</p>
-                    </Link>
-                </CustomButton>
-                <CustomButton className={styles.button}>
-                    <Link to={userChannelsPath(user.id)} className={styles['link-wrapper']}>
-                        <p className={styles.link}>Channels</p>
-                    </Link>
-                </CustomButton>
-                <CustomButton className={styles.button}>
                     <Link to={userPath(user.id)} className={styles['link-wrapper']}>
                         <p className={styles.link}>Profile</p>
                     </Link>

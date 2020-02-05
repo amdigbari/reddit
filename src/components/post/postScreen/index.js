@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import PostCard from '../postCard/PostCard';
 import CommentsList from '../../comment/CommentsList';
 import { getPostById } from '../../../actions/PostActions';
+import ScreenWithError from 'components/common/screenWithError';
 
-const PostScreen = React.memo(({ match, getPost }) => {
+const PostScreen = React.memo(({ match, getPost, setErrorMessage }) => {
     //use post pk to get full post from server
     const postPk = React.useMemo(() => match.params.pk, [match]);
 
@@ -22,8 +23,8 @@ const PostScreen = React.memo(({ match, getPost }) => {
     return (
         post.id && (
             <>
-                <PostCard post={post} fullCaption style={{ marginTop: 30 }} />
-                <CommentsList comments={post.comments || []} allCommentsCount={post.comments.length} />
+                <PostCard post={post} fullCaption style={{ marginTop: 30 }} setErrorMessage={setErrorMessage} />
+                <CommentsList comments={post.comments || []} allCommentsCount={post.comments.length} setErrorMessage={setErrorMessage} />
             </>
         )
     );
@@ -32,4 +33,4 @@ const PostScreen = React.memo(({ match, getPost }) => {
 const mapDispatchToProps = {
     getPost: getPostById,
 };
-export default connect(undefined, mapDispatchToProps)(PostScreen);
+export default connect(undefined, mapDispatchToProps)(ScreenWithError(PostScreen));

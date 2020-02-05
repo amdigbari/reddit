@@ -1,9 +1,9 @@
 import { sampleChannel } from '../utils/hardcodedData';
 import { customFetch } from 'utils/functionalUtils';
-import { CREATE_CHANNEL_API } from 'api/channelApi';
+import { CREATE_CHANNEL_API, getChannelApi, getFollowChannelApi } from 'api/channelApi';
 
 export const getChannelById = pk => dispatch => {
-    return sampleChannel;
+    return customFetch(getChannelApi(pk)).then(response => response[0]);
 };
 
 export const getUserChannels = pk => dispatch => {
@@ -15,4 +15,8 @@ export const createChannel = channel => dispatch => {
         method: 'POST',
         body: JSON.stringify(channel),
     });
+};
+
+export const followChannel = (id, action) => dispatch => {
+    return customFetch(getFollowChannelApi(id, action), { method: 'PUT' });
 };

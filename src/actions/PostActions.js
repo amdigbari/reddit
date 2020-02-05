@@ -24,5 +24,5 @@ export const getAvailableChannels = () => dispatch => {
 };
 
 export const scorePost = (postId, score) => dispatch => {
-    return customFetch(getScorePostApi(postId, score), { method: 'PUT' });
+    return customFetch(getScorePostApi(score), { method: 'PUT', body: JSON.stringify({ id: postId }) });
 };

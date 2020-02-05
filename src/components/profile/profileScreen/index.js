@@ -21,7 +21,7 @@ const ProfileScreen = React.memo(({ match, getUserProfile, loginUser }) => {
         return (
             <>
                 <div className="description-container">
-                    <h4>About</h4>
+                    <h4>Bio</h4>
                     <p className="description-text">{user.bio || ''}</p>
                 </div>
 
@@ -64,7 +64,7 @@ const ProfileScreen = React.memo(({ match, getUserProfile, loginUser }) => {
             <>
                 <ProfileCard user={user} showBorder className="profile-card" showEdit={loginUser.id === user.id} />
                 <Bio />
-                <UserPosts />
+                {/* <UserPosts /> */}
             </>
         )
     );

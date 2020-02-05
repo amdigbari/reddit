@@ -3,7 +3,6 @@ import React from 'react';
 import styles from './styles.module.scss';
 import { RedditLogo } from '../common/CommonComponents';
 import SearchBar from '../common/searchbar/SearchBar';
-import testProfile from '../../assets/images/default_profile.png';
 import { SHOW_ON_DESKTOP, SHOW_ON_DEVICE } from '../../utils/staticUtils';
 import SearchbarIcon from '../common/searchbar/SearchbarIcon';
 import HamburgerIcon from '../hamburgerMenu/HamburgerIcon';
@@ -33,7 +32,7 @@ const Header = React.memo(({ toggleMenuVisibility: openBurgerMenu, user }) => {
 
             <>
                 <div className={styles['avatar-container']} desc={SHOW_ON_DESKTOP}>
-                    <Avatar src={testProfile} url={userPath(user.id)} size={55} />
+                    <Avatar src={user.picture} url={userPath(user.id)} size={55} />
                 </div>
             </>
         </header>

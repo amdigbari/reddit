@@ -8,7 +8,7 @@ const PostScore = ({ score, setScore, userScore }) => {
     return (
         <div className={styles['score-container']}>
             <IoMdArrowDropup
-                onClick={() => userScore <= 0 && setScore(1)}
+                onClick={() => setScore(userScore > 0 ? 0 : 1)}
                 size={30}
                 color={userScore > 0 ? GREEN : GRAY}
                 cursor={userScore > 0 ? 'unset' : 'pointer'}
@@ -17,7 +17,7 @@ const PostScore = ({ score, setScore, userScore }) => {
             <p style={{ marginTop: -7 }}>{score}</p>
 
             <IoMdArrowDropdown
-                onClick={() => userScore >= 0 && setScore(-1)}
+                onClick={() => setScore(userScore < 0 ? 0 : -1)}
                 size={30}
                 color={userScore < 0 ? RED : GRAY}
                 style={{ marginTop: -7 }}

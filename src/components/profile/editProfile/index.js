@@ -62,14 +62,25 @@ const EditProfileModal = React.memo(
 
         const submitForm = event => {
             event.preventDefault();
-            updateProfile({
-                first_name: firstName.trim(),
-                last_name: lastName.trim(),
-                phone: phone.trim(),
-                city: city.trim(),
-                email: email.trim(),
-                picture: imageFile,
-            }).finally(() => toggleIsSubmitting());
+            const body = new FormData();
+
+            body.append('first_name', firstName.trim());
+            body.append('last_name', lastName.trim());
+            body.append('phone', phone.trim());
+            body.append('city', city.trim());
+            body.append('email', email.trim());
+            imageFile && body.append('picture', imageFile);
+
+            // {
+            //     first_name: firstName.trim(),
+            //     last_name: lastName.trim(),
+            //     phone: phone.trim(),
+            //     city: city.trim(),
+            //     email: email.trim(),
+            //     picture: imageFile,
+            // }
+
+            updateProfile(body).finally(() => toggleIsSubmitting());
         };
 
         const submitButtonHandler = event => {
