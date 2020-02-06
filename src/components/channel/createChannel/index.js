@@ -13,6 +13,7 @@ import { useToggle } from '../../common/customHooks';
 import Avatar from '../../common/Avatar';
 import { createChannel, getPotentialAuthors } from 'actions/ChannelActions';
 import { imageToBase64 } from 'utils/functionalUtils';
+import ScreenWithError from 'components/common/screenWithError';
 
 const RenderInputs = ({
     name: { name, error: nameError, change: changeName },
@@ -83,6 +84,7 @@ const RenderInputs = ({
                 onChange={changeName}
                 error={nameError}
                 helperText="name can't be empty"
+                inputProps={{ maxlength: 30 }}
             />
             <TextField
                 name="rules"
@@ -115,7 +117,7 @@ const RenderInputs = ({
 };
 
 const CreateChannelModal = React.memo(
-    ({ modalVisibility, toggleModalVisibility, createChannel, callback, edit, channel, getAvailableAuthors }) => {
+    ({ modalVisibility, toggleModalVisibility, createChannel, callback, edit, channel, getAvailableAuthors, setSnackMessage }) => {
         let [name, setName] = React.useState(edit ? channel.name : '');
         let [description, setDescription] = React.useState(edit ? channel.rules : '');
         let [image, setImage] = React.useState(edit ? channel.avatar : null);
@@ -160,6 +162,11 @@ const CreateChannelModal = React.memo(
                         ...response,
                         ...(edit ? {} : { id: response.channel_id }),
                     });
+                    setSnackMessage(200);
+                })
+                .catch(error => {
+                    if (error === 400) setSnackMessage({ type: 'error', text: 'Ensure name has less than 30 characters' });
+                    else setSnackMessage(error);
                 })
                 .finally(() => toggleIsSubmitting());
         };
@@ -209,4 +216,4 @@ const mapDispatchToProps = {
     createChannel,
     getAvailableAuthors: getPotentialAuthors,
 };
-export default connect(undefined, mapDispatchToProps)(CreateChannelModal);
+export default connect(undefined, mapDispatchToProps)(ScreenWithError(CreateChannelModal));

@@ -7,8 +7,9 @@ import PostsScreen from '../../post/postsScreen';
 import { getChannelById } from '../../../actions/ChannelActions';
 import { useToggle } from 'components/common/customHooks';
 import CreateChannelModal from 'components/channel/createChannel';
+import ScreenWithError from 'components/common/screenWithError';
 
-const ChannelScreen = React.memo(({ match, getChannel, loginUser }) => {
+const ChannelScreen = React.memo(({ match, getChannel, loginUser, raise404, raise500, setSnackMessage }) => {
     const channelPk = React.useMemo(() => match.params.pk, [match]);
 
     let [editChannelModal, toggleEditChannelModal] = useToggle(false);
@@ -18,7 +19,18 @@ const ChannelScreen = React.memo(({ match, getChannel, loginUser }) => {
     let isAdmin = React.useMemo(() => (channel.admin && loginUser ? loginUser.id === channel.admin : false), [channel, loginUser]);
 
     React.useEffect(() => {
-        channelPk && getChannel(channelPk).then(setChannel);
+        channelPk &&
+            getChannel(channelPk)
+                .then(setChannel)
+                .catch(error => {
+                    if (error === 404) {
+                        raise404(true);
+                    } else if (error === 500) {
+                        raise500(true);
+                    } else {
+                        setSnackMessage(error);
+                    }
+                });
     }, [channelPk, getChannel]);
 
     const ChannelDescription = () => {
@@ -94,4 +106,4 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     getChannel: getChannelById,
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ChannelScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ScreenWithError(ChannelScreen));

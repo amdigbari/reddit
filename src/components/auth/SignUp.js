@@ -6,6 +6,7 @@ import { CustomButtonWithLoading } from '../common/CommonComponents';
 import { useToggle } from '../common/customHooks';
 import CustomScreenWithBackButton from '../common/screenWithBackButton/CustomScreenWithBackButton';
 import EditProfileModal from '../profile/editProfile';
+import ScreenWithError from 'components/common/screenWithError';
 
 const textStyle = { width: '80%', textAlign: 'center', margin: '50px auto 0 auto' };
 
@@ -61,7 +62,7 @@ const RenderInputs = ({
     );
 };
 
-const SignUp = React.memo(({ goBack, registerUser }) => {
+const SignUp = React.memo(({ goBack, registerUser, setSnackMessage }) => {
     let [username, setUsername] = React.useState('');
     let [password, setPassword] = React.useState('');
     let [confirmPassword, setConfirmPassword] = React.useState('');
@@ -92,8 +93,12 @@ const SignUp = React.memo(({ goBack, registerUser }) => {
 
     const submitForm = event => {
         event.preventDefault();
-        registerUser({ username:username.trim(), password: password.trim() })
+        registerUser({ username: username.trim(), password: password.trim() })
             .then(() => toggleEditProfileModalVisibility())
+            .catch(e => {
+                if (e === 400) setSnackMessage({ type: 'error', text: 'A user with that username already exists.' });
+                else setSnackMessage(e);
+            })
             .finally(() => toggleIsSubmitting());
     };
 
@@ -132,4 +137,4 @@ const SignUp = React.memo(({ goBack, registerUser }) => {
         </>
     );
 });
-export default SignUp;
+export default ScreenWithError(SignUp);

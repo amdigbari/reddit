@@ -31,9 +31,15 @@ const Homepage = React.memo(({ getPosts, setSnackMessage }) => {
 
     const renderComponent = React.useCallback(
         () =>
-            posts.map((post, index, array) => (
-                <PostCard post={post} key={post.id} showBorder={index < array.length - 1} setSnackMessage={setSnackMessage} />
-            )),
+            posts.length ? (
+                posts.map((post, index, array) => (
+                    <PostCard post={post} key={post.id} showBorder={index < array.length - 1} setSnackMessage={setSnackMessage} />
+                ))
+            ) : (
+                <div className="render-center">
+                    <h3 className="danger">No Post To Show</h3>
+                </div>
+            ),
         [posts],
     );
 

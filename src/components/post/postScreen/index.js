@@ -8,7 +8,7 @@ import ScreenWithError from 'components/common/screenWithError';
 import CreatePostModal from '../createPost';
 import { useToggle } from 'components/common/customHooks';
 
-const PostScreen = React.memo(({ match, getPost, setSnackMessage, loginUser }) => {
+const PostScreen = React.memo(({ match, getPost, setSnackMessage, loginUser, raise404, raise500 }) => {
     const postPk = React.useMemo(() => match.params.pk, [match]);
 
     let [editPostModal, toggleEditPostModal] = useToggle(false);
@@ -22,9 +22,19 @@ const PostScreen = React.memo(({ match, getPost, setSnackMessage, loginUser }) =
 
     React.useEffect(() => {
         if (postPk) {
-            getPost(postPk).then(response => {
-                setPost(response[0]);
-            });
+            getPost(postPk)
+                .then(response => {
+                    setPost(response[0]);
+                })
+                .catch(e => {
+                    if (e === 404) {
+                        raise404(true);
+                    } else if (e === 500) {
+                        raise500(true);
+                    } else {
+                        setSnackMessage(e);
+                    }
+                });
         }
     }, [postPk, getPost]);
 

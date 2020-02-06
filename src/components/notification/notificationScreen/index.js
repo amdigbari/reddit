@@ -3,12 +3,15 @@ import { connect } from 'react-redux';
 
 import NotificationCard from '../notificationCard';
 import { getNotifications } from '../../../actions/ProfileActions';
+import ScreenWithError from 'components/common/screenWithError';
 
-const NotificationScreen = React.memo(({ getNotifications }) => {
+const NotificationScreen = React.memo(({ getNotifications, setSnackMessage }) => {
     const [notifications, setNotifications] = React.useState([]);
 
     React.useEffect(() => {
-        getNotifications(true).then(setNotifications);
+        getNotifications(true)
+            .then(setNotifications)
+            .catch(setSnackMessage);
     }, [getNotifications]);
 
     return (
@@ -28,4 +31,4 @@ const NotificationScreen = React.memo(({ getNotifications }) => {
 const mapDispatchToProps = {
     getNotifications,
 };
-export default connect(undefined, mapDispatchToProps)(NotificationScreen);
+export default connect(undefined, mapDispatchToProps)(ScreenWithError(NotificationScreen));

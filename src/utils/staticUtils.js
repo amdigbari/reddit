@@ -38,3 +38,32 @@ export const NOTIFICATION_TYPES = {
     LIKE_ON_POST: 'LIKE_ON_POST',
     COMMENT_ON_POST: 'COMMENT_ON_POST',
 };
+
+const getStatusErrorText = status => {
+    switch (status) {
+        case 400:
+            return 'Bad Request';
+        case 401:
+            return 'Unauthorized';
+        case 403:
+            return 'Permission Denied';
+        case 404:
+            return 'Not Found';
+        case 500:
+            return 'Server Error';
+        case 503:
+            return 'Service Unavailable';
+        default:
+            return 'namoosan bikhial';
+    }
+};
+
+export const getStatusMessage = status => {
+    const statusFamily = Math.floor(status / 100);
+
+    if (statusFamily === 2) {
+        return { type: 'success', text: 'Successful' };
+    } else {
+        return { type: 'error', text: getStatusErrorText(status) };
+    }
+};

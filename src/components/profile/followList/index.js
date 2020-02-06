@@ -6,8 +6,9 @@ import styles from './styles.module.scss';
 import Avatar from '../../common/Avatar';
 import { getFollowList, getUserProfileById } from '../../../actions/ProfileActions';
 import ChannelCard from 'components/channel/channelCard';
+import ScreenWithError from 'components/common/screenWithError';
 
-const FollowList = React.memo(({ match, getUsersList, getUser }) => {
+const FollowList = React.memo(({ match, getUsersList, getUser, raise404, raise500, setSnackMessage }) => {
     const isFollowers = React.useMemo(() => !!match.url.match(/followers/), [match]);
     const userPk = React.useMemo(() => match.params.pk, [match]);
 
@@ -16,11 +17,19 @@ const FollowList = React.memo(({ match, getUsersList, getUser }) => {
     const [usersList, setUsersList] = React.useState([]);
 
     React.useEffect(() => {
-        setUser(getUser(userPk));
+        getUser(userPk)
+            .then(setUser)
+            .catch(e => {
+                if (e === 404) raise404(true);
+                else if (e === 500) raise500(true);
+                else setSnackMessage(e);
+            });
     }, [userPk, getUser]);
 
     React.useEffect(() => {
-        getUsersList(userPk, isFollowers ? 'followers' : 'followings').then(setUsersList);
+        getUsersList(userPk, isFollowers ? 'followers' : 'followings')
+            .then(setUsersList)
+            .catch(setSnackMessage);
     }, [userPk, getUsersList, isFollowers]);
 
     const RenderTitle = () => {
@@ -49,7 +58,7 @@ const FollowList = React.memo(({ match, getUsersList, getUser }) => {
 
     return (
         <div className={styles['container']}>
-            {/* <RenderTitle /> */}
+            <RenderTitle />
             <RenderList />
         </div>
     );
@@ -59,4 +68,4 @@ const mapDispatchToProps = {
     getUsersList: getFollowList,
     getUser: getUserProfileById,
 };
-export default connect(undefined, mapDispatchToProps)(FollowList);
+export default connect(undefined, mapDispatchToProps)(ScreenWithError(FollowList));

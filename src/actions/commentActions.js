@@ -8,6 +8,6 @@ export const addComment = (post, request) => dispatch => {
     });
 };
 
-export const getCommentById = id => {
+export const getCommentById = id => dispatch => {
     return customFetch(getCommentApi(id));
 };

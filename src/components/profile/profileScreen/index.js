@@ -7,14 +7,22 @@ import PostsScreen from '../../post/postsScreen';
 import './styles.scss';
 import { getUserProfileById } from '../../../actions/ProfileActions';
 import { userFollowingsPath, userFollowersPath } from '../../../utils/pathUtils';
+import ScreenWithError from 'components/common/screenWithError';
 
-const ProfileScreen = React.memo(({ match, getUserProfile, loginUser }) => {
+const ProfileScreen = React.memo(({ match, getUserProfile, loginUser, raise404, raise500, setSnackMessage }) => {
     const userPk = React.useMemo(() => match.params.pk, [match]);
 
     let [user, setUser] = React.useState({});
 
     React.useEffect(() => {
-        userPk && getUserProfile(userPk).then(setUser);
+        userPk &&
+            getUserProfile(userPk)
+                .then(setUser)
+                .catch(e => {
+                    if (e === 404) raise404(true);
+                    else if (e === 500) raise500(true);
+                    else setSnackMessage(e);
+                });
     }, [userPk, getUserProfile]);
 
     const Bio = () => {
@@ -77,4 +85,4 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     getUserProfile: getUserProfileById,
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ScreenWithError(ProfileScreen));

@@ -86,7 +86,7 @@ const SignIn = React.memo(({ showForgotPasswordPage, goBack, registerUser, setSn
                     setPassword('');
                     setSnackMessage({ type: 'error', text: 'invalid username or password' });
                 } else {
-                    setSnackMessage({ type: 'error', text: "can't connect to server" });
+                    setSnackMessage(error);
                 }
             })
             .finally(() => toggleIsSubmitting());

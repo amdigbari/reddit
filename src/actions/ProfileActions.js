@@ -6,7 +6,7 @@ import { SET_NOTIFICATIONS_COUNT } from './ActionTypes';
 export const getUserProfileById = pk => dispatch => {
     return customFetch(getProfileApi(pk)).then(response => {
         if (response.length) return { ...response[0], id: response[0].user };
-        throw response;
+        throw 404;
     });
 };
 

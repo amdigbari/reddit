@@ -9,9 +9,10 @@ import { useToggle } from '../../common/customHooks';
 import RenderInputs from './Inputs';
 import { createPost, getAvailableChannels } from 'actions/PostActions';
 import { imageToBase64 } from 'utils/functionalUtils';
+import ScreenWithError from 'components/common/screenWithError';
 
 const CreatePostModal = React.memo(
-    ({ modalVisibility, toggleModalVisibility, createPost, getAvailableChannels, callback, edit = false, post }) => {
+    ({ modalVisibility, toggleModalVisibility, createPost, getAvailableChannels, callback, edit = false, post, setSnackMessage }) => {
         let [availableChannels, setAvailableChannels] = React.useState([]);
         let [channel, setChannel] = React.useState(null);
         let [caption, setCaption] = React.useState(edit ? post.text : '');
@@ -58,7 +59,9 @@ const CreatePostModal = React.memo(
                 .then(response => {
                     toggleModalVisibility();
                     callback({ ...{ text: caption.trim(), channel, image }, ...response });
+                    setSnackMessage(200);
                 })
+                .catch(setSnackMessage)
                 .finally(() => toggleIsSubmitting());
         };
 
@@ -96,4 +99,4 @@ const mapDispatchToProps = {
     createPost,
     getAvailableChannels,
 };
-export default connect(undefined, mapDispatchToProps)(CreatePostModal);
+export default connect(undefined, mapDispatchToProps)(ScreenWithError(CreatePostModal));

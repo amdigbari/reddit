@@ -14,7 +14,7 @@ const CommentScreen = React.memo(({ match, getComment }) => {
         getComment(commentPk).then(setComment);
     }, [commentPk]);
 
-    return <Comment comment={comment} />;
+    return comment.id && <Comment comment={comment} />;
 });
 
 const mapDispatchToProps = {

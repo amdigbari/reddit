@@ -12,9 +12,10 @@ import ChangePasswordModal from './changePassword';
 import { unRegisterUser } from '../../../actions/AuthActions';
 import { updateProfile } from 'actions/ProfileActions';
 import { imageToBase64 } from 'utils/functionalUtils';
+import ScreenWithError from 'components/common/screenWithError';
 
 const EditProfileModal = React.memo(
-    ({ modalVisibility, toggleModalVisibility, user = {}, unregisterUser: logOut, setup = false, updateProfile }) => {
+    ({ modalVisibility, toggleModalVisibility, user = {}, unregisterUser: logOut, setup = false, updateProfile, setSnackMessage }) => {
         // Required
         let [firstName, setFirstName] = React.useState(user.name || '');
         let [lastName, setLastName] = React.useState(user.name || '');
@@ -80,7 +81,9 @@ const EditProfileModal = React.memo(
             //     picture: imageFile,
             // }
 
-            updateProfile(body).finally(() => toggleIsSubmitting());
+            updateProfile(body)
+                .catch(setSnackMessage)
+                .finally(() => toggleIsSubmitting());
         };
 
         const submitButtonHandler = event => {
@@ -139,4 +142,4 @@ const mapDispatchToProps = {
     updateProfile,
 };
 
-export default connect(undefined, mapDispatchToProps)(EditProfileModal);
+export default connect(undefined, mapDispatchToProps)(ScreenWithError(EditProfileModal));

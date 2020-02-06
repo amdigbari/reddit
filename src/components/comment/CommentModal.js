@@ -81,7 +81,7 @@ const CommentModal = ({
                     toggleModalVisibility();
                     callback && callback({ ..._comment, ...response });
                 })
-                .catch(e => setSnackMessage({ text: "can't connect to server", type: 'error' }))
+                .catch(setSnackMessage)
                 .finally(() => toggleButtonLoadingVisibility());
         }
     };
