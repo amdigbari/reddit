@@ -114,20 +114,22 @@ const PostCard = React.memo(
                     </div>
                 </div>
 
-                <Dialog open={openDialog} onClose={handleCloseDialog}>
-                    <DialogTitle id="alert-dialog-title">Are you Sore??</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText id="alert-dialog-description">Are you sure about delete this post??</DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <CustomButton style={{ height: 35 }} onClick={handleCloseDialog}>
-                            Cancel
-                        </CustomButton>
-                        <CustomButton style={{ height: 35 }} onClick={removePost}>
-                            Confirm
-                        </CustomButton>
-                    </DialogActions>
-                </Dialog>
+                {canEdit && (
+                    <Dialog open={openDialog} onClose={handleCloseDialog}>
+                        <DialogTitle id="alert-dialog-title">Are you Sore??</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText id="alert-dialog-description">Are you sure about delete this post??</DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <CustomButton style={{ height: 35 }} onClick={handleCloseDialog}>
+                                Cancel
+                            </CustomButton>
+                            <CustomButton style={{ height: 35 }} onClick={removePost}>
+                                Confirm
+                            </CustomButton>
+                        </DialogActions>
+                    </Dialog>
+                )}
 
                 <CommentModal
                     modalVisibility={replyPostModalVisibility}

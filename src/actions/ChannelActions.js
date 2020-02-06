@@ -28,3 +28,10 @@ export const followChannel = (id, action) => dispatch => {
 export const getPotentialAuthors = pk => dispatch => {
     return customFetch(getPotentialAuthorsApi(pk));
 };
+
+export const deleteChannel = pk => dispatch => {
+    return customFetch(CREATE_CHANNEL_API, {
+        method: 'DELETE',
+        body: JSON.stringify({ channel: pk }),
+    });
+};
