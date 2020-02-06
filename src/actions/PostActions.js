@@ -28,3 +28,10 @@ export const scorePost = (postId, score) => dispatch => {
 export const getDashboardPosts = tab => dispatch => {
     return customFetch(getDashboardApi(tab));
 };
+
+export const deletePost = id => dispatch => {
+    return customFetch(CREATE_POST_API, {
+        method: 'DELETE',
+        body: JSON.stringify({ post: id }),
+    });
+};

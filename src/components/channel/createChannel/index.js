@@ -11,16 +11,19 @@ import CustomScreenWithBackButton from '../../common/screenWithBackButton/Custom
 import { CustomButtonWithLoading } from '../../common/CommonComponents';
 import { useToggle } from '../../common/customHooks';
 import Avatar from '../../common/Avatar';
-import { createChannel } from 'actions/ChannelActions';
+import { createChannel, getPotentialAuthors } from 'actions/ChannelActions';
 import { imageToBase64 } from 'utils/functionalUtils';
 
 const RenderInputs = ({
     name: { name, error: nameError, change: changeName },
     description: { description, change: changeDescription },
+    authors: { authors, change: changeAuthors },
     image: { image, change: changeImage },
     isSubmitting,
     submitForm,
     handleSubmit,
+    possibleAuthors,
+    edit,
 }) => {
     const RenderImageInput = () => {
         return <input type="file" accept="image/*" className={styles['add-image-input']} onChange={changeImage} />;
@@ -53,6 +56,19 @@ const RenderInputs = ({
         );
     };
 
+    const handleChange = (event, value) => {
+        changeAuthors(value);
+    };
+
+    const renderOption = author => {
+        return (
+            <div style={{ width: '100%', display: 'flex', alignItems: 'center' }} key={author.id}>
+                <Avatar size={25} src={author.picture} />
+                <p style={{ marginLeft: 15 }}>{author.username}</p>
+            </div>
+        );
+    };
+
     return (
         <form method="POST" action="/" onSubmit={submitForm}>
             <RenderImage />
@@ -78,6 +94,19 @@ const RenderInputs = ({
                 onChange={changeDescription}
             />
 
+            {edit && (
+                <Autocomplete
+                    options={possibleAuthors}
+                    getOptionLabel={channel => channel.name}
+                    renderOption={renderOption}
+                    autoComplete
+                    disableClearable
+                    renderInput={params => <TextField {...params} name="authors" label="authors" margin="normal" fullWidth />}
+                    onChange={handleChange}
+                    multiple
+                />
+            )}
+
             <CustomButtonWithLoading className="button-container" type="submit" loading={isSubmitting} clickHandler={handleSubmit}>
                 Create
             </CustomButtonWithLoading>
@@ -85,77 +114,97 @@ const RenderInputs = ({
     );
 };
 
-const CreateChannelModal = React.memo(({ modalVisibility, toggleModalVisibility, createChannel, callback, edit, channel }) => {
-    let [name, setName] = React.useState(edit ? channel.name : '');
-    let [description, setDescription] = React.useState(edit ? channel.rules : '');
-    let [image, setImage] = React.useState(edit ? channel.avatar : null);
-    let [imageFile, setImageFile] = React.useState(null);
+const CreateChannelModal = React.memo(
+    ({ modalVisibility, toggleModalVisibility, createChannel, callback, edit, channel, getAvailableAuthors }) => {
+        let [name, setName] = React.useState(edit ? channel.name : '');
+        let [description, setDescription] = React.useState(edit ? channel.rules : '');
+        let [image, setImage] = React.useState(edit ? channel.avatar : null);
+        let [authors, setAuthors] = React.useState([]);
+        let [availableAuthors, setAvailableAuthors] = React.useState([]);
+        let [imageFile, setImageFile] = React.useState(null);
 
-    let [nameValidate, setNameValidate] = React.useState(true);
+        let [nameValidate, setNameValidate] = React.useState(true);
 
-    let [isSubmitting, toggleIsSubmitting] = useToggle(false);
+        let [isSubmitting, toggleIsSubmitting] = useToggle(false);
 
-    const changeName = ({ target }) => {
-        setName(target.value);
-    };
+        React.useEffect(() => {
+            edit && getAvailableAuthors(channel.id).then(setAvailableAuthors);
+        }, [channel]);
 
-    const changeDescription = ({ target }) => {
-        setDescription(target.value);
-    };
+        const changeName = ({ target }) => {
+            setName(target.value);
+        };
 
-    const submitForm = event => {
-        event.preventDefault();
-        const formData = new FormData();
-        formData.append('name', name.trim());
-        formData.append('rules', description.trim());
-        formData.append('avatar', imageFile);
+        const changeDescription = ({ target }) => {
+            setDescription(target.value);
+        };
 
-        createChannel(formData, edit)
-            .then(response => {
-                toggleModalVisibility();
-                callback({ ...{ name: name.trim(), rules: description.trim(), avatar: image }, ...response });
-            })
-            .finally(() => toggleIsSubmitting());
-    };
+        React.useEffect(() => {}, []);
 
-    const submitButtonHandler = event => {
-        setNameValidate(name.trim().length);
-
-        if (name.length) {
-            toggleIsSubmitting();
-        } else {
+        const submitForm = event => {
             event.preventDefault();
-        }
-    };
+            const formData = new FormData();
+            formData.append('name', name.trim());
+            formData.append('rules', description.trim());
+            formData.append('avatar', imageFile);
+            if (edit) {
+                formData.append('channel', channel.id);
+                authors.forEach(author => {
+                    formData.append('authors', author.id);
+                });
+            }
 
-    const changeImage = imageInput => {
-        if (imageInput) {
-            setImageFile(imageInput.target.files[0]);
-            imageToBase64(imageInput.target.files[0]).then(image => setImage(image));
-        } else {
-            setImage(null);
-        }
-    };
+            createChannel(formData, edit)
+                .then(response => {
+                    toggleModalVisibility();
+                    callback({ ...{ name: name.trim(), rules: description.trim(), avatar: image }, ...response });
+                })
+                .finally(() => toggleIsSubmitting());
+        };
 
-    return (
-        <Modal modalVisibility={modalVisibility} toggleVisibility={toggleModalVisibility} className={styles['container']}>
-            <CustomScreenWithBackButton goBack={toggleModalVisibility} title="Create Channel">
-                <div className={styles['container']}>
-                    <RenderInputs
-                        name={{ name: name, error: !nameValidate, change: changeName }}
-                        description={{ description: description, change: changeDescription }}
-                        image={{ image, change: changeImage }}
-                        isSubmitting={isSubmitting}
-                        handleSubmit={submitButtonHandler}
-                        submitForm={submitForm}
-                    />
-                </div>
-            </CustomScreenWithBackButton>
-        </Modal>
-    );
-});
+        const submitButtonHandler = event => {
+            setNameValidate(name.trim().length);
+
+            if (name.length) {
+                toggleIsSubmitting();
+            } else {
+                event.preventDefault();
+            }
+        };
+
+        const changeImage = imageInput => {
+            if (imageInput) {
+                setImageFile(imageInput.target.files[0]);
+                imageToBase64(imageInput.target.files[0]).then(image => setImage(image));
+            } else {
+                setImage(null);
+            }
+        };
+
+        return (
+            <Modal modalVisibility={modalVisibility} toggleVisibility={toggleModalVisibility} className={styles['container']}>
+                <CustomScreenWithBackButton goBack={toggleModalVisibility} title="Create Channel">
+                    <div className={styles['container']}>
+                        <RenderInputs
+                            name={{ name: name, error: !nameValidate, change: changeName }}
+                            description={{ description: description, change: changeDescription }}
+                            authors={{ authors, change: setAuthors }}
+                            image={{ image, change: changeImage }}
+                            isSubmitting={isSubmitting}
+                            handleSubmit={submitButtonHandler}
+                            submitForm={submitForm}
+                            edit={edit}
+                            possibleAuthors={availableAuthors}
+                        />
+                    </div>
+                </CustomScreenWithBackButton>
+            </Modal>
+        );
+    },
+);
 
 const mapDispatchToProps = {
     createChannel,
+    getAvailableAuthors: getPotentialAuthors,
 };
 export default connect(undefined, mapDispatchToProps)(CreateChannelModal);

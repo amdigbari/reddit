@@ -52,6 +52,7 @@ const CreatePostModal = React.memo(
             formData.append('text', caption.trim());
             formData.append('channel_id', channel.id);
             imageFile && formData.append('image', imageFile);
+            edit && formData.append('post', post.id);
 
             createPost(formData, edit)
                 .then(response => {
