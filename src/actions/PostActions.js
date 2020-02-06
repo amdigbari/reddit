@@ -12,7 +12,7 @@ export const getUserPosts = pk => dispatch => {
 
 export const createPost = (post, edit) => dispatch => {
     return customFetch(CREATE_POST_API, {
-        method: edit ? 'PUT' : 'POST',
+        method: edit ? 'PATCH' : 'POST',
         body: post,
     });
 };
