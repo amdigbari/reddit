@@ -10,10 +10,10 @@ export const getUserPosts = pk => dispatch => {
     return [samplePost, { ...samplePost, pk: 2 }];
 };
 
-export const createPost = post => dispatch => {
+export const createPost = (post, edit) => dispatch => {
     return customFetch(CREATE_POST_API, {
-        method: 'POST',
-        body: JSON.stringify(post),
+        method: edit ? 'PUT' : 'POST',
+        body: post,
     });
 };
 

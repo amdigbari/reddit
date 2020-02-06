@@ -5,11 +5,17 @@ import ChannelCard from '../channelCard';
 import styles from './styles.module.scss';
 import PostsScreen from '../../post/postsScreen';
 import { getChannelById } from '../../../actions/ChannelActions';
+import { useToggle } from 'components/common/customHooks';
+import CreateChannelModal from 'components/channel/createChannel';
 
-const ChannelScreen = React.memo(({ match, getChannel }) => {
+const ChannelScreen = React.memo(({ match, getChannel, loginUser }) => {
     const channelPk = React.useMemo(() => match.params.pk, [match]);
 
+    let [editChannelModal, toggleEditChannelModal] = useToggle(false);
+
     let [channel, setChannel] = React.useState({});
+
+    let isAdmin = React.useMemo(() => (channel.admin && loginUser ? loginUser.id === channel.admin : false), [channel, loginUser]);
 
     React.useEffect(() => {
         channelPk && getChannel(channelPk).then(setChannel);
@@ -49,18 +55,44 @@ const ChannelScreen = React.memo(({ match, getChannel }) => {
         );
     };
 
+    const editCallback = response => {
+        setChannel({ ...channel, ...response });
+        toggleEditChannelModal();
+    };
+
     return (
         channel.id && (
-            <div className={styles.container}>
-                <ChannelCard channel={channel} showBorder link={false} style={{ paddingTop: 30 }} />
-                <ChannelDescription />
-                <ChannelPosts />
-            </div>
+            <>
+                <div className={styles.container}>
+                    <ChannelCard
+                        channel={channel}
+                        edit={isAdmin}
+                        showEdit={toggleEditChannelModal}
+                        showBorder
+                        link={false}
+                        style={{ paddingTop: 30 }}
+                    />
+                    <ChannelDescription />
+                    <ChannelPosts />
+                </div>
+
+                <CreateChannelModal
+                    modalVisibility={editChannelModal}
+                    toggleModalVisibility={toggleEditChannelModal}
+                    callback={editCallback}
+                    edit
+                    channel={channel}
+                />
+            </>
         )
     );
 });
 
+const mapStateToProps = state => {
+    return { loginUser: state.loginUser };
+};
+
 const mapDispatchToProps = {
     getChannel: getChannelById,
 };
-export default connect(undefined, mapDispatchToProps)(ChannelScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ChannelScreen);

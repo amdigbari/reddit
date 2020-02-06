@@ -10,11 +10,11 @@ export const getUserChannels = pk => dispatch => {
     return [sampleChannel, { ...sampleChannel, pk: 2 }];
 };
 
-export const createChannel = channel => dispatch => {
+export const createChannel = (channel, edit) => dispatch => {
     return customFetch(
         CREATE_CHANNEL_API,
         {
-            method: 'POST',
+            method: edit ? 'PUT' : 'POST',
             body: channel,
         },
         false,

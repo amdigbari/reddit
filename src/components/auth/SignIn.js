@@ -49,7 +49,7 @@ const RenderInputs = ({
     );
 };
 
-const SignIn = React.memo(({ showForgotPasswordPage, goBack, registerUser, setMessage }) => {
+const SignIn = React.memo(({ showForgotPasswordPage, goBack, registerUser, setSnackMessage }) => {
     let [username, setUsername] = React.useState('');
     let [password, setPassword] = React.useState('');
 
@@ -84,9 +84,9 @@ const SignIn = React.memo(({ showForgotPasswordPage, goBack, registerUser, setMe
             .catch(error => {
                 if (error === 403) {
                     setPassword('');
-                    setMessage({ type: 'error', text: 'invalid username or password' });
+                    setSnackMessage({ type: 'error', text: 'invalid username or password' });
                 } else {
-                    setMessage({ type: 'error', text: "can't connect to server" });
+                    setSnackMessage({ type: 'error', text: "can't connect to server" });
                 }
             })
             .finally(() => toggleIsSubmitting());

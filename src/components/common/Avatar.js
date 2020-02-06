@@ -10,7 +10,7 @@ const Avatar = ({ src, url, size = 40, style = {}, className = '', ...restProps 
 
     React.useLayoutEffect(() => {
         let img = new Image();
-        img.src = src && src.match(/\/image\//) ? `${BASE_BACK_URL}${src}` : src;
+        img.src = src && !src.match(/^http/) && src.match(/\/image\//) ? `${BASE_BACK_URL}${src}` : src;
 
         img.onload = () => {
             setSrc(img.src);

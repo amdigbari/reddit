@@ -10,7 +10,7 @@ import { LIGHT_PRIMARY_COLOR } from '../../../utils/staticUtils';
 import { channelPath } from '../../../utils/pathUtils';
 import { followChannel } from 'actions/ChannelActions';
 
-const ChannelCard = ({ channel, showBorder = false, link = true, followChannel, ...restProps }) => {
+const ChannelCard = ({ channel, showBorder = false, link = true, followChannel, edit, showEdit, ...restProps }) => {
     // let [loading, toggleLoading] = useToggle(false);
     let [isFollow, toggleIsFollow] = useToggle(channel.follow);
 
@@ -28,7 +28,11 @@ const ChannelCard = ({ channel, showBorder = false, link = true, followChannel, 
     };
 
     const FollowButton = () => {
-        return isFollow ? (
+        return edit ? (
+            <CustomButton className="follow-button" color="transparent" hoverColor={LIGHT_PRIMARY_COLOR} onClick={showEdit}>
+                Edit Channel
+            </CustomButton>
+        ) : isFollow ? (
             <CustomButton className="un-follow-button" onClick={followButtonClicked}>
                 UnFollow
             </CustomButton>

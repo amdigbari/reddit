@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaRegComment } from 'react-icons/fa';
 import { connect } from 'react-redux';
-import { MdDelete } from 'react-icons/md';
+import { MdDelete, MdEdit } from 'react-icons/md';
 
 import styles from './styles.module.scss';
 import PostChannel from './PostChannel';
@@ -23,9 +23,10 @@ const PostCard = React.memo(
         fullCaption = false,
         channelLink = true,
         authorLink = true,
-        setMessage,
+        setSnackMessage,
         scorePost,
-        showDelete,
+        canEdit,
+        showEditModal,
         ...restProps
     }) => {
         let [replyPostModalVisibility, toggleReplyPostModalVisibility] = useToggle(false);
@@ -51,15 +52,18 @@ const PostCard = React.memo(
                     <div className={styles.header}>
                         <PostChannel channel={post.channel} link={channelLink} />
 
-                        {showDelete && (
-                            <MdDelete
-                                color={SILVER_GRAY}
-                                className="pointer"
-                                size={23}
-                                onClick={() => {
-                                    /* TODO:  delete post */
-                                }}
-                            />
+                        {canEdit && (
+                            <>
+                                <MdDelete
+                                    color={SILVER_GRAY}
+                                    className="pointer"
+                                    size={23}
+                                    onClick={() => {
+                                        /* TODO:  delete post */
+                                    }}
+                                />
+                                <MdEdit color={SILVER_GRAY} className="pointer" size={23} onClick={showEditModal} />
+                            </>
                         )}
 
                         <p>{post.create_time}</p>
@@ -95,7 +99,7 @@ const PostCard = React.memo(
                     modalVisibility={replyPostModalVisibility}
                     toggleVisibility={toggleReplyPostModalVisibility}
                     post={post}
-                    setMessage={setMessage}
+                    setSnackMessage={setSnackMessage}
                 />
             </>
         );

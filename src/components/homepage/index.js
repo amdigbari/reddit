@@ -8,7 +8,7 @@ import { getDashboardPosts } from 'actions/PostActions';
 import { useToggle } from 'components/common/customHooks';
 import ScreenWithError from 'components/common/screenWithError';
 
-const Homepage = React.memo(({ getPosts, setMessage }) => {
+const Homepage = React.memo(({ getPosts, setSnackMessage }) => {
     let [posts, setPosts] = React.useState([]);
     let [activeId, setActiveId] = React.useState(navigationTabs[0].id);
     let [loading, toggleLoading] = useToggle(false);
@@ -25,7 +25,7 @@ const Homepage = React.memo(({ getPosts, setMessage }) => {
         toggleLoading();
         getPosts(activeTitle)
             .then(setPosts)
-            .catch(() => setMessage({ type: 'error', text: "can't connect to server" }))
+            .catch(() => setSnackMessage({ type: 'error', text: "can't connect to server" }))
             .finally(() => toggleLoading());
     }, [activeTitle]);
 

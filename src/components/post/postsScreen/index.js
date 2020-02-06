@@ -9,7 +9,7 @@ import { getUserPosts } from '../../../actions/PostActions';
 import ScreenWithError from 'components/common/screenWithError';
 
 const PostsScreen = React.memo(
-    ({ showFloatButton = true, channelsLink = true, authorsLink = true, getPosts, posts: propsPosts, setMessage }) => {
+    ({ showFloatButton = true, channelsLink = true, authorsLink = true, getPosts, posts: propsPosts, setSnackMessage }) => {
         let [modalVisibility, toggleModalVisibility] = useToggle(false);
 
         let [posts, setPosts] = React.useState(propsPosts || []);
@@ -22,7 +22,7 @@ const PostsScreen = React.memo(
             <>
                 {posts.map((post, index, array) => (
                     <PostCard
-                        setMessage={setMessage}
+                        setSnackMessage={setSnackMessage}
                         channelLink={channelsLink}
                         authorLink={authorsLink}
                         post={post}
