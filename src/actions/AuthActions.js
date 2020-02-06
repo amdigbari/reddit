@@ -2,7 +2,7 @@ import { encode } from 'base-64';
 
 import { REGISTER_USER, UNREGISTER_USER } from './ActionTypes';
 import { customFetch } from 'utils/functionalUtils';
-import { REGISTER_API, LOGIN_API } from 'api/authApi';
+import { REGISTER_API, LOGIN_API, forgotPasswordApi, sendVerificationCodeApi, changePasswordApi } from 'api/authApi';
 
 export const registerUserSuccess = user => ({
     type: REGISTER_USER,
@@ -41,5 +41,23 @@ export const unRegisterUser = () => dispatch => {
     localStorage.removeItem('token');
     dispatch({
         type: UNREGISTER_USER,
+    });
+};
+
+export const sendVerificationCode = username => dispatch => {
+    return customFetch(sendVerificationCodeApi(username));
+};
+
+export const checkVerificationCode = request => dispatch => {
+    return customFetch(forgotPasswordApi, {
+        method: 'PUT',
+        body: JSON.stringify(request),
+    });
+};
+
+export const changePassword = request => dispatch => {
+    return customFetch(changePasswordApi, {
+        method: 'POST',
+        body: JSON.stringify(request),
     });
 };

@@ -1,25 +1,24 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import './material_style.scss';
 import RenderInputs from './Inputs';
 import { useToggle } from '../../../common/customHooks';
 import CustomScreenWithBackButton from '../../../common/screenWithBackButton/CustomScreenWithBackButton';
 import Modal from '../../../common/Modal';
+import { changePassword as changePasswordServer } from 'actions/AuthActions';
+import ScreenWithError from 'components/common/screenWithError';
+import { encode } from 'base-64';
 
-const ChangePasswordModal = React.memo(({ modalVisibility, toggleModalVisibility }) => {
+const ChangePasswordModal = React.memo(({ modalVisibility, toggleModalVisibility, changePasswordServer, setSnackMessage, loginUser }) => {
     let [password, setPassword] = React.useState('');
     let [confirmPassword, setConfirmPassword] = React.useState('');
-    let [currentPassword, setCurrentPassword] = React.useState('');
 
     let [passwordValidate, setPasswordValidate] = React.useState(true);
     let [confirmPasswordValidate, setConfirmPasswordValidate] = React.useState(true);
-    let [currentPasswordValidate, setCurrentPasswordValidate] = React.useState(true);
 
     let [isSubmitting, toggleIsSubmitting] = useToggle(false);
 
-    const changeCurrentPassword = ({ target }) => {
-        setCurrentPassword(target.value);
-    };
     const changePassword = ({ target }) => {
         setPassword(target.value);
     };
@@ -30,21 +29,21 @@ const ChangePasswordModal = React.memo(({ modalVisibility, toggleModalVisibility
     const submitForm = event => {
         event.preventDefault();
 
-        //TODO: .trim()
-        console.log('Submit');
+        changePasswordServer({ password1: password, password2: confirmPassword })
+            .then(() => {
+                localStorage.setItem('token', encode(`${loginUser.username}:${password}`));
+                toggleModalVisibility();
+                setSnackMessage(200);
+            })
+            .catch(setSnackMessage)
+            .finally(toggleIsSubmitting);
     };
 
     const submitButtonHandler = event => {
-        setCurrentPasswordValidate(currentPassword.trim().length);
-        setPasswordValidate(password.trim().length && password.trim() !== currentPassword.trim());
+        setPasswordValidate(password.trim().length);
         setConfirmPasswordValidate(confirmPassword.trim() === password.trim());
 
-        if (
-            currentPassword.trim().length &&
-            password.trim().length &&
-            password.trim() !== currentPassword.trim() &&
-            confirmPassword.trim() === password.trim()
-        ) {
+        if (password.trim().length && confirmPassword.trim() === password.trim()) {
             toggleIsSubmitting();
         } else {
             event.preventDefault();
@@ -56,7 +55,6 @@ const ChangePasswordModal = React.memo(({ modalVisibility, toggleModalVisibility
             <CustomScreenWithBackButton goBack={toggleModalVisibility} title="Change Password">
                 <div className="change-password-modal-container">
                     <RenderInputs
-                        currentPassword={{ password: currentPassword, change: changeCurrentPassword, error: !currentPasswordValidate }}
                         password={{ password, change: changePassword, error: !passwordValidate }}
                         confirmPassword={{ password: confirmPassword, change: changeConfirmPassword, error: !confirmPasswordValidate }}
                         isSubmitting={isSubmitting}
@@ -68,4 +66,11 @@ const ChangePasswordModal = React.memo(({ modalVisibility, toggleModalVisibility
         </Modal>
     );
 });
-export default ChangePasswordModal;
+
+const mapStateToProps = state => {
+    return { loginUser: state.loginUser };
+};
+const mapDispatchToProps = {
+    changePasswordServer,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ScreenWithError(ChangePasswordModal));

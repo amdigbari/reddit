@@ -17,8 +17,8 @@ import ScreenWithError from 'components/common/screenWithError';
 const EditProfileModal = React.memo(
     ({ modalVisibility, toggleModalVisibility, user = {}, unregisterUser: logOut, setup = false, updateProfile, setSnackMessage }) => {
         // Required
-        let [firstName, setFirstName] = React.useState(user.name || '');
-        let [lastName, setLastName] = React.useState(user.name || '');
+        let [firstName, setFirstName] = React.useState(user.first_name || '');
+        let [lastName, setLastName] = React.useState(user.last_name || '');
         let [email, setEmail] = React.useState(user.email || '');
 
         // Not Required

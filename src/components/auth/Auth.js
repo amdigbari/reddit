@@ -97,7 +97,7 @@ const Auth = React.memo(({ loginUser, checkLogin, registerUser }) => {
                 ) : page === PAGE_TYPES.signUp ? (
                     <SignUp goBack={showAuthPage} registerUser={signUpUser} />
                 ) : (
-                    <ResetPassword goBack={showLoginPage} />
+                    <ResetPassword goBack={showLoginPage} registerUser={loginUser} />
                 )}
             </div>
         </div>

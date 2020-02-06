@@ -37,8 +37,8 @@ const CustomScreen = React.memo(({ children, className = '', loginUser, getNotif
     }, [history]);
 
     React.useEffect(() => {
-        getNotifs();
-    }, []);
+        loginUser.username && getNotifs();
+    }, [loginUser]);
 
     const addCallback = type => response => {
         history.push(type === 'post' ? postPath(response.id) : channelPath(response.id));

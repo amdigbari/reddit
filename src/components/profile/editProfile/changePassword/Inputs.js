@@ -5,7 +5,6 @@ import './material_style.scss';
 import { CustomButtonWithLoading } from '../../../common/CommonComponents';
 
 const RenderInputs = ({
-    currentPassword: { password: currentPassword, change: changeCurrentPassword, error: currentPasswordError },
     password: { password, change: changePassword, error: passwordError },
     confirmPassword: { password: confirmPassword, change: changeConfirmPassword, error: confirmPasswordError },
     isSubmitting,
@@ -15,17 +14,6 @@ const RenderInputs = ({
     return (
         <form method="POST" action="/" onSubmit={submitForm}>
             <TextField
-                name="current_password"
-                className="input-container animation-error"
-                type="text"
-                label="current password *"
-                color="secondary"
-                value={currentPassword}
-                onChange={changeCurrentPassword}
-                error={currentPasswordError}
-                helperText="current password can't be empty"
-            />
-            <TextField
                 name="password"
                 className="input-container animation-error"
                 type="password"
@@ -34,6 +22,7 @@ const RenderInputs = ({
                 value={password}
                 onChange={changePassword}
                 error={passwordError}
+                autoFocus
                 helperText="new password can't be empty and can't be the same as the current password."
             />
             <TextField

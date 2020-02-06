@@ -61,7 +61,11 @@ const ProfileCard = ({ user, showBorder = false, link = false, className = '', l
                 </div>
 
                 {showEdit && (
-                    <EditProfileModal modalVisibility={editModalVisibility} toggleModalVisibility={toggleEditModalVisibility} user={user} />
+                    <EditProfileModal
+                        modalVisibility={editModalVisibility}
+                        toggleModalVisibility={toggleEditModalVisibility}
+                        user={{ ...user, ...loginUser }}
+                    />
                 )}
             </>
         );

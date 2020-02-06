@@ -1,10 +1,14 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
+import { connect } from 'react-redux';
 
 import './styles.scss';
 import { CustomButtonWithLoading } from '../common/CommonComponents';
 import { useToggle } from '../common/customHooks';
 import CustomScreenWithBackButton from '../common/screenWithBackButton/CustomScreenWithBackButton';
+import { sendVerificationCode, checkVerificationCode } from 'actions/AuthActions';
+import ScreenWithError from 'components/common/screenWithError';
+import VerificationCode from './VerificationCode';
 
 const textStyle = { width: '80%', textAlign: 'center', margin: '50px auto 0 auto' };
 
@@ -31,8 +35,9 @@ const RenderInputs = ({ username: { username, error: usernameError, change: chan
     );
 };
 
-const ResetPassword = React.memo(({ goBack }) => {
+const ResetPassword = React.memo(({ goBack, sendVerificationCode, checkVerificationCode, setSnackMessage, registerUser }) => {
     let [username, setUsername] = React.useState('');
+    let [level, setLevel] = React.useState(1);
 
     let [usernameValidate, setUsernameValidate] = React.useState(true);
 
@@ -54,8 +59,15 @@ const ResetPassword = React.memo(({ goBack }) => {
     const submitForm = event => {
         event.preventDefault();
 
-        // TODO: .trim()
-        console.log('Submit');
+        sendVerificationCode(username.trim())
+            .then(() => {
+                /**open verification page */
+                setSnackMessage({ type: 'success', text: 'A code Set to your email address' });
+
+                setLevel(2);
+            })
+            .catch(setSnackMessage)
+            .finally(toggleIsSubmitting);
     };
 
     const submitButtonHandler = event => {
@@ -70,14 +82,30 @@ const ResetPassword = React.memo(({ goBack }) => {
 
     return (
         <CustomScreenWithBackButton goBack={goBack} title="Reset Password">
-            <Description />
-            <RenderInputs
-                username={{ username, error: !usernameValidate, change: changeUsername }}
-                isSubmitting={isSubmitting}
-                handleSubmit={submitButtonHandler}
-                submitForm={submitForm}
-            />
+            {level === 1 ? (
+                <>
+                    <Description />
+                    <RenderInputs
+                        username={{ username, error: !usernameValidate, change: changeUsername }}
+                        isSubmitting={isSubmitting}
+                        handleSubmit={submitButtonHandler}
+                        submitForm={submitForm}
+                    />
+                </>
+            ) : (
+                <VerificationCode
+                    username={username.trim()}
+                    setSnackMessage={setSnackMessage}
+                    checkVerificationCode={checkVerificationCode}
+                    registerUser={registerUser}
+                />
+            )}
         </CustomScreenWithBackButton>
     );
 });
-export default ResetPassword;
+
+const mapDispatchToProps = {
+    sendVerificationCode,
+    checkVerificationCode,
+};
+export default connect(undefined, mapDispatchToProps)(ScreenWithError(ResetPassword));
