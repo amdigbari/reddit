@@ -8,12 +8,17 @@ import ScreenWithError from 'components/common/screenWithError';
 import CreatePostModal from '../createPost';
 import { useToggle } from 'components/common/customHooks';
 
-const PostScreen = React.memo(({ match, getPost, setSnackMessage }) => {
+const PostScreen = React.memo(({ match, getPost, setSnackMessage, loginUser }) => {
     const postPk = React.useMemo(() => match.params.pk, [match]);
 
     let [editPostModal, toggleEditPostModal] = useToggle(false);
 
     let [post, setPost] = React.useState({});
+
+    let hasEditPermission = React.useMemo(
+        () => loginUser && post.id && (loginUser.id === post.author.id || loginUser.id === post.channel.admin.id),
+        [post, loginUser],
+    );
 
     React.useEffect(() => {
         if (postPk) {
@@ -36,7 +41,7 @@ const PostScreen = React.memo(({ match, getPost, setSnackMessage }) => {
                     fullCaption
                     style={{ marginTop: 30 }}
                     setSnackMessage={setSnackMessage}
-                    canEdit={post.can_edit || true}
+                    canEdit={hasEditPermission}
                     showEditModal={toggleEditPostModal}
                 />
                 <CommentsList comments={post.comments || []} allCommentsCount={post.comments.length} setSnackMessage={setSnackMessage} />
@@ -53,7 +58,10 @@ const PostScreen = React.memo(({ match, getPost, setSnackMessage }) => {
     );
 });
 
+const mapStateToProps = state => {
+    return { loginUser: state.loginUser };
+};
 const mapDispatchToProps = {
     getPost: getPostById,
 };
-export default connect(undefined, mapDispatchToProps)(ScreenWithError(PostScreen));
+export default connect(mapStateToProps, mapDispatchToProps)(ScreenWithError(PostScreen));

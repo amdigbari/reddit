@@ -13,7 +13,7 @@ export const getUserProfileById = pk => dispatch => {
 export const getNotifications = (see = false) => dispatch => {
     return customFetch(GET_NOTIFICATIONS_API).then(response => {
         dispatch({ type: SET_NOTIFICATIONS_COUNT, payload: see ? 0 : response.length });
-        customFetch(GET_NOTIFICATIONS_API, { method: 'PUT' });
+        see && customFetch(GET_NOTIFICATIONS_API, { method: 'PUT' });
         return response;
     });
 };

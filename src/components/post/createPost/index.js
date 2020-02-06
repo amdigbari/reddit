@@ -50,11 +50,11 @@ const CreatePostModal = React.memo(
             event.preventDefault();
             const formData = new FormData();
             formData.append('text', caption.trim());
-            formData.append('channel_id', channel.id);
+            formData.append('channel', channel.id);
             imageFile && formData.append('image', imageFile);
-            edit && formData.append('post', post.id);
+            edit && formData.append('author', post.author.id);
 
-            createPost(formData, edit)
+            createPost(formData, edit, post ? post.id : null)
                 .then(response => {
                     toggleModalVisibility();
                     callback({ ...{ text: caption.trim(), channel, image }, ...response });

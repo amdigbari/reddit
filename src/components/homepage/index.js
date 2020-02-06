@@ -30,7 +30,10 @@ const Homepage = React.memo(({ getPosts, setSnackMessage }) => {
     }, [activeTitle]);
 
     const renderComponent = React.useCallback(
-        () => posts.map((post, index, array) => <PostCard post={post} key={post.id} showBorder={index < array.length - 1} />),
+        () =>
+            posts.map((post, index, array) => (
+                <PostCard post={post} key={post.id} showBorder={index < array.length - 1} setSnackMessage={setSnackMessage} />
+            )),
         [posts],
     );
 

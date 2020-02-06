@@ -129,7 +129,7 @@ const CreateChannelModal = React.memo(
 
         React.useEffect(() => {
             edit && getAvailableAuthors(channel.id).then(setAvailableAuthors);
-        }, [channel]);
+        }, [channel, edit]);
 
         const changeName = ({ target }) => {
             setName(target.value);
@@ -139,25 +139,27 @@ const CreateChannelModal = React.memo(
             setDescription(target.value);
         };
 
-        React.useEffect(() => {}, []);
-
         const submitForm = event => {
             event.preventDefault();
             const formData = new FormData();
             formData.append('name', name.trim());
             formData.append('rules', description.trim());
-            formData.append('avatar', imageFile);
+            imageFile && formData.append('avatar', imageFile);
             if (edit) {
-                formData.append('channel', channel.id);
+                formData.append('admin', channel.admin);
                 authors.forEach(author => {
                     formData.append('authors', author.id);
                 });
             }
 
-            createChannel(formData, edit)
+            createChannel(formData, edit, channel ? channel.id : null)
                 .then(response => {
                     toggleModalVisibility();
-                    callback({ ...{ name: name.trim(), rules: description.trim(), avatar: image }, ...response });
+                    callback({
+                        ...{ name: name.trim(), rules: description.trim(), avatar: image },
+                        ...response,
+                        ...(edit ? {} : { id: response.channel_id }),
+                    });
                 })
                 .finally(() => toggleIsSubmitting());
         };

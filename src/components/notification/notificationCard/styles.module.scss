@@ -10,6 +10,8 @@
     .notification-text-container {
         flex: 1;
         margin-left: 15px;
+        display: flex;
+        align-items: center;
 
         .post-link {
             transition: color 0.2s linear;

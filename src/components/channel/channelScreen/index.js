@@ -57,7 +57,6 @@ const ChannelScreen = React.memo(({ match, getChannel, loginUser }) => {
 
     const editCallback = response => {
         setChannel({ ...channel, ...response });
-        toggleEditChannelModal();
     };
 
     return (

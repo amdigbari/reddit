@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import styles from './styles.module.scss';
 import { postPath, userPath, commentPath } from '../../../utils/pathUtils';
 import { NOTIFICATION_TYPES } from 'utils/staticUtils';
+import Avatar from 'components/common/Avatar';
 
-const NotificationCard = ({ notification: { situation, For, who_name, who_id }, showBorder, className, ...restProps }) => {
+const NotificationCard = ({ notification: { situation, For, who }, showBorder, className, ...restProps }) => {
     const RenderPostNotificationText = () => {
         switch (situation) {
             case NOTIFICATION_TYPES.FOLLOWED:
@@ -13,7 +14,7 @@ const NotificationCard = ({ notification: { situation, For, who_name, who_id }, 
             case NOTIFICATION_TYPES.LIKE_ON_POST:
                 return (
                     <>
-                        has liked your
+                        has liked your{' '}
                         <Link className={[styles['post-link'], 'danger'].join(' ')} to={postPath(For.id)}>
                             post
                         </Link>
@@ -22,7 +23,7 @@ const NotificationCard = ({ notification: { situation, For, who_name, who_id }, 
             case NOTIFICATION_TYPES.LIKE_ON_COMMENT:
                 return (
                     <>
-                        has liked your
+                        has liked your{' '}
                         <Link className={[styles['post-link'], 'danger'].join(' ')} to={commentPath(For.id)}>
                             comment
                         </Link>
@@ -31,7 +32,7 @@ const NotificationCard = ({ notification: { situation, For, who_name, who_id }, 
             case NOTIFICATION_TYPES.COMMENT_ON_COMMENT:
                 return (
                     <>
-                        has commented your
+                        has commented your{' '}
                         <Link className={[styles['post-link'], 'danger'].join(' ')} to={commentPath(For.id)}>
                             comment
                         </Link>
@@ -40,7 +41,7 @@ const NotificationCard = ({ notification: { situation, For, who_name, who_id }, 
             default:
                 return (
                     <>
-                        has commented your
+                        has commented your{' '}
                         <Link className={[styles['post-link'], 'danger'].join(' ')} to={postPath(For.id)}>
                             post
                         </Link>
@@ -52,9 +53,10 @@ const NotificationCard = ({ notification: { situation, For, who_name, who_id }, 
     return (
         <div className={[styles['card-container'], showBorder ? 'border-bottom' : '', className].join(' ')} {...restProps}>
             <div className={styles['notification-text-container']}>
+                <Avatar src={who.avatar} style={{ marginRight: 7 }} />
                 <p>
-                    <Link className={styles['post-link']} to={userPath(who_id)}>
-                        {who_name}
+                    <Link className={styles['post-link']} to={userPath(who.id)}>
+                        {who.name}
                     </Link>{' '}
                     <RenderPostNotificationText />
                 </p>

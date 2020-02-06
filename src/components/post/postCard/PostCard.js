@@ -20,6 +20,7 @@ import { CustomLinkify, CustomButton } from '../../common/CommonComponents';
 import { postPath, basePath } from '../../../utils/pathUtils';
 import { scorePost, deletePost } from 'actions/PostActions';
 import { SILVER_GRAY } from 'utils/staticUtils';
+import ScreenWithError from 'components/common/screenWithError';
 
 const PostCard = React.memo(
     ({
@@ -36,11 +37,16 @@ const PostCard = React.memo(
         ...restProps
     }) => {
         let [replyPostModalVisibility, toggleReplyPostModalVisibility] = useToggle(false);
-        let [changeScore, setChangedScore] = React.useState(0);
         let [userScore, setUserScore] = React.useState(post.like);
         let [openDialog, setDialogOpen] = React.useState(false);
+        let [_post, _setPost] = React.useState(post);
+        let [commentsCount, setCommentsCount] = React.useState(post.no_comments);
 
-        let score = React.useMemo(() => post.no_feedbacks.likes - post.no_feedbacks.dislikes + changeScore, [post]);
+        let [score, setScore] = React.useState(_post.no_feedbacks.likes - _post.no_feedbacks.dislikes);
+
+        // let score = React.useMemo(_score => +(prevScore ? changeScore : -prevScore), [_post, changeScore, prevScore]);
+
+        React.useEffect(() => {}, []);
 
         let history = useHistory();
 
@@ -60,16 +66,21 @@ const PostCard = React.memo(
         };
 
         const removePost = () => {
-            deletePost(post.id).then(() => {
+            deletePost(_post.id).then(() => {
                 history.push(basePath);
             });
+        };
+
+        const addComment = comment => {
+            _setPost({ ..._post, comments: [..._post.comments, comment] });
+            setCommentsCount(commentsCount + 1);
         };
 
         return (
             <>
                 <div className={[styles['card-container'], showBorder ? 'border-bottom' : ''].join(' ')} {...restProps}>
                     <div className={styles.header}>
-                        <PostChannel channel={post.channel} link={channelLink} />
+                        <PostChannel channel={_post.channel} link={channelLink} />
 
                         {canEdit && (
                             <>
@@ -85,30 +96,30 @@ const PostCard = React.memo(
                             </>
                         )}
 
-                        <p>{post.create_time}</p>
+                        <p>{_post.create_time}</p>
                     </div>
 
-                    <Link to={postPath(post.id)}>
-                        <PostImage src={post.image} />
+                    <Link to={postPath(_post.id)}>
+                        <PostImage src={_post.image} />
                     </Link>
 
                     <CustomLinkify>
-                        <p className={styles['caption-container']}>{post.text}</p>
+                        <p className={styles['caption-container']}>{_post.text}</p>
                     </CustomLinkify>
 
                     <div className={styles.footer}>
-                        <PostAuthor author={post.author} link={authorLink} />
+                        <PostAuthor author={_post.author} link={authorLink} />
 
                         <div style={{ display: 'flex', alignItems: 'center' }}>
-                            <span style={{ marginRight: 6 }}>{post.comments.length}</span>
+                            <span style={{ marginRight: 6 }}>{commentsCount}</span>
                             <FaRegComment className={styles['reply-comment']} onClick={toggleReplyPostModalVisibility} />
                         </div>
 
                         <PostScore
                             score={score}
                             userScore={userScore}
-                            setScore={like => scorePost(post.id, like)}
-                            setChangedScore={setChangedScore}
+                            setScore={like => scorePost(_post.id, like)}
+                            changeScore={setScore}
                             setUserScore={setUserScore}
                         />
                     </div>
@@ -134,8 +145,9 @@ const PostCard = React.memo(
                 <CommentModal
                     modalVisibility={replyPostModalVisibility}
                     toggleVisibility={toggleReplyPostModalVisibility}
-                    post={post}
+                    post={_post}
                     setSnackMessage={setSnackMessage}
+                    callback={addComment}
                 />
             </>
         );

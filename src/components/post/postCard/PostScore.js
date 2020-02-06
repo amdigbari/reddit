@@ -4,19 +4,19 @@ import { IoMdArrowDropup, IoMdArrowDropdown } from 'react-icons/io';
 import styles from './styles.module.scss';
 import { GRAY, GREEN, RED } from '../../../utils/staticUtils';
 
-const PostScore = ({ score, setScore, userScore, setChangedScore, setUserScore }) => {
+const PostScore = ({ score, setScore, userScore, changeScore, setUserScore }) => {
     return (
         <div className={styles['score-container']}>
             <IoMdArrowDropup
                 onClick={() => {
                     setScore(userScore > 0 ? 0 : 1).then(res => {
-                        setChangedScore(userScore > 0 ? -1 : 1);
+                        changeScore(score + (userScore > 0 ? -1 : userScore < 0 ? 2 : 1));
                         setUserScore(userScore > 0 ? 0 : 1);
                     });
                 }}
                 size={30}
                 color={userScore > 0 ? GREEN : GRAY}
-                cursor={userScore > 0 ? 'unset' : 'pointer'}
+                cursor="pointer"
             />
 
             <p style={{ marginTop: -7 }}>{score}</p>
@@ -24,14 +24,14 @@ const PostScore = ({ score, setScore, userScore, setChangedScore, setUserScore }
             <IoMdArrowDropdown
                 onClick={() => {
                     setScore(userScore < 0 ? 0 : -1).then(res => {
-                        setChangedScore(userScore < 0 ? 1 : -1);
+                        changeScore(score + (userScore > 0 ? -2 : userScore < 0 ? 1 : -1));
                         setUserScore(userScore < 0 ? 0 : -1);
                     });
                 }}
                 size={30}
                 color={userScore < 0 ? RED : GRAY}
                 style={{ marginTop: -7 }}
-                cursor={userScore < 0 ? 'unset' : 'pointer'}
+                cursor="pointer"
             />
         </div>
     );

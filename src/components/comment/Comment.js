@@ -12,30 +12,42 @@ import { userPath } from '../../utils/pathUtils';
 const Comment = ({ comment, isReply = false }) => {
     let [replyPostModalVisibility, toggleReplyPostModalVisibility] = useToggle(false);
 
+    let [_comment, _setComment] = React.useState(comment);
+
+    const addComment = __comment => {
+        _setComment({ ...comment, answers: { ...comment.answers, __comment } });
+    };
+
     return (
         <>
             <div className={[styles['comment-container'], isReply ? styles.reply : ''].join(' ')}>
                 <div className={styles['comment-header']}>
-                    <Link to={userPath(comment.author.id)}>
+                    <Link to={userPath(_comment.author.id)}>
                         <div className={styles['comment-author']}>
-                            <Avatar src={comment.author.avatar} />
-                            <p style={{ marginLeft: 10 }}>{comment.author.name}</p>
+                            <Avatar src={_comment.author.avatar} />
+                            <p style={{ marginLeft: 10 }}>{_comment.author.name}</p>
                         </div>
                     </Link>
 
-                    <p>{comment.date}</p>
+                    <p>{_comment.date}</p>
                 </div>
 
                 <CustomLinkify>
-                    <p className={styles['comment-text']}>{comment.text}</p>
+                    <p className={styles['comment-text']}>{_comment.text}</p>
                 </CustomLinkify>
 
-                <FaRegComment className={styles['reply-comment']} onClick={toggleReplyPostModalVisibility} />
+                {_comment.can_reply && <FaRegComment className={styles['reply-comment']} onClick={toggleReplyPostModalVisibility} />}
 
-                {comment.replies && comment.replies.map(comment => <Comment comment={comment} isReply key={comment.id} />)}
+                {_comment.answers && _comment.answers.map(comment => <Comment comment={comment} isReply key={_comment.id} />)}
             </div>
 
-            <CommentModal modalVisibility={replyPostModalVisibility} toggleVisibility={toggleReplyPostModalVisibility} />
+            {_comment.can_reply && (
+                <CommentModal
+                    modalVisibility={replyPostModalVisibility}
+                    toggleVisibility={toggleReplyPostModalVisibility}
+                    callback={addComment}
+                />
+            )}
         </>
     );
 };

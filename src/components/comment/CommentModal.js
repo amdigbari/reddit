@@ -40,7 +40,15 @@ const RenderForm = ({ text, submitForm, setText, buttonLoadingVisibility, button
     );
 };
 
-const CommentModal = ({ modalVisibility, toggleVisibility: toggleModalVisibility, comment, post, addComment, setSnackMessage }) => {
+const CommentModal = ({
+    modalVisibility,
+    toggleVisibility: toggleModalVisibility,
+    comment,
+    post,
+    addComment,
+    callback,
+    setSnackMessage,
+}) => {
     let [buttonLoadingVisibility, toggleButtonLoadingVisibility] = useToggle(false);
 
     let [text, setText] = React.useState('');
@@ -64,8 +72,15 @@ const CommentModal = ({ modalVisibility, toggleVisibility: toggleModalVisibility
         event.preventDefault();
 
         if (text.trim().length) {
-            addComment(!!post, { id: post ? post.id : comment.id, text: text.trim() })
-                .then(console.log)
+            const _comment = { id: post ? post.id : comment.id, text: text.trim() };
+
+            toggleButtonLoadingVisibility();
+
+            addComment(!!post, _comment)
+                .then(response => {
+                    toggleModalVisibility();
+                    callback && callback({ ..._comment, ...response });
+                })
                 .catch(e => setSnackMessage({ text: "can't connect to server", type: 'error' }))
                 .finally(() => toggleButtonLoadingVisibility());
         }

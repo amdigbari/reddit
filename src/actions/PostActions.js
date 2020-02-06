@@ -1,6 +1,6 @@
 import { samplePost } from '../utils/hardcodedData';
 import { customFetch } from 'utils/functionalUtils';
-import { CREATE_POST_API, getPostApi, GET_AVAILABLE_CHANNELS_API, getScorePostApi, getDashboardApi } from 'api/postApi';
+import { CREATE_POST_API, getPostApi, GET_AVAILABLE_CHANNELS_API, getScorePostApi, getDashboardApi, updatePostApi } from 'api/postApi';
 
 export const getPostById = pk => dispatch => {
     return customFetch(getPostApi(pk));
@@ -10,11 +10,15 @@ export const getUserPosts = pk => dispatch => {
     return [samplePost, { ...samplePost, pk: 2 }];
 };
 
-export const createPost = (post, edit) => dispatch => {
-    return customFetch(CREATE_POST_API, {
-        method: edit ? 'PATCH' : 'POST',
-        body: post,
-    });
+export const createPost = (post, edit, id) => dispatch => {
+    return customFetch(
+        edit ? updatePostApi(id) : CREATE_POST_API,
+        {
+            method: edit ? 'PATCH' : 'POST',
+            body: post,
+        },
+        false,
+    );
 };
 
 export const getAvailableChannels = () => dispatch => {
@@ -30,8 +34,7 @@ export const getDashboardPosts = tab => dispatch => {
 };
 
 export const deletePost = id => dispatch => {
-    return customFetch(CREATE_POST_API, {
+    return customFetch(updatePostApi(id), {
         method: 'DELETE',
-        body: JSON.stringify({ post: id }),
     });
 };

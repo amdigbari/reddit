@@ -32,7 +32,6 @@ const ChannelCard = ({ channel, showBorder = false, link = true, followChannel, 
     };
 
     const followButtonClicked = () => {
-        // toggleLoading();
         followChannel(channel.id, isFollow).then(() => toggleIsFollow());
     };
 

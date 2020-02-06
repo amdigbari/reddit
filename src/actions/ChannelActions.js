@@ -1,6 +1,6 @@
 import { sampleChannel } from '../utils/hardcodedData';
 import { customFetch } from 'utils/functionalUtils';
-import { CREATE_CHANNEL_API, getChannelApi, getFollowChannelApi, getPotentialAuthorsApi } from 'api/channelApi';
+import { CREATE_CHANNEL_API, getChannelApi, getFollowChannelApi, getPotentialAuthorsApi, updateChannelApi } from 'api/channelApi';
 
 export const getChannelById = pk => dispatch => {
     return customFetch(getChannelApi(pk)).then(response => response[0]);
@@ -10,11 +10,11 @@ export const getUserChannels = pk => dispatch => {
     return [sampleChannel, { ...sampleChannel, pk: 2 }];
 };
 
-export const createChannel = (channel, edit) => dispatch => {
+export const createChannel = (channel, edit, id) => dispatch => {
     return customFetch(
-        CREATE_CHANNEL_API,
+        edit ? updateChannelApi(id) : CREATE_CHANNEL_API,
         {
-            method: edit ? 'PUT' : 'POST',
+            method: edit ? 'PATCH' : 'POST',
             body: channel,
         },
         false,
@@ -30,8 +30,7 @@ export const getPotentialAuthors = pk => dispatch => {
 };
 
 export const deleteChannel = pk => dispatch => {
-    return customFetch(CREATE_CHANNEL_API, {
+    return customFetch(updateChannelApi(pk), {
         method: 'DELETE',
-        body: JSON.stringify({ channel: pk }),
     });
 };

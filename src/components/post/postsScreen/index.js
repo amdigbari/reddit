@@ -8,40 +8,32 @@ import { useToggle } from '../../common/customHooks';
 import { getUserPosts } from '../../../actions/PostActions';
 import ScreenWithError from 'components/common/screenWithError';
 
-const PostsScreen = React.memo(
-    ({ showFloatButton = true, channelsLink = true, authorsLink = true, getPosts, posts: propsPosts, setSnackMessage }) => {
-        let [modalVisibility, toggleModalVisibility] = useToggle(false);
+const PostsScreen = React.memo(({ showFloatButton = true, channelsLink = true, authorsLink = true, getPosts, posts, setSnackMessage }) => {
+    let [modalVisibility, toggleModalVisibility] = useToggle(false);
 
-        let [posts, setPosts] = React.useState(propsPosts || []);
+    return (
+        <>
+            {posts.map((post, index, array) => (
+                <PostCard
+                    setSnackMessage={setSnackMessage}
+                    channelLink={channelsLink}
+                    authorLink={authorsLink}
+                    post={post}
+                    key={post.id}
+                    {...(index === 0 ? { style: { paddingTop: 30 } } : {})}
+                    {...(index < array.length - 1 ? { showBorder: true } : {})}
+                />
+            ))}
 
-        React.useEffect(() => {
-            !posts.length && setPosts(getPosts());
-        }, []);
-
-        return (
-            <>
-                {posts.map((post, index, array) => (
-                    <PostCard
-                        setSnackMessage={setSnackMessage}
-                        channelLink={channelsLink}
-                        authorLink={authorsLink}
-                        post={post}
-                        key={post.id}
-                        {...(index === 0 ? { style: { paddingTop: 30 } } : {})}
-                        {...(index < array.length - 1 ? { showBorder: true } : {})}
-                    />
-                ))}
-
-                {showFloatButton && (
-                    <>
-                        <FloatAddButton onClick={toggleModalVisibility} />
-                        <CreatePostModal modalVisibility={modalVisibility} toggleModalVisibility={toggleModalVisibility} />
-                    </>
-                )}
-            </>
-        );
-    },
-);
+            {showFloatButton && (
+                <>
+                    <FloatAddButton onClick={toggleModalVisibility} />
+                    <CreatePostModal modalVisibility={modalVisibility} toggleModalVisibility={toggleModalVisibility} />
+                </>
+            )}
+        </>
+    );
+});
 
 const mapDispatchToProps = {
     getPosts: getUserPosts,

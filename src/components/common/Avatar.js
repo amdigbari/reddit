@@ -15,7 +15,7 @@ const Avatar = ({ src, url, size = 40, style = {}, className = '', ...restProps 
         img.onload = () => {
             setSrc(img.src);
         };
-    }, []);
+    }, [src]);
 
     return (
         <div className={[styles.avatar, styles.link, className].join(' ')} style={{ width: size, height: size, ...style }} {...restProps}>
