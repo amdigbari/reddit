@@ -17,7 +17,7 @@ import { imageToBase64 } from 'utils/functionalUtils';
 const RenderInputs = ({
     name: { name, error: nameError, change: changeName },
     description: { description, change: changeDescription },
-    authors: { authors, change: changeAuthors },
+    authors: { change: changeAuthors },
     image: { image, change: changeImage },
     isSubmitting,
     submitForm,
@@ -119,7 +119,7 @@ const CreateChannelModal = React.memo(
         let [name, setName] = React.useState(edit ? channel.name : '');
         let [description, setDescription] = React.useState(edit ? channel.rules : '');
         let [image, setImage] = React.useState(edit ? channel.avatar : null);
-        let [authors, setAuthors] = React.useState([]);
+        let [authors, setAuthors] = React.useState(edit ? channel.authors : []);
         let [availableAuthors, setAvailableAuthors] = React.useState([]);
         let [imageFile, setImageFile] = React.useState(null);
 
