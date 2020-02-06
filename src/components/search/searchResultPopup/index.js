@@ -1,12 +1,11 @@
 import React from 'react';
 
 import styles from './styles.module.scss';
-import { Loading } from '../../common/CommonComponents';
 
-const SearchResultPopup = ({ renderResults, className = '', loading, ...restProps }) => {
+const SearchResultPopup = ({ Results, className = '', ...restProps }) => {
     return (
         <div className={[styles['container'], className].join(' ')} {...restProps}>
-            <Loading />
+            {<Results />}
         </div>
     );
 };

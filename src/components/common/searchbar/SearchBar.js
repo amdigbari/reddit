@@ -2,11 +2,11 @@ import React from 'react';
 
 import styles from './styles.module.scss';
 import { useDepsChanged } from '../customHooks';
-import { SEARCH_DELAY } from '../../../utils/staticUtils';
+import { SEARCH_DELAY } from 'utils/staticUtils';
 import Input from '@material-ui/core/Input';
-import SearchResultPopup from '../../search/searchResultPopup';
+import SearchResultPopup from 'components/search/searchResultPopup';
 
-const SearchBar = React.memo(({ search, autoFocus = false, renderResults, setLoading, ...restProps }) => {
+const SearchBar = React.memo(({ search, autoFocus = false, Results, setLoading, showPopup = false, ...restProps }) => {
     let interval = React.useRef();
 
     let [isTyping, setIsTyping] = React.useState(false);
@@ -33,7 +33,7 @@ const SearchBar = React.memo(({ search, autoFocus = false, renderResults, setLoa
 
     let isTypingChangedHandler = React.useCallback(() => {
         setLoading && setLoading(isTyping);
-        !isTyping && searchQuery.trim().length && search(searchQuery.trim());
+        !isTyping && search(searchQuery.trim());
     }, [isTyping, searchQuery, search, setLoading]);
 
     useDepsChanged(isTypingChangedHandler, [isTyping]);
@@ -52,7 +52,7 @@ const SearchBar = React.memo(({ search, autoFocus = false, renderResults, setLoa
                     autoFocus={autoFocus}
                 />
 
-                {renderResults && searchQuery.trim().length ? <SearchResultPopup renderResults={renderResults} loading={isTyping} /> : ''}
+                {showPopup && searchQuery.trim().length ? <SearchResultPopup Results={Results} loading={isTyping} /> : ''}
             </div>
         </div>
     );

@@ -11,10 +11,12 @@ import EditProfileModal from '../editProfile';
 import { userPath } from '../../../utils/pathUtils';
 import { followUser } from 'actions/ProfileActions';
 
-const ProfileCard = ({ user, showBorder = false, showEdit = false, link = false, className = '', followUser, ...restProps }) => {
+const ProfileCard = ({ user, showBorder = false, link = false, className = '', loginUser, followUser, ...restProps }) => {
     // let [loading, toggleLoading] = useToggle(false);
     let [editModalVisibility, toggleEditModalVisibility] = useToggle(false);
     let [isFollow, toggleIsFollow] = useToggle(user.follow || false);
+
+    let showEdit = React.useMemo(() => loginUser.id === user.id, [loginUser, user]);
 
     const followButtonClicked = () => {
         // toggleLoading();
@@ -88,7 +90,10 @@ const ProfileCard = ({ user, showBorder = false, showEdit = false, link = false,
     );
 };
 
+const mapStateToProps = state => {
+    return { loginUser: state.loginUser };
+};
 const mapDispatchToProps = {
     followUser,
 };
-export default connect(undefined, mapDispatchToProps)(ProfileCard);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileCard);

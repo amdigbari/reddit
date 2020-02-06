@@ -5,7 +5,7 @@ import { GRAY, ICON_MOBILE_SIZE } from '../../../utils/staticUtils';
 import SearchModal from '../../search/searchModal';
 import { useToggle } from '../customHooks';
 
-const SearchbarIcon = ({ search, renderResults, ...restProps }) => {
+const SearchbarIcon = ({ search, Results, setLoading, ...restProps }) => {
     let [searchModalVisibility, toggleSearchModalVisibility] = useToggle(false);
 
     return (
@@ -14,9 +14,10 @@ const SearchbarIcon = ({ search, renderResults, ...restProps }) => {
 
             <SearchModal
                 search={search}
-                renderResults={renderResults}
+                Results={Results}
                 modalVisibility={searchModalVisibility}
                 toggleModalVisibility={toggleSearchModalVisibility}
+                setLoading={setLoading}
             />
         </>
     );

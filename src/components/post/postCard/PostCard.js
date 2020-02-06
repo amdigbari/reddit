@@ -34,6 +34,7 @@ const PostCard = React.memo(
         canEdit,
         showEditModal,
         deletePost,
+        hideChannel = false,
         ...restProps
     }) => {
         let [replyPostModalVisibility, toggleReplyPostModalVisibility] = useToggle(false);
@@ -80,7 +81,7 @@ const PostCard = React.memo(
             <>
                 <div className={[styles['card-container'], showBorder ? 'border-bottom' : ''].join(' ')} {...restProps}>
                     <div className={styles.header}>
-                        <PostChannel channel={_post.channel} link={channelLink} />
+                        {!hideChannel && <PostChannel channel={_post.channel} link={channelLink} />}
 
                         {canEdit && (
                             <>

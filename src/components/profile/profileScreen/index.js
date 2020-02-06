@@ -70,7 +70,7 @@ const ProfileScreen = React.memo(({ match, getUserProfile, loginUser, raise404, 
         // TODO: remove user.username
         (user.id || user.username) && (
             <>
-                <ProfileCard user={user} showBorder className="profile-card" showEdit={loginUser.id === user.id} />
+                <ProfileCard user={user} showBorder className="profile-card" />
                 <Bio />
                 {/* <UserPosts /> */}
             </>
